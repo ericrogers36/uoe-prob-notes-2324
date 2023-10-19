@@ -1,0 +1,181 @@
+\documentclass[12pt,a4paper]{article}
+
+%PACKAGES BEING USED
+
+\usepackage[english]{babel}
+%\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb} 
+\usepackage{graphicx}
+\usepackage{pifont}
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{fontspec} 
+\usepackage{xcolor} 
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{wrapfig} 
+\usepackage{sfmath} 
+\usepackage{bbm}
+\usepackage{ifthen} 
+\usepackage[most]{tcolorbox}
+\usepackage{booktabs} 
+\usetikzlibrary{trees} 
+\usepackage{version} 
+\usepackage{enumerate} 
+\usepackage{titlesec} 
+\titleformat{\subsubsection}[runin]{\bfseries}{\thesubsubsection}{8pt}{}[]
+\titleclass{\section}{top}
+\newcommand\sectionbreak{\clearpage}
+\raggedbottom 
+
+\usepackage{tikz, pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+
+
+\includeversion{n}
+\includeversion{e}
+\includeversion{s}
+%\excludeversion{n}
+%\excludeversion{e}
+%\excludeversion{s}
+
+
+\newcommand{\bs}{\begin{s}} 
+\newcommand{\bn}{\begin{n}}
+\newcommand{\be}{\begin{e}}
+
+%\setcounter{page}{-2} 
+\addtocounter{section}{-1} 
+
+
+\newcommand{\ssn}[1]{\addtocounter{subsubsection}{1}\bn\addtocounter{subsubsection}{-1}\subsubsection{#1}}
+\newcommand{\sse}{\addtocounter{subsubsection}{1}\be\addtocounter{subsubsection}{-1}\subsubsection{Exercise}}
+\newcommand{\ssp}{\be\subsubsection{Problem}}
+\newcommand{\sss}{\bs\addtocounter{subsubsection}{-1}\subsubsection{Solution}}
+
+\newcommand{\tcb}{\begin{tcolorbox}}
+\newcommand{\etcb}{\end{tcolorbox}}
+
+
+\newenvironment{proof}{%
+\par\noindent\textit{Proof.~}}%
+{\hfill\ensuremath{\square}\par}
+\newcommand{\bpr}{\begin{proof}}
+\newcommand{\epr}{\end{proof}}
+
+\newcommand{\beq}[1]{\begin{equation}\label{#1}}
+\newcommand{\eeq}{\end{equation}}
+
+\newcommand{\bx}[2]{{\centering %
+\begin{tcolorbox}[enhanced jigsaw,breakable,pad at break*=1mm,%
+  colback=blue!5!white,colframe=blue!30!black,%
+  title={\centering #1},width=0.92\linewidth]%
+    #2 \end{tcolorbox}}}
+
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}[Scale=MatchLowercase]
+\renewcommand{\familydefault}{\sfdefault}
+
+% COMMANDS FOR BLACKBOARD BOLD, DISTS ETC
+\newcommand{\NN}{{\mathbb N}}
+\newcommand{\PP}{{\mathbb P}}
+\newcommand{\CC}{{\mathbb C}}
+\newcommand{\RR}{{\mathbb R}}
+\newcommand{\EE}{{\mathbb E}}
+\newcommand{\ZZ}{{\mathbb Z}}
+\newcommand{\bo}[1]{\mathbf{#1}} 
+\newcommand{\SLC}{{\mathrm{SL}(2,\CC}} 
+\newcommand{\SLR}{{\mathrm{SL}(2,\RR}} 
+\newcommand{\SU}{{\mathrm{SU}(1,1)}}
+\newcommand{\map}{\longrightarrow} 
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand\var{{\mathrm{Var}}} 
+\newcommand\cov{{\mathrm{Cov}}} 
+\newcommand\cor{{\mathrm{Cor}}} 
+\newcommand\bino{{\mathop{Binom}}}
+\newcommand\geom{{\mathop{Geom}}}
+\newcommand\unif{{\mathop{Unif}}}
+\newcommand\bern{{\mathop{Bern}}}
+\newcommand\expo{{\mathop{Expo}}}
+\newcommand\pois{{\mathop{Pois}}}
+\newcommand\gamm{{\mathop{Gamma}}}
+\newcommand\norm{{\mathop{Normal}}}
+
+% INDICATOR FUNCTION
+\newcommand{\1}{\mathbbm{1}}
+
+
+\newcommand{\rd}[1]{{\color{red} #1 }}
+\newcommand{\bl}[1]{{\color{blue} #1 }} 
+\newcommand{\st}{\, | \,}
+
+\newif\ifsolution
+%\solutiontrue
+\solutionfalse
+\newcommand{\esol}{\ifsolution} % I think solutions for exercises
+\newcommand{\eesol}{\fi}
+
+\newif\iftbc % change to color box? Maybe spellingmistake, should be /tcb
+\tbctrue
+%\solutionfalse
+\newcommand{\tbc}{\iftbc} % I think some additional material
+\newcommand{\etbc}{\fi}
+
+
+\title{Probably OK} 
+\author{originally created by Toby Bailey, \\ based of materials created by Stefan Engelhardt, \\ \linebreak \\ edited by Eric Rogers, Ben Jecock and Corinne Baillie} 
+\date{2023-2024}
+
+\includeonly{
+src/W00
+,src/W01
+,src/W02
+,src/W03
+,src/W04
+,src/W05
+%
+,src/W06
+%
+,src/W07
+%
+,src/W08
+%
+,src/W09
+%
+, src/W10
+, src/W11
+%,aWsummary
+%,aWP
+%,aWextras
+}
+
+%\includeonly{aWsummary}   
+
+
+\begin{document}
+\maketitle
+\setcounter{tocdepth}{2}
+\tableofcontents 
+
+\include{src/W00}
+\include{src/W01}
+\include{src/W02}
+\include{src/W03}
+\include{src/W04}
+\include{src/W05}
+\include{src/W06}
+\include{src/W07}
+\include{src/W08}
+\include{src/W09}
+\include{src/W10}
+
+%\appendix
+%\include{aWsummary}
+%\include{aWP}
+%\include{aWextras}
+
+\end{document} 
