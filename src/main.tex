@@ -1,0 +1,240 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[english]{babel}
+%\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb} 
+\usepackage{graphicx}
+\usepackage{pifont}
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{fontspec} 
+\usepackage{xcolor} 
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{wrapfig} 
+\usepackage{sfmath} 
+\usepackage{bbm}
+\usepackage{ifthen} 
+\usepackage[most]{tcolorbox}
+\usepackage{booktabs} 
+\usetikzlibrary{trees} 
+\usepackage{version} 
+\usepackage{enumerate} 
+\usepackage{titlesec} 
+\titleformat{\subsubsection}[runin]{\bfseries}{\thesubsubsection}{8pt}{}[]
+\titleclass{\section}{top}
+\newcommand\sectionbreak{\clearpage}
+\raggedbottom 
+
+\usepackage{tikz, pgfplots}
+\pgfplotsset{compat=1.17}
+\usepgfplotslibrary{groupplots}
+
+
+\includeversion{n}
+\includeversion{e}
+\includeversion{s}
+%\excludeversion{n}
+%\excludeversion{e}
+%\excludeversion{s}
+
+
+\newcommand{\bs}{\begin{s}} 
+\newcommand{\bn}{\begin{n}}
+\newcommand{\be}{\begin{e}}
+
+%\setcounter{page}{-2} 
+\addtocounter{section}{-1} 
+
+
+\newcommand{\ssn}[1]{\addtocounter{subsubsection}{1}\bn\addtocounter{subsubsection}{-1}\subsubsection{#1}}
+\newcommand{\sse}{\addtocounter{subsubsection}{1}\be\addtocounter{subsubsection}{-1}\subsubsection{Exercise}}
+\newcommand{\ssp}{\be\subsubsection{Problem}}
+\newcommand{\sss}{\bs\addtocounter{subsubsection}{-1}\subsubsection{Solution}}
+
+\newcommand{\tcb}{\begin{tcolorbox}}
+\newcommand{\etcb}{\end{tcolorbox}}
+
+
+\newenvironment{proof}{%
+\par\noindent\textit{Proof.~}}%
+{\hfill\ensuremath{\square}\par}
+\newcommand{\bpr}{\begin{proof}}
+\newcommand{\epr}{\end{proof}}
+
+\newcommand{\beq}[1]{\begin{equation}\label{#1}}
+\newcommand{\eeq}{\end{equation}}
+
+\newcommand{\bx}[2]{{\centering %
+\begin{tcolorbox}[enhanced jigsaw,breakable,pad at break*=1mm,%
+  colback=blue!5!white,colframe=blue!30!black,%
+  title={\centering #1},width=0.92\linewidth]%
+    #2 \end{tcolorbox}}}
+
+%\setmainfont{Liberation Serif}
+%\setsansfont{Liberation Sans}[Scale=MatchLowercase]
+\renewcommand{\familydefault}{\sfdefault}
+
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\bA}{\mathbb{A}}
+\newcommand{\bD}{\mathbb{D}}
+\newcommand{\bE}{\mathbb{E}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bL}{\mathbb{L}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bV}{\mathbb{V}}
+\newcommand{\bZ}{\mathbb{Z}}
+
+\newcommand{\IE}{\mathbb{E}}
+\newcommand{\IP}{\mathbb{P}}
+\newcommand{\IR}{\mathbb{R}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+
+\newcommand{\NN}{{\mathbb N}}
+\newcommand{\PP}{{\mathbb P}}
+\newcommand{\CC}{{\mathbb C}}
+\newcommand{\RR}{{\mathbb R}}
+\newcommand{\EE}{{\mathbb E}}
+\newcommand{\ZZ}{{\mathbb Z}}
+\newcommand{\bo}[1]{\mathbf{#1}} 
+\newcommand{\SLC}{{\mathrm{SL}(2,\CC}} 
+\newcommand{\SLR}{{\mathrm{SL}(2,\RR}} 
+\newcommand{\SU}{{\mathrm{SU}(1,1)}}
+\newcommand{\map}{\longrightarrow} 
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand\var{{\mathrm{Var}}} 
+\newcommand\cov{{\mathrm{Cov}}} 
+\newcommand\cor{{\mathrm{Cor}}} 
+\newcommand\bino{{\mathop{Binom}}}
+\newcommand\geom{{\mathop{Geom}}}
+\newcommand\unif{{\mathop{Unif}}}
+\newcommand\bern{{\mathop{Bern}}}
+\newcommand\expo{{\mathop{Expo}}}
+\newcommand\pois{{\mathop{Pois}}}
+\newcommand\gamm{{\mathop{Gamma}}}
+\newcommand\norm{{\mathop{Normal}}}
+
+
+\newcommand{\rd}[1]{{\color{red} #1 }}
+\newcommand{\bl}[1]{{\color{blue} #1 }} 
+\newcommand{\st}{\, | \,}
+
+\newif\ifsolution
+%\solutiontrue
+\solutionfalse
+\newcommand{\esol}{\ifsolution} % I think solutions for exercises
+\newcommand{\eesol}{\fi}
+
+\newif\iftbc % change to color box? Maybe spellingmistake, should be /tcb
+\tbctrue
+%\solutionfalse
+\newcommand{\tbc}{\iftbc} % I think some additional material
+\newcommand{\etbc}{\fi}
+
+
+\title{Probably OK} 
+\author{by Stefan Engelhardt, \\ based on notes from Toby Bailey} 
+\date{2023-2024}
+
+%\includeonly{
+%aW00
+%,aW01
+%,aW02
+%,aW03
+%,aW04
+%,aW05
+%%
+%,aW06
+%%
+%,aW07
+%%
+%,aW08
+%%
+%,aW09
+%%
+%, aW10
+%, aW11
+%%,aWsummary
+%%,aWP
+%%,aWextras
+%}
+
+%\includeonly{aWsummary}   
+
+
+\begin{document}
+\maketitle
+\setcounter{tocdepth}{2}
+\tableofcontents 
+
+%%Week 00
+\section{Why study probability?} 
+\input{sourceFiles/00_Motivation}
+
+%%Week 01
+\section{Foundations of probability, inclusion-exclusion and equally likely outcomes} \label{s1} 
+\input{sourceFiles/01_IdeasDefinitions}
+\input{sourceFiles/01_discreteUniform}
+\input{sourceFiles/01_InclusionExclusion}
+
+%%Week 02
+\section{Conditional probabilities, random variables and the binomial distribution}
+\input{sourceFiles/02_Conditional}
+\input{sourceFiles/02_Bayes}
+\input{sourceFiles/02_IndependenceConditional}
+\input{sourceFiles/02_RV}
+\input{sourceFiles/02_Binomial}
+
+%%Week 03
+\section{More discrete and continuous distributions}
+\input{sourceFiles/03_Geom}
+\input{sourceFiles/03_ContDistr}
+\input{sourceFiles/03_ExpDistr}
+\input{sourceFiles/03_Pois}
+\input{sourceFiles/03_ExercisesGeomExp}
+
+%%Week 04
+\section{Expectation}
+\input{sourceFiles/04_E}
+\input{sourceFiles/04_LinearityOfE}
+\input{sourceFiles/04_CondExp}
+
+%%Week 05
+\section{More expectations and variance}
+\input{sourceFiles/05_ECont}
+\input{sourceFiles/05_Var}
+
+%%Week 06
+\section{Sums are Normal}
+\input{sourceFiles/06_Normal}
+
+%%Week 07
+\section{Several Random Variables}
+\input{sourceFiles/07_SeveralRV}
+
+%%Week 08
+\section{Transformations, Chebyshev's inequality and LLN}
+\input{sourceFiles/08_Trans}
+\input{sourceFiles/08_ChebyWLLN}
+
+%%Week 09
+\section{Covariance and Correlation}
+\input{sourceFiles/09_CovCor}
+
+%%Week 010
+\section{More and more}
+\input{sourceFiles/xx_GammaDistr}
+\input{sourceFiles/xx_RandomWalk}
+%\appendix
+%\include{aWsummary}
+%\include{aWP}
+%\include{aWextras}
+\end{document} 

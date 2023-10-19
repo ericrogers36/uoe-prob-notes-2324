@@ -1,0 +1,393 @@
+\section{Concept summary}
+
+\subsection*{Week 1}\addtocounter{subsection}{1}
+
+\ssn{Sample Space}  The \emph{sample space} of an experiment is the set of all possible outcomes. For example, the sample space $S$ for choosing a random day in October is $S=\{ 1,2,\dots,31\}$.
+\end{n}
+
+\ssn{Conditional probability}  Intuitively, the \emph{conditional probability} $\PP( A \st B)$ is the probability that $A$ happens given that we know $B$ has happened. For instance, if $X$ is the result of rolling a D6 then $\PP( X=4 \st \text{$X$ is even}) = 1/3$. 
+\begin{itemize}
+    \item We will see later that mathematically we can \emph{define} conditional probability as 
+     \[
+         \PP( A \st B) = \frac{\PP(\text{$A$ and $B$ occur})}{\PP(B)} = 
+           \frac{\PP(A \cap B)}{\PP(B)} \qquad \text{if $\PP(B) \not= 0$.}
+     \]
+     \item In practice, it is often clear (or possible to calculate) $\PP(A | B)$ and the ``definition'' gets used to calculate $\PP(\text{$A$ and $B$ occur})$ as 
+      \[
+        \PP(\text{$A$ and $B$ occur})  = \PP(A \cap B) = \PP( A \st B ) \, \PP(B). 
+      \]
+\end{itemize}
+\end{n}
+
+\ssn{Uniformly random}
+To say that an experiment or process is \emph{uniformly random} means that each outcome is equally likely.  (This definition requires modification when we talk later about ``continuous random variables''.)  
+
+Thus to chose a day in October uniformly randomly means that each of the 31 possible days is chosen with probability $1/31$. 
+\end{n}
+
+
+\ssn{Random variable} Intuitively, a random variable is an experiment or process whose outcome is a number.  Thus setting $X$ to be the outcome of rolling a D6 is defining a random variable. 
+
+We will see later that the mathematical way to define a random variable is that it is a function on the sample space $X$.  Thus a sample space for the result of tossing two coins is $S = \{ HH, HT, TH, TT\}$.  The number of heads is then a function on $S$ and defines a random variable $Z$ that takes the values $0,1,2$ with certain probabilities. 
+\end{n}
+
+\ssn{Expected value}
+If $X$ is a random variable taking each of $n$ possible values $\{ x_1, x_2, \dots , x_n\}$ with corresponding probability $\PP(X= x_k) = p_k$ (so that necessarily $\sum_k p_k = 1$) then 
+the \emph{expected value} or \emph{expectation} of $X$ is 
+ \[
+        \EE(X) = \sum_k \left( p_k x_k \right).
+ \]
+
+The expected value of $X$ defined to be the result of rolling a D6 is $7/2$.  We ``expect'' that if we roll a D6 a large number $N$ times then the sum of all the rolls will be about $(7/2)N$. 
+\end{n} 
+
+\subsection*{Week 2}\addtocounter{subsection}{1}
+
+\ssn{The Binomial distribution} The probability of $k$ successes in $n$ independent trials each having probability $p$ of success and probability $q=1-p$ of failure is 
+ \[
+    \PP(\text{$k$ successes}) = \binom{n}{k} p^k q^{n-k}.
+ \]
+We often write ``Let $X \sim \bino(n,p)$'' to mean that the random variable $X$ has this distribution. 
+
+We see later in the notes that the expected number of successes is (as expected?) $np$. \end{n}
+
+
+\ssn{Independence of random variables}  Random variables $X,Y$ are \emph{independent} if for all $k,l$ it is the case that 
+  \[
+     \PP( \text{$X=k$ and $Y=l$} ) \quad = \quad \PP( X=k) \, \PP(Y=l).
+  \]
+The idea is that knowing the value $X$ takes tells us nothing about $Y$. 
+\end{n}
+
+\ssn{Probability generating functions} Given a random variable $X$ taking integer values $\{ x_k \}$ with probabilities $\{ p_k \}$, we define
+\[
+G_X(s) = \sum_{k=0}^n \PP( X = k)\, s^k. 
+\]
+Important properties:    $G_X(1)=1$ and $G'(1) = \EE(X)$. Also if $X ,Y$ are independent random variables then 
+ \[
+       G_{X+Y}(s) = G_X(s) G_Y(s).
+       \]
+       We will define variance later and see that too can be computed from derivatives of $G$.
+
+WARNING: You may find ``Moment generating functions'' in books or other courses. This is a different (although quite closely related) concept. 
+\end{n}
+
+\subsection*{Week 3}\addtocounter{subsection}{1}
+
+\ssn{Probability of a random natural number having a property }
+It does not make sense to choose a natural number, with each outcome being equally likely.    So we say that a random natural number has property $A$ with probability $p$ if defining $p_n$ to be the probability that a random natural number in the interval $[1,n]$ has property $A$ it is the case that $p_n \map p$ as $n \map \infty$. 
+
+For instance, the probability that a random natural number in $[1,N]$ is a square is approximately $\/\sqrt{n}$.  So with this definition  the probability that a random natural number is a perfect square is $0$. 
+\end{n}
+
+\ssn{The axiomatic approach} 
+We have a sample space $S$.  We choose certain subsets of $S$ to be \emph{events}. (In the finite / discrete cases, every subset is an event.  In the continuous case it is more complex but we are not worrying about that.)   We have a probability function $\PP$ that defines a probability $\PP(A)$ to every event $A$.   It obeys certain axioms---see the notes.
+\end{n}
+
+\ssn{Exclusive and independent} 
+Two events $A,B$ are \emph{exclusive} or \emph{disjoint} if
+ \[
+      A \cap B =  \{ \} 
+ \]
+ (So the two events cannot both occur.) 
+ 
+ Two events $A,B$ are \emph{independent} if 
+  \[
+    \PP(  A \cap B )  =  \PP(A) \, \PP(B). 
+ \]
+ Do NOT confuse these two ideas!  Do note also the definition of more than two events being independent. 
+\end{n}
+
+\ssn{Complements}
+If $A \subseteq S$ is an event, the complementary event is 
+ \[
+   A^c = S \setminus A = \{ s \in S \st s \not\in A \}. 
+ \]
+It is thus the event that occurs precisely when $A$ does not. 
+We have $\PP(A^c) = 1 - \PP(A)$. 
+\end{n} 
+
+\ssn{Inclusion-exclusion} 
+For two events $A,B$ we have 
+\[
+   \PP( A \cup B) = \PP(A) + \PP(B) - \PP(A \cap B). 
+\]
+There is an analogous formula for three events. See notes. 
+\end{n} 
+
+\subsection*{Week 4}\addtocounter{subsection}{1}
+
+\ssn{Continuous distributions} 
+For us, the sample space will usually be an interval $[a,b]$ in $\RR$. The outcome is a random variable $X$. Events are unions of intervals.  We have a \emph{probability density function (pdf)} $f_X(x)$ such that 
+\begin{itemize}
+    \item $0 \leq f_X(x) \leq 1 $
+    \item $\int_a^b f_X(x) \, \dd x = 1$. 
+\end{itemize}
+The probabilities are defined by 
+ \[
+   \PP( u \leq X \leq v) = \int_u^v f_X(x) \, \dd x
+ \]
+
+We also define the \emph{cumulative distribution function (cdf)} 
+ \[
+     F_X(x) = \PP( X \leq x). 
+ \]
+We have 
+ \[
+      f_X(x) = \frac{\dd}{\dd x}  F_X(x) . 
+ \]
+\end{n}
+
+\ssn{Examples of continuous distributions}
+\begin{itemize}
+    \item Uniform distribution on a finite interval $[a,b]$:  
+     \[
+       f_X(x)  = \frac{1}{b-a}, \quad F_X(x) = \frac{x-a}{b-a}. 
+     \]
+     \item The exponential distribution with parameter $\lambda>0$:
+       \[
+       f_X(x)  = \lambda e^{-\lambda x}, \quad 
+          F_X(x) = 1 - e^{-\lambda x}.  
+     \]
+     Both are core distributions for us. 
+\end{itemize}
+\end{n}
+
+\ssn{Expected values} 
+In the continuous case, 
+  \[
+      \EE(X) = \int_a^b x f_X(x) \, \dd x. 
+  \]
+\end{n}
+
+\ssn{Gamma function} 
+The \emph{gamma function} is defined for $z>0$ by 
+ \[
+   \Gamma(z) = \int_0^\infty x^{z-1} e^{-x} \dd x. 
+ \]
+It has the properties: 
+ \begin{itemize}
+     \item $\Gamma(n) = (n-1)!$ for $n \in \mathbb N$
+     \item $\Gamma(z+1) = z \Gamma(z)$.
+ \end{itemize}
+ This function allows us to evaluate useful integrals because 
+  \[
+     \int_0^\infty x^{z-1} e^{-\lambda x} \, \dd x = \frac{\Gamma(z)}{\lambda^z}. 
+  \]
+ It also allows us to define the important (at an advanced level) Gamma distribution, but familiarity with the use of that is not expected. 
+\end{n}
+
+\subsection*{Week 5}\addtocounter{subsection}{1}
+
+\ssn{Geometric distribution} 
+A random variable is distributed with geometric distribution with parameter $p$ (where $0<p<1$) if 
+ \[
+    \PP(X=k) = q^{k-1} p \quad \text{where $q=1-p$}. 
+  \]
+We often write $X \sim \mathrm{Geom}(p)$ for brevity. 
+
+The distribution gives the probability of having ones first success on the $k$-th trial where each trial independently has probability $p$ of success. 
+\end{n}
+
+
+\ssn{Variance}
+Variance provides a measure of how much the values of an RV tend to deviate from the expected value.  It is defined by 
+ \[
+    \var(X) = \EE( ( X - \EE(X) )^2 ) 
+ \]
+but almost always more easily calculated using 
+ \[
+  \var(X) = \EE(X^2) - (\EE(X))^2.
+  \]
+\end{n} 
+
+\ssn{Fundamental properties} 
+Where defined, for RVs $X,Y$ and numbers $a,b$: 
+  \begin{itemize}
+      \item $\EE( aX+b) = a \EE(X) + b$; 
+      \item $\var(aX+b) = a^2 \var(X)$; 
+      \item $\EE(X+Y) = \EE(X) + \EE(Y)$; 
+      \item if $X,Y$ are independent then $\EE(XY) = \EE(X) \, \EE(Y)$;
+      \item if $X,Y$ are independent then $\var(X+Y) = \var(X) + \var(Y)$. 
+  \end{itemize}
+\end{n} 
+
+\ssn{The fundamental confusion of RVs} 
+Let $X$ be a RV.  Then $2X$ is the random variable ``take a sample from $X$ and multiply it by $2$''. 
+
+On the other hand, $X_1, X_2$ might be independent identically distributed (``iid'') random variables.  Then $X_1+X_2$ means take a sample from each and add them together. 
+
+Example: rolling a D6 and doubling the answer is NOT equivalent to taking two D6, rolling them and adding the results together. 
+\end{n}
+
+\ssn{Averaging} 
+We are often interested in the average 
+ \[
+     A_n = \frac1n (X_1 + \dots + X_n) 
+ \]
+ of $n$ iid (``independent, identically distributed'') random variables. Assuming that expectations and variance exist, 
+ \[
+   \EE(A_n) = \EE(X_j) , \qquad \var(A_n) = \frac1n \var(X_j).
+ \]
+Slogan: averaging reduces variance. 
+\end{n} 
+
+\ssn{Theory}
+\emph{Chebyshev's inequality} sets a limit in terms of variance for how probable it is that an rv (with defined variance) takes values far from the mean:
+\[
+     \PP( | X - \EE(X) | \geq a \leq \frac{\var{X}}{a^2}. 
+\]
+
+Combining this with the behaviour of variance under averaging in the situation just above, we obtain the famous \emph{weak law of large numbers} that says that given $a>0$ the probability $\PP( | A_n - \EE(X_j) | > a)$ tends to zero as $n \map \infty$.  One might view this as confirming that probability theory makes some sort of sense! 
+\end{n} 
+
+\subsection*{Week 6}\addtocounter{subsection}{1}
+
+\ssn{Poisson distribution}
+This distribution models situations where events are occurring randomly in time or space and the only thing we know is the rate of occurrence. 
+
+The distribution is given by:
+ \[
+    \PP(X=k) = e^{-\lambda}  \, \frac{\lambda^k}{k!}, \quad \text{where $k=  0,1,2,\dots$}. 
+ \]
+Here $\lambda$ is the expected number of occurrences. 
+\end{n}
+
+\ssn{Relation with exponential distribution} 
+The waiting time $T$ until the first occurrence for a process that is modelled by a Poisson distribution of parameter $\lambda$ is an exponential random variable of parameter $\lambda$. 
+
+So, for instance, if a lump of radioactive material is giving off alpha particles at an average rate of 600 per minute then the probability of $k$ particles being given off in a single second is a Poisson RV $X$ with parameter $\lambda = 10$.   But starting at some fixed time, the time $T$ until the first alpha particle is ejected is an exponential RV with that same parameter. 
+\end{n} 
+
+\subsection*{Week 7}\addtocounter{subsection}{1}
+
+\ssn{Conditional probability}
+The \emph{conditional probability}  $\PP(A \st B)$ is the probability that $A$ occurs given that $B$ occurs.  (The word ``given'' is a strong indication that we are talking about a conditional probability.)
+
+The definition however is: 
+  \[
+     \PP(A \st B )  = \frac{\PP( A \cap B)}{\PP(B)}
+  \]
+where the intersection $A \cap B$ is the event that both $A$ and $B$ occur. 
+
+There is also conditional expectation of a random variable $X$ which has a (finite or infinite) number of possible values $x_1,x_2, \dots$. 
+ \[
+    \EE(X \st B) = \sum_j \PP(X=x_j \st B ) x_j.
+ \]
+(The meaning is ``the expected value of $X$ given that we know $B$ has occurred''.) 
+\end{n}
+
+\ssn{Zooming in}
+When taking conditional probabilities ``given $B$'' we are ``zooming in'' replacing our original sample space by $B$.  Note for instance that $\PP(B \st B ) = 1$. 
+\end{n}
+
+\ssn{law of total probability and the ``expectation'' version}
+Let our sample space $S$ be partitioned into disjoint events $A_k, \, k=1,2,\dots, n$. Then:
+ \[
+  \PP(B) = \sum_{k=1}^n \PP(B \st A_k) \,\PP(A_k) \quad
+  \text{and} \quad 
+   \EE(B) = \sum_{k=1}^n \EE(B \st A_k) \,\PP(A_k). 
+ \]
+\end{n}
+
+\ssn{Bayes theorem} 
+Basic version: 
+\[
+     \PP(A \st B )  = \PP(B \st A) \, \frac{\PP( A)}{\PP(B)}.
+  \]
+  
+``Probability of causes'' form: Let our sample space $S$ be partitioned into disjoint events $A_k, \, k=1,2,\dots, n$.  Then for $1\leq j \leq n$, 
+ \[
+   \PP(A_j \st B)  =   \frac{\PP(B \st A_j)\,\PP(A_j)}{ \sum_{k=1}^n \PP(B \st A_k) \,\PP(A_k)}
+ \]
+Here, we imagine that one of the $A_k$ has been the ``cause'' of $B$ and knowing that $B$ has occurred we want to know the probability of the cause being one of them.  
+
+The denominator in the last formula is just $\PP(B)$ being computed by the law of total probability. 
+ \end{n} 
+ 
+\ssn{Conditioning on first step} 
+See numerous examples of this important technique in the notes and from lectures. 
+\end{n}
+ 
+\subsection*{Week 8}\addtocounter{subsection}{1}
+
+\ssn{Definition}
+The \emph{standard deviation} of an RV, usually denoted $\sigma$ is the square root of the variance. 
+\end{n}
+
+\ssn{Definition} 
+This is the familiar bell-shaped curve. It comes in a general version with expected value $\mu$ and variance $\sigma^2$.
+
+The standard version has $\mu=0$ and $\sigma=1$ and is usually denoted $Z$. 
+\end{n}
+
+\ssn{Computing probabilities} 
+The cumulative distribution function of $Z$, usually denoted $\Phi$ is tabulated.  We use 
+ \[
+    \PP( a \leq Z \leq b) = \Phi(b) - \Phi(a).
+ \]
+In case of a general normal distribution $X$ we transform to a standard one using 
+ \[
+   Z = \frac{X-\mu}{\sigma}.
+ \]
+\end{n} 
+
+\ssn{Central limit theorem} 
+Let $X_1, X_2, \dots$ be independent, identically distributed random variables, each of expected value $\mu$ and finite variance $\sigma^2$.   We may be interested in the sum $S$ or the average $A$ of $n$ of these:
+\[
+   S = X_1 + \dots + X_n, \qquad A = \frac{X_1 + \dots + X_n}{n} 
+\]
+These have mean and variance
+ \[
+    \mu_S = n \mu, \quad \sigma_S^2 = n \sigma^2; \qquad 
+     \mu_A = \mu, \quad \sigma_A^2 = \frac{\sigma^2}{n}.
+ \]
+(The last of those expressions illustrates the important point that averaging reduces variance.) 
+
+The ``central limit theorem'' says that for large $n$ the distribution of $A_n$ and $S_n$ tend towards normal distributions (with the expected value and variance as in the formulae above). 
+\end{n}
+
+\ssn{Application}
+The central limit theorem is often used to estimate sums or averages of the above sort. We compute the expected value and variance and then transform the approximating normal distribution to a standard one using $ Z = \frac{X-\mu}{\sigma}$.
+\end{n}
+
+\subsection*{Week 9}\addtocounter{subsection}{1}
+
+\ssn{Several random variables} 
+We consider two (or in principle more) random variables $X,Y$ on the same sample space.
+Our starting point is the ``joint mass function''  $p_{ij} = \PP( X = x_j \text{ and } Y= y_j)$.  
+
+Starting with this, we can recover the mass functions for $X,Y$ separately by summing rows and columns in a table of $p_{ij}$. 
+
+We are mainly interested in the case where $X,Y$ are not independent. 
+\end{n}
+
+\ssn{Continuous case}
+We consider cases such as a random point $(X,Y)$ in a disk $D$ of radius $r$.  here, the probability of $(X,Y)$ lying in a subset $A \subseteq D$ is proportional to the area of the subset.  So 
+ \[
+    \PP( (X,Y) \in A) = \frac{ \mathrm{Area}(A)}{\pi r^2}. 
+ \]
+\end{n} 
+
+\subsection*{Week 10}\addtocounter{subsection}{1}
+
+\ssn{Covariance} 
+Let $X,Y$ be two random variables on the same sample space. Then $\cov(X,Y)$ could be defined by any one of the following formulae:
+\begin{itemize}
+    \item $\cov(X,Y) = \EE(XY) - \EE(X)\, \EE(Y)$
+    \item $\cov(X,Y) = \EE\left( ( X - \EE(X)) \, (Y - \EE(Y)) \right)$
+    \item $\var(X+Y) = \var(X) + \var(Y) + 2 \, \cov(X,Y)$
+\end{itemize}
+The algebraic properties of covariance resemble those of a dot product of vectors and are important. 
+
+The covariance is zero if $X$ and $Y$ are independent. 
+
+Covariance measures in some sense whether $X$ and $Y$ tend to be large or small relative to their respective means together (positive covariance) or whether one being small tends to make the other large (negative covariance). 
+\end{n}
+
+\ssn{Correlation}
+The correlation is a value in the range $[-1,1]$ that is a normalised version of the covariance: 
+ \[
+       \cor(X,Y) = \frac{\cov(X,Y)}{\sqrt{\var(X) \, \var(Y)}}
+  \]
+\end{n} 

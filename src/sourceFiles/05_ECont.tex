@@ -1,0 +1,43 @@
+
+\subsection{Conditional Expectation}
+
+\ssn{Definition}
+The \emph{expected value} of a random variable $X$ with pdf $f_X(x)$ 
+is given by 
+\tcb 
+ \[
+    \EE(X) = \int_{-\infty}^\infty x \, f_X(x) \dd x.
+   \]
+   \etcb 
+   
+\noindent    
+More generally, we can take the expected value of a function $g(X)$ of our random variable $X$: 
+\tcb 
+ \[
+    \EE(g(X)) = \int_{-\infty}^\infty g(x) \, f_X(x) \dd x.
+   \]
+  \etcb 
+ 
+ \noindent If the random variable $X$ takes values only in an interval $[a,b]$ then the limits of the integral can be taken to be $a$ and $b$. 
+\end{n}
+
+\ssn{Examples} 
+\begin{itemize}
+\item For the rod example where $f_X(x)=1/L$ on $[0,L]$, the expected value of $X$ is 
+ \[
+ \EE(X) =  \int_0^L  \frac1L  x \dd x = \left[ \frac{x^2}{2L}\right]_0^L = \frac{L}2, 
+  \]
+ which surely accords with our intuition. 
+ 
+ Similarly (exercise)  $\EE(X^2) = L^2/3$. 
+ \item 
+ For the exponential distribution on $[0,\infty]$ where $f_T(t) = \lambda e^{-\lambda t}$ we have 
+  \[
+ \EE(T)= \int_0^\infty u \, \lambda e^{-\lambda u} \,\dd u = 
+   \left[ - u e^{-\lambda u} \right]_0^\infty +
+   \int_0^\infty e^{-\lambda t} \dd t = 0 + \frac1\lambda = \frac1\lambda
+  \]
+ where at the start we integrated by parts. 
+\end{itemize}
+
+\end{n}

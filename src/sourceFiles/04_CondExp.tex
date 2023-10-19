@@ -1,0 +1,123 @@
+
+\ssn{Conditional expectation} 
+ If $X$ is a random variable taking values $x_1, x_2, \dots$ and $A$ is an event, we can compute the \ul{conditional} \ul{expectation} $\EE( X \st A)$. The formula is 
+  \tcb
+  \[ 
+   \EE( X \st A) = \sum_k \PP( X=x_k \st A) x_k  
+  \]
+  \etcb 
+\end{n}
+
+\sse{} 
+Let $X$ be the result of rolling a D6. Let $A$ denote the event that the roll is even and let $B$ be the event that the roll is odd.  
+
+What do you believe the values of $\EE(X \st A)$ and $\EE(X \st B)$ should be?   Use the definition and check that it agrees. 
+\end{e}
+
+
+\ssn{Proposition: the law of total probability for expectations}
+The law of total probability translates immediately also into expectations, for a random variable and a partition of the sample space into disjoint events. 
+\tcb
+ \[  \EE(X) = \EE(X \st A_1)\, \PP(A_1) + \dots + \EE(X \st A_n) \, \PP(A_n)
+ \]
+\etcb
+\end{n}
+
+\sse{} 
+ Continuing with the previous exercise, compute $\EE(X)$ using the law of total probability for expectations and the partition $S = A \cup B$. Check you get the correct answer! 
+\end{e}
+
+\ssn{Properties of natural numbers} 
+We now change direction to answer questions such as the following:  What is the probability that a randomly selected positive integer is even? 
+\end{n}
+
+\ssn{Discussion}
+You probably did not hesitate: surely it's one half?  But there is a problem here: you cannot choose a positive integer with every value equally likely to be selected because there are infinitely many of them. The probability of choosing 123456789 has to be zero. And the probability of choosing a number less than $10^{10^{1000000}}$ has to be zero, because there are only a finite number of those.  So what does the question actually mean? 
+\end{n}
+
+\ssn{Definition} 
+To escape from that impasse, we make a definition:  by saying that \emph{the probability a positive integer has some property is $p$} we mean the following:  if we write $p(N)$ for the probability that a random chosen integer in the range $[1,N]$ has the property, then the limit of $p(N)$ as $N \map \infty$ exists and is equal to $p$. 
+\end{n}
+
+\ssn{Example}
+Let us check that according to this definition, 
+the probability of a random positive integer being divisible by 3 is $1/3$, as we should surely hope. We observe that the number of integers divisible by 3 in the range $[1,N]$ is whichever of the values $N/3, (N-1)/3,(N-2)/3$ is an integer. So letting $p(N)$ denote the probability that such an integer is divisible by 3 we have 
+ \[
+    \frac{N-2}{3N} = \frac13 - \frac2{3N}\leq \; p(N) \;\leq \;\frac{N}{3N} = \frac13.
+   \]
+So the limit of $p(N)$ as $N \map \infty$ is $1/3$.    \end{n}
+
+\ssn{Example}
+What is the probability that a randomly chosen positive integer is divisible by $3$ or by $5$? We proceed with the understanding that we are talking about limits of choosing from $[1,N]$ as $N \map \infty$. 
+
+Let $B_1, B_2$ be the events that the number is divisible by 3 and 5 respectively.    Then $\PP(B_1) = 1/3$ and $\PP(B_2) = 1/5$. The event $B_1 \cap B_2$ is that the number is divisible by $15$. So,  $\PP(B_1 \cap B_2) = 1/15$.   The event we are interested in is $B_1 \cup B_2$ and by the formula 
+ \[
+    \PP(B_1 \cup B_2) = \frac13+ \frac15 - \frac{1}{15} = \frac{7}{15}. 
+ \]
+\end{n}
+
+\ssn{A proposition on divisibility}
+Let $A$ be the event that a positive integer $n$ is divisible by $k$ and let $B$ be the event that it is divisible by $l$. Then $A$ and $B$ are independent if and only if $\mathrm{gcd}(k,l) = 1$. 
+
+\begin{proof}
+Let $k,l$ have greatest common divisor $d$. Then the least common multiple (lcm) of $k,l$ is $m=kl/d$. 
+A number $n$ is a multiple of both $k$ and $l$ if and only if $n$ is a multiple of $m$.
+
+Thus we have 
+ \[
+  \PP(A) = 1/k, \quad \PP(B) = 1/l, \quad \PP(A \cap B) = \frac1m = \frac{d}{kl}.
+  \]
+  So $\PP(A \cap B) = \PP(A) \, (B)$ if and only if $d=1$. 
+\end{proof}
+\end{n}
+
+\sse 
+What is the probability that a randomly chosen positive integer is divisible by 4 or by 14?
+\end{e}
+
+\sss
+Let $A,B$ be the events that $n$ is divisible by 4 and 14 respectively. Then $\PP(A) = 1/4$ and $\PP(B)=1/14$.  The number $n$ is divisible by both if and only if $n$ is a multiple of the lcm of 4 and 14 which is 28. So $\PP(A \cap B) = 1/28$.   Thus 
+ \[
+  \PP(A \cup B) = \frac14 + \frac1{14} - \frac1{28} = 
+     \frac27 . 
+ \]
+\end{s}
+
+\ssn{Example}
+What is the probability that a random natural number has no `5' in its decimal expansion?    Well, there are $10^n$ natural numbers less than or equal to $10^n$. 
+There are $9^n$ ways of writing down an $n$-digit number with no `5's.  So for the interval $[1, 10^n]$ the probability of having no `5's is 
+ \[
+      \frac{9^n}{10^n}  \map 0 \text{ as $n \map \infty$.} 
+ \]
+ So the probability is zero. 
+ \end{n}
+ 
+ \sse{}
+ The famed ``prime number theorem'' says that for large $n$ the number of primes less than or equal to  $n$ is approximately $n/\log(n)$.  
+ 
+ Given that, what is the probability that a random natural number is prime? 
+ \end{e}
+ 
+ \sss
+ So the probability that a natural number in $[1,n]$ is prime is 
+  \[
+       \frac{n/\log(n)}{n} = \frac1{\log(n)}.
+  \]
+ This goes to zero as $n \map \infty$ so the probability is zero. 
+ \end{s} 
+ 
+ \ssp{} 
+ Some natural numbers cannot be expressed as the sum of two squares. Others can be expressed in multiple ways. For example,
+  \[
+  50 = 5^2 + 5^2 = 7^2 + 1^2. 
+  \]
+ What (in our usual sense of a large $n$ limit) is the expected number of ways that a random natural number can be written as the sum of two squares of natural numbers?   (You might like to think about the number of points with integer coordinates inside a large circle about the origin in the plane. Also think about what you are counting: are you allowing $25 = (-3)^2 + 4^2$ and does $25 = 3^2 + 4^2 = 4^2 + 3^2$ count as two ways or only one?) 
+ \end{e} 
+ 
+ \sss
+ A large circle of radius $r$ has equation $x^2 + y^2 = r^2$.  The number of points inside with integer coordinates is approximately the area $\pi r^2$. So the number of sums of squares with sum less than or equal to $r^2$ is about $\pi r^2$. So the expected number is approximately $\pi$.  
+ 
+ This counting of course includes the possibility of either or both of $x$ and $y$ being negative so one should divide by 4 to get an expected number of $\pi/4$ if we restrict to non-negative case. And we are still counting $25 = 3^2 + 4^2 = 4^2 + 3^2$ as two solutions. So $\pi/8$ is the best answer. 
+ 
+ And by the way, I believe the probability that a random natural number is the sum of two squares is zero, which at first sight seems a bit paradoxical. 
+ \end{s} 

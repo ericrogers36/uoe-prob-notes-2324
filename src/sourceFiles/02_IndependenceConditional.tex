@@ -1,0 +1,42 @@
+
+\subsection{Independence}
+
+\ssn{Definition: independence} \hfill
+\tcb
+Two events $A,B \subseteq S$ are \ul{independent} if
+ \[
+   \PP(A \cap B) = \PP(A) \PP(B). 
+ \]
+\etcb
+
+\noindent
+The event $A \cap B$ is the intersection of the two events: it occurs precisely when both $A$ and $B$ occur. 
+
+We say two events are ``dependent'' if they are not independent. 
+
+We will say more about independence next week.  Two events being independent means that knowing that one has occurred does not change the probability that the other occurs.  
+\end{n}
+
+\ssn{Examples}
+\begin{itemize}
+    \item Roll a D6 twice. Let $A$ be the event that the first roll is a `6' and let $B$ be the event that the second roll is a `6'. Then $\PP(A) = \PP(B) = 1/6$. Then $A \cap B$ is rolling `double-6' which has probability $1/36$. So $A$ and $B$ are independent.  We were using this independence in our calculations with the probability trees above. 
+    \item Roll a D6 twice. Let $A$ be the event that the sum of the rolls is $5$ and let $B$ be the event that at least one `1' appears.     Then $A=\{ (1,4), (4,1),(2,3),(3,2) \} $ and so $\PP(A) = 4/36$.   Counting we find $11$ possible rolls contain at least one `1' and so $\PP(B) = 11/36$.    The event $A \cap B = \{ (1,4), (4,1)$ and so $\PP(A \cap B) = 2/36$. Checking 
+     \[
+        \frac2{36} \not = \frac{4}{36} \, \frac{11}{36}
+     \]
+     and so $A$ and $B$ are \emph{not} independent. 
+      \begin{itemize}
+          \item Looking at this from another angle, if we know that the sum is 5, then there are only four possibilities and two of them contain a `1':  the probability now of there being a `1' present is $1/2$. 
+      \end{itemize}
+\end{itemize}
+It is worth noting at this stage that the very last item above is usually expressed in the form 
+ \[
+  \text{The \ul{conditional probability} of $B$ given $A$ is equal to $1/2$} 
+ \]
+which we write with the notation 
+\[
+   \PP( B \st A) = \frac12 
+\]
+where the vertical bar is read as ``given''. 
+We will take up conditional probability further next week. 
+\end{n}

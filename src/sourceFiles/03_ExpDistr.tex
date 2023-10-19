@@ -1,0 +1,82 @@
+
+\subsection{Exponential Distribution}
+
+\ssn{Example: back to the radioactive atom} (Do not get bogged down in the following argument if you find parts of it hard. The main point is that at the end we derive a pdf for the situation. The derivation is not examinable.)  
+
+Let us return to the radioactive atom and see if we can find a candidate for a pdf. We will assume there is a constant $\lambda >0$ such that \emph{if the atom is intact at time $t$} then it decays in the interval $[t, t + \Delta t]$ with probability $\lambda \Delta t$ (in the limit as $\Delta t \map 0$).
+
+Now, letting $T$ be the RV which is when the atom decays and letting its pdf be $f_T$ we have the following as $\Delta t\map 0$.
+\begin{eqnarray*}
+  f_T(t) \Delta t &=& \PP (t \leq T \leq t+\Delta t) \\
+   &=& \PP(\text{intact at time $t$}) \;\PP( \text{decays in $[t,t+\Delta t] \st$ intact at time $t$})  \\
+   &=& \PP(\text{intact at time $t$}) \lambda \Delta t  \\
+   &=& (1- \PP( 0 \leq T \leq t))  \lambda \Delta t.  
+\end{eqnarray*}
+Dividing be $\Delta t$ and replacing the probability by an integral of the pdf we have
+\[
+   f_T(t) = \lambda \left( 1 - \int_0^t f_T(u) \dd u \right). 
+\]
+Differentiating, we have 
+ \[
+   f_T'(t) = -\lambda f_T(t) \text{ and so } f_T(t) = A e^{-\lambda t} \text{ for some $A>0$}.  
+ \]
+For $\int_0^\infty f_T(t) \dd t = 1$ we need $A=\lambda$ and so finally we have 
+\[
+     f_T(t) = \lambda e^{-\lambda t} ,\quad t \geq 0. 
+\]
+\end{n}
+
+\ssn{Definition} \hfill 
+\tcb 
+A random variable $X$ on $[0,\infty]$ with pdf of the form 
+ \[ 
+ f_X(x) = \lambda e^{-\lambda x} \text{ (where } \lambda >0
+  \]
+  is a constant) is called an \emph{exponential random variable}.  
+\etcb 
+So the sample space is $S = [a,b]$. It does not matter whether we take an open interval $(a,b)$ instead.  
+\end{n}
+
+\sse 
+\begin{enumerate}[(a)]
+\item Show that the probability of decay occurring between the times $t=0$ and $t=1/\lambda$ is $(e-1)/e \approx 0.632$.
+\item The \emph{half life} $\tau$ of a radioactive atom is the time at which there is a 50\% chance that an atom that was intact at $t=0$ will have decayed.   Show that $\tau = \ln 2 / \lambda$. 
+\end{enumerate}
+\end{e}
+
+\sss
+\begin{enumerate}[(a)]
+\item  We compute 
+  \[
+     \int_0^{1/\lambda} \lambda e^{-\lambda t} \dd t = [ 1 - e^{-\lambda t}]_0^{1/\lambda} = \frac{e-1}{e}. 
+  \]
+ \item To find $\tau$ such that the probability of decay is $1/2$ we solve   
+ \[
+   [ 1-e^{-\lambda}]_0^\tau = \frac12  
+ \]
+to get $e^{-\lambda\tau}= 1/2$ or $\lambda\tau = \ln 2$. 
+\end{enumerate}
+\end{s}
+
+
+
+\sse{} In a model of a call centre, at a given moment, the time in seconds until the next call arrives is a random variable $T$ that has a pdf of the form 
+ \[
+    f_T(t) =  k e^{-t/8}, \qquad \text{where $t \in [0,\infty)$ and $k$ is a constant to be determined.}
+ \] 
+What is the probability that a call arrives in the first four seconds?   (Answers: $k=1/8$ comparing with the general exponential distribution. The integral for the probability should evaluate to approx 0.3935.) 
+ \end{e}
+
+\sse{}
+The random variable $X$ defined on the interval $[0,1]$ has pdf given by $f_X(x) = k \sqrt{1-x^2}$.  Find the value for $k$. No explicit integration should be necessary! 
+(You should arrive at $k=4/\pi$.) 
+\end{e}
+
+\sss
+Notice that the graph of $y = \sqrt{1-x^2}$ is a quarter of a unit circle so the area under it is $\pi/4$.  Alternatively, integrate!
+\end{s}
+
+
+\ssn{Convention} 
+Henceforth we will assume that for a continuous random variables $X$, the pdf $f_X(x)$ is defined for the whole real line. If $X$ takes values only in an interval $(a,b)$ we simply take $f_X(x) =0$ for all $x$ outside $(a,b)$. 
+\end{n}

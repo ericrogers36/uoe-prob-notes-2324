@@ -1,0 +1,152 @@
+
+\ssn{Definition: Probability generating function (pgf)}
+For a random variable $X$ its \ul{probability} \ul{generating} \ul{function} (pgf) is the function of a variable `$s$' defined by 
+\tcb 
+\[
+        G_X(s) = \EE( s^X)
+  \]
+\etcb
+\noindent for such values of $s$ that the expectation exists. 
+\end{n}
+
+\ssn{Pgf in practice} \label{gefun} 
+Let us consider discrete random variables taking values in the non-negative integers. Thus we have 
+ \[
+    \PP(X=k)  = p_k  \quad \text{for $k=0,1,2,3, \dots$}.  
+ \]
+Then 
+\tcb 
+ \[ 
+    G_X(s) = p_0 + p_1 s + p_2 s^2 + \dots 
+ \]
+\etcb
+\noindent 
+which is a polynomial if $X$ takes only finitely many values and otherwise is an infinite series. 
+
+On the other hand, if $X$ is continuous we have 
+ \[
+     G_X(s) = \int_{-\infty}^\infty s^x f_X(x) \dd x.
+  \]
+ We will not use the continuous case and so we will restrict ourselves to discrete examples. 
+\end{n}
+
+\ssn{Warning} There is a very similar gadget called the ``moment generating function'' and defined by $M_X(t) = \EE(e^{tX})$. Do not get confused if you are reading around.   (Since $s^X = e^{\log(s) X}$, the two things are related by $t = \log(s)$.) 
+\end{n} 
+
+\ssn{Comment} In the definition, it is tempting to ask what the variable $s$ ``is''. The answer is that it does not represent anything. It just turns out that the polynomial/series is a good way to represent or encode the random variable. 
+\end{n} 
+
+\ssn{Examples} Suppose $X$ is the result of rolling a single D4. Then the pgf for $X$ is 
+ \[
+      \frac{1}{4} s +  \frac{1}{4} s^2 + \frac{1}{4} s^3 + \frac{1}{4} s^4. 
+ \]
+Another example would be to let $Y$ be the number of H resulting from tossing two coins. This has generating function 
+ \[
+  G_Y(s) = \PP(Y=0) s^0 + \PP(Y=1) s^1 + \PP(Y=2) s^2 = 
+     \frac14 + \frac12 s + \frac14 s^2.
+ \]
+ \end{n}
+ 
+\ssn{Properties} 
+The pgf $G_X(s)$ of the random variable $X$ has the properties: 
+\tcb 
+\begin{itemize}
+\item $G_X(1) = 1$; 
+\item $G_X'(1) = \EE(X)$, the expected value of $X$.  
+\end{itemize}
+\etcb 
+\bpr
+The first of these is immediate from the definition. for the second, differentiate the equation in \S\ref{gefun} above and then set $s=1$ to obtain 
+ \[
+      G'(1) = 1 p_1 + 2 p_2 + \dots + n p_n = \EE(X). 
+ \]
+\epr
+\end{n}
+
+\ssn{Example} \label{exgeom} 
+Consider a geometric random variable $X \sim \geom(p)$. Then 
+ \[
+    G_X(s) = \sum_{k=1}^\infty s^k q^{k-1} p = \frac{ps}{1-qs}
+ \]
+where we have summed a GP in the final step. Note that, as expected, $G_X(1) = 1$ (remembering that $q=1-p$).  Then calculating we get
+ \[
+     G_X'(s) = \frac{p}{(1-qs)^2} 
+ \]
+and $\EE(X) = G_X'(1) = 1/p$ agreeing with earlier calculations. 
+\end{n} 
+
+\ssn{Theorem}  \hfill 
+\tcb
+Let $X,Y$ be independent random variables both taking non-negative integer values.  Then 
+ \[ 
+  G_{X+Y}(s) = G_X(s)\, G_Y(s).
+  \]
+\etcb
+\begin{proof}
+ \[
+ G_{X+Y}(s) = \EE( s^{X+Y}) = \EE( s^X s^Y ) = \EE(s^X) \, \EE(s^Y) = 
+   G_X(s)\, G_Y(s).
+ \]
+ The third equality uses independence. 
+\end{proof}
+The result extends to sums of more than two random variables in the obvious way. 
+\end{n} 
+
+\ssn{Example}
+What is the probability of rolling ten D4 and obtaining a total of exactly 25?  The generating function for a single  D4 is
+ \[
+     G(s) = \frac14 ( s + s^2 + s^3 + s^4 )  
+ \]
+and so the generating function for a sum of 10 independent D4 is 
+  \[
+     G(s) = \frac1{4^{10}} ( s + s^2 + s^3 + s^4 )^{10}  
+ \]
+So the answer is the coefficient of $s^{25}$ in that expression. 
+
+Wolfram Alpha (\url{https://www.wolframalpha.com/} -- see examples in\\  \url{https://www.wolframalpha.com/examples/Polynomials.html}) 
+gives the answer $7269/65536 \approx 0.11$ 
+\end{n}
+
+\sse{}
+Let $Z \sim \bern(p)$ be a Bernoulli random variable. Write down $G_Z(s)$.    Remembering that a $X \sim \bino(n,p)$ is the sum of $n$ independent $\bern(p)$ variables, write down $G_X(s)$. Compute $\EE(X)$ from the generating function.  (Ans: as previously calculated, $\EE(X) = np$.) 
+\end{e} 
+
+\sse{}
+A random variable $X$ has $G_X(s) = (2s+1)^2/9$.   Calculate $\EE(X)$ and $\PP(X=2)$.   (Ans: $2/3$ and $4/9$.)
+\end{e} 
+
+
+
+
+\ssn{Generating functions and variance}
+If we take the generating function $G_X(s)$ of a random variable $X$ (assumed for ease of calculation to have values in the non-negative integers) 
+  \[
+     G_X(s) =  \sum_{k=0} p_k s^k = p_0 + p_1 s + p_2 s^2 + \dots 
+  \]
+We discovered earlier that $G_X(1) = 1$ and $G_X'(1) = \EE(X)$. 
+Differentiating again 
+ \[
+     G_X''(s) = \sum_{j} p_j j(j-1) s^{j-2} \quad \text{and so} \quad G''_X(1)=\EE(X^2)- \EE(X).
+  \]
+Combining these we arrive at the very useful formula 
+\tcb 
+ \[
+ \var(X) = \EE(X^2) - \left( \EE(X)\right)^2 = G_X''(1) + G_X'(1) - \left(G_X'(1)\right)^2.
+ \]
+ \etcb 
+\end{n}
+
+\ssn{Example: the geometric distribution}
+Let $X \sim \geom(p)$. Then from \S\ref{exgeom} above 
+ \[
+     G_X(s) = \frac{ps}{1-qs}, \qquad \EE(X) = G_X'(1) = \frac1p. 
+ \]
+Calculating, we get 
+ \[ 
+  G_X''(s)=\frac{2pq}{(1-qs)^3} \quad\text{and so} \quad G_X''(1) = \frac{2q}{p^2}.
+ \]
+ So we can calculate 
+ \[
+   \var(X) = \EE(X^2) - \left( \EE(X)\right)^2 = G_X''(1) + G_X'(1) - \left(G_X'(1)\right)^2 = \frac{q}{p^2}.
+ \]
+\end{n}
