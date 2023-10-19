@@ -1,0 +1,228 @@
+
+\subsection{Variance}
+
+\ssn{Definition: variance}
+A fundamental thing to ask about a probability distribution is whether samples from it are mainly clustered close to the mean, or whether values are more widely spread.  To provide a measure, we define the \emph{variance} of a random variable by 
+\tcb 
+ \[
+    \var(X) = \EE \left( (X - \EE(X))^2 \right) . 
+  \]
+\etcb
+
+\noindent 
+As for expected values, it is possible that the variance does not exist (i.e.\ that it is ``infinite''). 
+\end{n}
+
+\ssn{Examples}
+\begin{itemize}
+\item Consider again rolling a D5.  Here, $\EE(X)=3$ and so we can compute the variance as follows.
+ \[
+   \var(X)= \EE( (X-3)^2 ) = 
+    \frac15 (1-3)^2 + \frac15 (2-3)^2 +\frac15 (3-3)^2 +\frac15 (4-3)^2 +\frac15 (5-3)^2= \frac{10}5 = 2.
+ \]
+ \item Let's compute the variance of a uniform distribution $X$ on $[0,1]$. 
+ The pdf is $f_X(x)=1$ and $\EE(X)= 1/2$. Thus 
+  \[
+  \var(X) = \EE((X-\EE(X))^2) = \EE\left( \left( X-\frac12\right)^2 \right) = \int_0^1 \left( x - \frac12\right)^2 1 \, \dd x =\frac1{12}. 
+  \]
+\end{itemize}
+
+\end{n}
+
+\ssn{Proposition} \label{linev}
+Let $X$ be a random variable with expected value $\EE(X)$ and variance $\var(X)$. Let $a,b$ be real numbers.  Then 
+\tcb
+\[
+   \EE(aX+b)= a \EE(X) + b, \qquad \var(aX+b) = a^2 \var(X). 
+ \]
+ \etcb 
+ \begin{proof}
+ Exercise. 
+ \end{proof}
+\end{n}
+
+
+\ssn{Proposition}
+The variance of $X$ (when it exists) is given by 
+\tcb
+\[
+      \var(X) = \EE( X^2) - \left(\EE(X)\right)^2.
+ \]
+\etcb
+
+\noindent
+(This formula is usually an easier way of calculating the variance than using the definition. It can also be useful in theoretical calculations.) 
+ \begin{proof}
+ \begin{eqnarray*}
+   \var(X) &=&  \EE( (X-\EE(X))^2) \\ 
+     &=&  \EE( X^2 - 2\EE(X) X + (\EE(X))^2) \\
+     &=& \EE(X^2) - 2 \EE(\EE(X)X) + \EE( (\EE(X))^2) \\
+     &=& \EE(X^2) - 2 \EE(X) \EE(X) + (\EE(X))^2 \\
+     &=&  \EE( X^2) - \left(\EE(X)\right)^2. 
+ \end{eqnarray*}
+ \end{proof}
+\end{n}
+
+\ssn{Definition: Standard deviation}
+The \ul{standard deviation} $\sigma$ of a random variable $X$ is defined by $\sigma = \sqrt{\var(X)}$. Thus we have 
+ \tcb
+      \[
+      \var(X)= \sigma^2
+   \]
+   \etcb
+\end{n} 
+
+\ssn{Theorem} \hfill 
+\tcb 
+If the variances of $X,Y$ exist and $X,Y$ are independent then 
+\[
+  \var(X+Y) = \var(X) + \var(Y) .
+ \]
+\etcb 
+
+\noindent 
+ (SLOGAN: Expected values always add, but variances only add when the random variables are independent.) 
+ \begin{proof}
+   \begin{eqnarray*}
+     \var(X+Y) &=& \EE((X+Y)^2) - (\EE(X+Y))^2 \\
+      &=& \EE( X^2 +2\EE(X) X +(\EE(X))^2) - 
+        (\EE(X) + \EE(Y))^2 \\
+    &=& \EE(X^2)+2 \EE( \EE(X) X ) + \EE( (\EE(X))^2) - 
+    ( (\EE(X))^2 + (\EE(Y))^2 + 2\EE(X)\EE(Y) ) \\
+ &=&  ( \EE( X^2) - \left(\EE(X)\right)^2 ) + 
+     (\EE( Y^2) - \left(\EE(Y)\right)^2)  \\
+    &=& \var(X) + \var(Y) 
+   \end{eqnarray*}
+ \end{proof}
+\noindent  Note in the proof that e.g.\ $\EE(X)$ is a number and so, for instance, $\EE( \EE(X) X ) = \EE(X) \EE(X)$. 
+\end{n} 
+
+
+
+
+\ssn{Expectation and variance of Binomial distribution}
+Consider a Bernoulli trial: a single experiment where the outcomes are ``success'' with probability $p$ and ``failure'' with probability $q=1-p$.  Define a random variable $X$ which takes the value $X=1$ in the event of success and $X=0$ in the event of failure. Then the expected value of $X$ is just $\EE(X)=p$ and the expected value of $X^2$ is also $p$. Thus we deduce 
+ \[
+    \EE(X) = p, \qquad \var(X) = p-p^2 = pq.
+ \]
+
+Turning to the binomial distribution, we are performing $n$ independent Bernoulli trials;  call the corresponding random variables $X_j$ where $j=1,\dots,n$. The total number of successes precisely the sum $Y= \sum_1^n X_j$ of these $n$ independent random variables, each. So (extending the results about sums of expectations and variances to sums of more than one variable) we have that the expected value and variance of a binomial random variable are $np$ and $npq$ respectively.
+\end{n}
+
+\ssn{Proposition}  \label{wlln0}
+Let $X_1,X_2, \dots$ be independent, identically distributed random variables with $\EE(X_j)=\mu$ and variance $\var(X_j) = \sigma^2$. 
+
+Let $n\in \mathbb N$ and consider the ``average of the first $n$''
+\[
+       A_n = \frac1n \left(   X_1 + X_2 + \dots + X_n \right).
+ \]
+Then (remembering that $\EE(aX)= a\EE(X)$ and $\var(aX) = a^2 \var(X)$) we have 
+\tcb 
+  \[
+     \EE(A_n) = \mu , \qquad  \var(A_n) = \frac{\sigma^2}n. 
+  \]
+ \etcb
+ \noindent 
+ So, the larger $n$ is, the smaller the variance of the average.  
+\end{n}
+
+
+\subsection{Exercises and Problems}
+
+\sse{}
+What is the variance of a single roll of a D3?  (Try to calculate this in your head first!) 
+\end{e}
+
+\sss
+In your head: $\EE(X)=2$.   Then $(X- \EE(X))^2$ is zero one third of the time and otherwise equal to one. So $\var(X) = 2/3$. 
+\end{s}
+
+
+
+\sse{} 
+Compute the expected value and variance of the uniform distribution on the interval $[a,b]$ where $a<b$.   
+\end{e}
+
+\sss
+To have area one the (constant) pdf must be
+\[
+  f_X(x) = \frac1{b-a} \quad \text{on $[a,b]$}.
+\]
+The expected value has to be the midpoint: $\EE(X) = (a+b)/2$ but check that with an integral if you like. 
+
+Also 
+ \[
+    \EE(X^2) =  \frac1{b-a} \int_a^b x^2 \dd x = 
+     \frac{b^3 - a^3}{3(b-a)} = \frac{b^2+ab+a^2}{3}.
+ \]
+ Then after a short calculation, 
+ \[
+     \var(X) = \EE(X^2) - (\EE(X))^2 = \frac{(b-a)^2}{12}.
+ \]
+ 
+\end{s}
+
+\sse 
+Show that the variance of an exponential random variable $X$ with parameter $\lambda >0$ is $1/\lambda^2$. (Recall $f_X(s) = \lambda e^{-\lambda x}$ on $[0,\infty)$.  (Use the ``quick'' $\EE(X^2) - (\EE(X))^2$ formula for variance. Integration by parts is your friend. Or use the results we found about Gamma functions.)
+\end{e}
+
+\sss
+The expected value is 
+ \begin{eqnarray*}
+   \EE(X) &=& \int_0^\infty \lambda x e^{-\lambda x} \dd x \\ 
+    &=& \left[ x e^{-\lambda x}  \right]_0^\infty   + \int_0^\infty e^{-\lambda x} \dd x \\
+     &=&   0 + \left[ \frac{-1}\lambda  e^{-\lambda x}\right ]_0^\infty = \frac1\lambda.
+ \end{eqnarray*}
+ Similarly, integrating by parts twice,  
+  \[
+      \EE (X^2) = \frac2{\lambda^2}
+  \]
+ and so $\var(X) = 2/\lambda^2 - (1/\lambda^2) = 1/\lambda^2$. 
+\end{s}
+
+
+\sse{}
+I repeatedly roll a Dn.  Let $X=k$ if I first roll a ``1'' on the $k$-th roll.  What is the expected value and variance of $X$? 
+\end{e}
+
+\sss
+This is geometric with $p=1/n$. So the expected value is $1/p = n$ and the variance is $q/p^2 = n(n-1)$
+\end{s}
+
+
+\sse{}
+Consider the RV $X$ defined to be the number of pairs of consecutive H I obtain in 4 tosses of a coin.  (As usual, HHHH counts as 3 such pairs.) 
+Calculate the expected value of $X$ directly by listing all 16 outcomes and also indirectly by considering $X$ as the sum of three RVs.
+\end{e}
+
+\sss
+Listing all outcomes, I get 
+ \[
+ \PP(X=0) = \frac8{16}, \quad \PP(X=1) = \frac5{16},  \quad
+ \PP(X=2) = \frac2{16}, \quad \PP(X=3) = \frac1{16}.
+ \]
+So 
+\[
+  \EE(X) = \frac1{16} ( 8 (0) + 5 (1) + 2  (2) + 1 (3) ) = \frac34.
+\]
+
+Alternatively (and more simply), let $X_j$ where $j=1,2,3$ denote the number of pairs of heads consisting of the $j$-th and $(j+1)$-th tosses.  Then $\EE(X_j) = 1/4$ and $X = X_1+X_2+X_3$ and so $\EE(X)=3/4$. 
+\end{s}
+
+\sse 
+Prove Proposition~\ref{linev} as follows.
+\begin{itemize}
+\item Prove that $\EE(aX+b)= a \EE(X) + b$ from the definition for the discrete case and the continuous case separately. 
+\item Use the definition $\var(X) = \EE((X-\EE(X))^2)$ and the first part of this exercise to prove that $\var(aX+b)= a^2 \var(X)$. 
+\end{itemize}
+\end{e}
+
+\sss
+In the discrete case, let $X$ take values $x_1,x_2,\dots$ with probabilities $p_1,p_2,\dots$.  Then 
+ \begin{eqnarray*}
+ \EE(aX+b) &=& \sum_k p_k (a x_k + b) \\
+   &=& a \sum_k p_k  x_k  b \sum_k p_k  \\
+   &=& a \EE(X) + b. 
+ \end{eqnarray*}
+ The steps for the continuous case are completely analogous. 
+\end{s}

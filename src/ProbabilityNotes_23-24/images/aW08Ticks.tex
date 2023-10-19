@@ -1,0 +1,42 @@
+\begin{tikzpicture}[
+    declare function={gamma(\z)=
+    (2.506628274631*sqrt(1/\z) + 0.20888568*(1/\z)^(1.5) + 0.00870357*(1/\z)^(2.5) - (174.2106599*(1/\z)^(3.5))/25920 - (715.6423511*(1/\z)^(4.5))/1244160)*exp((-ln(1/\z)-1)*\z);},
+    declare function={gammapdf(\x,\a,\b) = \b^\a * \x^(\a-1) * exp(-\x*\b) / (gamma(\a));},
+    declare function={ExpCLTpdf(\x,\n) = gammapdf(\x*\n,\n,1)*\n;},
+    declare function={gauss(\x,\m,\s) = exp(-(\x-\m)^2/(2*\s^2)) / (2.506628*\s);}
+]
+
+\begin{groupplot}[
+    group style={rows=1,columns=4},
+    axis lines=left,
+    enlargelimits=upper,
+    samples=30,
+    xlabel = {\Large $x$},
+    ylabel = {\Large Density},
+    ymax=2.3,
+    ymin=0,
+    every axis plot/.append style={ultra thick}
+]
+
+\nextgroupplot[title = \huge (a)]
+\addplot [smooth, domain=0:3] {ExpCLTpdf(x,1)};
+\addplot [smooth, domain=0:3,dashed]
+{gauss(\x, 1, sqrt(1/1))};
+
+\nextgroupplot[title = \huge (b)]
+\addplot [smooth, domain=0:3] {ExpCLTpdf(x,5)};
+\addplot [smooth, domain=0:3,dashed]
+{gauss(\x, 1, sqrt(1/5))};
+
+\nextgroupplot[title = \huge (c)]
+\addplot [smooth, domain=0:3] {ExpCLTpdf(x,15)};
+\addplot [smooth, domain=0:3,dashed]
+{gauss(\x, 1, sqrt(1/15))};
+
+\nextgroupplot[title = \LARGE (d)]
+\addplot [smooth, domain=0:3] {ExpCLTpdf(x,30)};
+\addplot [smooth, domain=0:3,dashed]
+{gauss(\x, 1, sqrt(1/30))};
+
+\end{groupplot}
+\end{tikzpicture}

@@ -1,0 +1,410 @@
+\documentclass[11pt,pdf,ngerman,UKenglish]{beamer}%,handout
+\usepackage[UKenglish]{babel}
+\usepackage{array}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%%\usepackage{amsfonts}
+%%\usepackage{amstext}
+\usepackage{amsthm}
+%\usepackage{stmaryrd}
+\usepackage{relsize}
+%\usepackage{graphics}
+\usepackage{graphicx}
+%\usepackage{mathptmx}
+%\usepackage[scaled]{uarial}
+\usepackage[T1]{fontenc}
+%%\usepackage{a4wide}
+\usepackage{makeidx}
+\usepackage{textcomp}
+\usepackage{ulem}
+\usepackage{geometry}
+%\usepackage{bbm}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{sverb}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{tabularx, multirow}
+%\usepackage{booktabs}
+%\usepackage{txfonts}
+%\usepackage[ansinew]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage{enumerate}
+\usepackage{bbold}
+\usepackage{dsfont}
+\usepackage{listings}
+\usepackage{xifthen}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.11}
+\usepackage{xcolor}
+\usepackage{subfigure}
+
+\usepackage{epsdice}
+
+
+\lstset{
+	language=Matlab,% choose the language of the code
+	basicstyle=\footnotesize,% the size of the fonts that are used for the code
+	numbers=left,% where to put the line-numbers
+	numberstyle=\scriptsize,% the size of the fonts that are used for the line-numbers
+	stepnumber=1,% the step between two line-numbers. If it's 1 each line will be numbered
+	numbersep=5pt,% how far the line-numbers are from the code
+	%backgroundcolor=\color{white},% choose the background color. You must add \usepackage{color}
+	showspaces=false,% show spaces adding particular underscores
+	showstringspaces=false,% underline spaces within strings
+	showtabs=false,% show tabs within strings adding particular underscores
+	%frame=single,% adds a frame around the code
+	%tabsize=2,% sets default tabsize to 2 spaces
+	captionpos=t,% sets the caption-position to bottom
+	%caption=\lstname,
+	breaklines=false,% sets automatic line breaking
+	breakatwhitespace=false,% sets if automatic breaks should only happen at whitespace
+	escapeinside={\%*}{*)}% if you want to add a comment within your code
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\IR}{\mathds{R}}
+%\newcommand{\IN}{{\mathbb{N}}}
+\newcommand{\IN}{\mathds{N}}
+\newcommand{\IZ}{{\mathbb{Z}}}
+\newcommand{\IF}{{\mathbb{F}}}
+\newcommand{\IK}{{\mathbb{K}}}
+\newcommand{\IQ}{{\mathbb{Q}}}
+\newcommand{\IC}{{\mathbb{C}}}
+%\newcommand{\IP}{{\mathbb{P}}}
+\newcommand{\IP}{\mathbb{P}}
+\newcommand{\IE}{{\mathbb{E}}}
+%\newcommand{\E}{\mbox{I\negthinspace E}}% Zeichen für den Erwartungswert
+\newcommand{\E}{\mathds{E}}
+\newcommand{\F}{\mathcal{F}}
+\renewcommand{\S}{\mathcal{S}}
+
+\newcommand{\de}{\delta}
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\sk}{{\,|\,}}
+\newcommand{\arccot}{\operatorname{arccot}}
+\newcommand{\1}{\mathbb{1}}
+\newcommand{\supp}{\operatorname{supp}}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\Re}{\operatorname{Re}}
+\newcommand{\aeq}{\Leftrightarrow}
+%\newcommand{\M}{\widetilde{\text{M}}}
+\newcommand{\erfc}{\operatorname{Erfc}}
+\newcommand{\erf}{\operatorname{Erf}}
+\newcommand{\qvar}[2]{\langle #1 , #1 \rangle _{#2}}
+%\newcommand{\qvar}[2]{<\hspace{-1.5mm}#1\hspace{-0.3mm},\hspace{-0.5mm}#1\hspace{-1.5mm}>_{#2}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\SEP}{\text{SEP}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\conv}{\operatorname{conv}}
+
+\newcommand{\Law}{\text{Law}}
+ 
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+
+\newcommand*{\cA}{\mathcal{A}}
+\newcommand*{\cB}{\mathcal{B}}
+\newcommand*{\cC}{\mathcal{C}}
+\newcommand*{\cD}{\mathcal{D}}
+\newcommand*{\cE}{\mathcal{E}}
+\newcommand*{\cF}{\mathcal{F}}
+\newcommand*{\cG}{\mathcal{G}}
+\newcommand*{\cH}{\mathcal{H}}
+\newcommand*{\cI}{\mathcal{I}}
+\newcommand*{\cJ}{\mathcal{J}}
+\newcommand*{\cK}{\mathcal{K}}
+\newcommand*{\cL}{\mathcal{L}}
+\newcommand*{\cM}{\mathcal{M}}
+\newcommand*{\cN}{\mathcal{N}}
+\newcommand*{\cO}{\mathcal{O}}
+\newcommand*{\cP}{\mathcal{P}}
+\newcommand*{\cQ}{\mathcal{Q}}
+\newcommand*{\cR}{\mathcal{R}}
+\newcommand*{\cS}{\mathcal{S}}
+\newcommand*{\cT}{\mathcal{T}}
+\newcommand*{\cU}{\mathcal{U}}
+\newcommand*{\cX}{\mathcal{X}}
+\newcommand*{\cY}{\mathcal{Y}}
+
+\renewcommand{\d}{\operatorname{d} \hspace{-0.5mm}}
+\newcommand{\Dt}{\operatorname{D}^t}
+\newcommand{\Dw}{\operatorname{D}^w}
+\newcommand{\diff}[3][]{\ifthenelse{\isempty{#1}}{#3_{#2}}{#3_{#1 #2}}}
+%\newcommand{\diff}[3][]{\ifthenelse{\isempty{#1}}{\partial_{#2} #3}{\partial_{#1} \partial_{#2} #3}}
+
+\newcommand{\p}[3]{#1^{(#2)}_{#3}}
+\newcommand{\Xz}[2]{X^{(2), (#1) }_{ #2 }}
+\newcommand{\Xd}[2]{X^{(3), (#1) }_{ #2 }}
+\newcommand{\dx}[1]{\frac{\d}{\d x^{(#1)}}}
+\newcommand{\X}[2]{\p{X}{#1}{#2}}%{X^{(#1)}_{#2}}
+\newcommand{\x}[1]{x^{(#1)}}
+\renewcommand{\u}[2]{\ifthenelse{\isempty{#2}}{u^{(#1)}}{u^{(#1)}_{#2}}} %\p{u}{#1}{#2}}
+\newcommand{\ut}[2]{\p{\tilde{u}}{#1}{#2}}%{\tilde{u}^{(#1)}_{#2}}
+\newcommand{\Z}[2]{\p{\tilde{Z}}{#1}{#2}}%{\tilde{Z}^{(#1)}_{#2}}
+\newcommand{\Zo}[2]{\p{Z}{#1}{#2}}%{Z^{(#1)}_{#2}}
+\newcommand{\W}[1]{\widetilde{W}_{#1}}
+\newcommand{\Y}[2]{\p{Y}{#1}{#2}}%{Y^{(#1)}_{#2}}
+\newcommand{\Zh}[1]{\hat{Z}_{#1}}
+
+\newcommand{\myitem}{$\bullet$\hspace*{-3mm}}
+
+\newcommand{\Ito}{It\^o\ }
+\newcommand{\Itos}{It\^o's\ }
+
+
+\newtheoremstyle{thm}% name
+{10pt}% Space above
+{18pt}% Space below 
+{\itshape}% Body font
+{}% Indent amount: Indent amount: empty = no indent, \parindent = normal paragraph indent
+{\bf}% Theorem head font
+{}% Punctuation after theorem head
+{\newline }% Space after theorem head: { } = normal interword space; \newline = linebreak
+{}% Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{def}% name
+{10pt}% Space above
+{18pt}% Space below 
+{}% Body font
+{}% Indent amount: Indent amount: empty = no indent, \parindent = normal paragraph indent
+{\bf}% Theorem head font
+{}% Punctuation after theorem head
+{\newline }% Space after theorem head: { } = normal interword space; \newline = linebreak
+{}% Theorem head spec (can be left empty, meaning `normal')
+
+
+\theoremstyle{thm}
+
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{algorithm}[theorem]{Algorithm}
+
+\theoremstyle{def}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{example}[theorem]{Example}
+%\newtheorem{remarks}[theorem]{Remark}
+
+\renewenvironment{proof}{\par\noindent\textit{Proof.~}}{\hfill \qedsymbol\newline}
+
+ 
+ 
+ 
+%\newtheorem{satz}{Satz}
+%\newtheorem{theorem}{Theorem}%[section]
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{remarks}{Bemerkung}
+%\newtheorem{definition}{Definition}
+%\newtheorem{example}{Beispiel}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Madrid %Singapore %Copenhagen %Warsaw
+\mode<presentation>{\usetheme{Frankfurt}}
+
+\title{Probability}
+\author{Stefan Engelhardt}
+\date{26th September 2023}%{\today}%{25st Jannuary 2022}
+%\logo{...}
+
+\setbeamercovered{transparent}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+% Remove logo from the next slides
+\logo{}
+
+
+
+\begin{frame}{Inclusion-Exclusion Principle}
+\begin{proposition}
+Let $A$ and $B$ be two events. Then
+$$\IP(A \cup B) = \IP(A) + \IP(B) - \IP(A \cap B).$$
+\end{proposition}
+
+\begin{proposition}
+Let $n \in \IN$ and $A_i$, $i\in \{ 1, \ldots, n \}$ be events. Then
+$$\IP\left(\bigcup_{i=1}^n A_i \right) = \sum_{k=1}^n (-1)^{k+1} \sum\limits_{1 \leq i_1 < \ldots < i_k \leq n} \IP\left( \bigcap_{j=1}^k A_{i_j}\right).$$
+\end{proposition}
+\end{frame}
+
+
+\begin{frame}{Idea for Conditional Probability}
+Roll a D6 under a cover. A sneak peak reveals a dot in the lower left corner of the die.
+What is the probability of the die showing an uneven number?
+
+\ \\
+Let $\Omega = \{ \epsdice{1}, \epsdice{2}, \epsdice{3}, \epsdice{4}, \epsdice{5}, \epsdice{6} \}$ and $\IP(\omega)=\frac16$ for all $\omega \in \Omega$.
+
+\ \\
+We define
+$A=$"dot in lower right corner"$=\{ \epsdice{4}, \epsdice{5}, \epsdice{6} \}$,
+\\
+$B=$"uneven number of dots"$=\{ \epsdice{1}, \epsdice{3}, \epsdice{5} \}$
+\\
+and hence have $A \cap B = \{ \epsdice{5} \}$.
+
+\pause
+By intuition we expect that
+
+"dot in lower right corner" and 
+
+"uneven number, when I know there is a dot in lower right corner" 
+
+= "dot in lower right corner and uneven number"
+
+or in our notation $\IP(A) \cdot \IP(B \vert A) = \IP(A \cap B)$ and hence
+
+$\IP(B \vert A) := \frac{\IP(A \cap B)}{\IP(A)} = \frac{1/6}{3/6} = \frac13$.
+\end{frame}
+
+\begin{frame}{Conditional Probability}
+\begin{block}{Definition: Conditional Probability}
+The conditional probability of $B$ given $A$ is defined by
+$$\IP(B \vert A) := \frac{\IP(A \cap B)}{\IP(A)}.$$
+\end{block}
+\ \\ \ \\
+$\IP( B \vert A)=$"The probability of $B$ occurring when we know that $A$ has occurred."
+\end{frame}
+
+
+\begin{frame}{Example}
+I roll two D6 in secret. I have a look and reveal to you that the sum of the two dice is $8$. What is the probability that one of the dice shows a '$6$'?
+
+\ \\
+\pause
+Let $\Omega = \{ (\omega_1,\omega_2):\ \omega_1,\omega_2 \in \{1, \ldots, 6 \}\}$ and $\IP(\{\omega\}) = \frac{1}{36}$.
+
+Define $A:=\{ (\omega_1,\omega_2): \omega_1+ \omega_2 = 8 \} = \{ (2,6),(3,5), (4,4), (5,3), (6,2)\}$ and \\$B:=\{ (6,1),\ldots,(6,5),(6,6),(5,6),\ldots,(1,6) \}$.
+
+\ \\
+\pause
+Then $\vert A \vert =5$, $A \cap B= \{ (2,6),(6,2)\}$ and hence $\vert A \cap B \vert = 2$ giving us that
+$$ \IP(B \vert A) = \frac{\IP(A \cap B)}{\IP(A)} = \frac{ 2/36}{5/36} = \frac25
+.$$
+\end{frame}
+
+
+\begin{frame}{A useful trick}
+We have a standard deck of 52 cards. What is the probability of first drawing the Queen of Spades, then the King of Hearts and finally the 10 of clubs?
+
+\ \\
+Let $\Omega = \{ (\omega_1,\omega_2,\omega_3):\ \omega_i \in \{1,\ldots,52\}\}$ and $\IP(\omega)=\frac{1}{\vert \Omega \vert}$. Define
+$A:=$"first Queen of Spades", \\ 
+$B:=$"second King of Hearts" and \\ 
+$C:=$"third 10 of clubs". \\
+We want to find $\IP(A \cap B \cap C)$. 
+
+\pause
+\begin{align*}
+\IP(A \cap B \cap C) 
+&= \IP(A \cap B) \ \cdot \ \IP( C \vert A \cap B)
+\\&
+= \IP(A) \IP(A \vert B) \IP( C \vert A \cap B)
+\\ &
+= \ \frac{1}{52} \ \ \cdot \ \ \frac{1}{51} \ \ \cdot \ \ \frac{1}{50}
+\end{align*}
+\end{frame}
+
+
+\begin{frame}{This Trick in General}
+\begin{corollary}
+Let $n \in \IN$ and $A_i$ for $i \in \{ 1, \ldots, n \}$ be events. Then
+\begin{align*}
+\IP\left( A_1 \cap \ldots \cap A_n \right) 
+= \IP( A_1) \cdot \IP(A_2 \vert A_1 ) \cdot \ldots \cdot \IP( A_n \vert A_1 \cap \ldots \cap A_{n-1} )
+.
+\end{align*}
+\end{corollary}
+
+\ \\
+Note the version for only two sets:
+$$ \IP(A \cap B) = \IP(B \vert A) \cdot \IP(A)
+.$$
+\end{frame}
+
+
+\begin{frame}{The Law of Total Probability}
+\begin{proposition}
+Let $n\in \IN$ and $A_i$ for all $i \in \{1,\ldots,n\}$ be disjoint events that partition the state space $\Omega$. For an arbitrary event $B$ we have
+\begin{align*}
+\IP(B)
+= \sum_{i=1}^n \IP(B \vert A_i ) \IP(A_i)
+.
+\end{align*}
+\end{proposition}
+\
+\begin{corollary}
+For two events $A$ and $B$ it holds true that
+\begin{align*}
+\IP(B) = \IP(B \vert A) \IP(A) + \IP(B \vert A^C) \IP(A^C)
+.
+\end{align*}
+\end{corollary}
+\end{frame}
+
+
+\begin{frame}{Bayes' Theorem}
+\begin{theorem}
+Let $A,B$ be events and let $(A_i)_{i\in\{1,\ldots,n\}, n \in \IN}$ be disjoint events that partition $\Omega$. Then
+\begin{itemize}
+\item \ \vspace*{-7mm}
+\begin{align*}
+\IP(A \vert B) = \IP(B \vert A ) \frac{\IP(A)}{\IP(B)},
+\end{align*}
+\item \ \vspace*{-7mm}
+\begin{align*}
+\IP(A_k \vert B) = \IP(B \vert A_k ) \frac{\IP(A_k)}{\sum_{i=1}^n \IP(B \vert A_i) \IP(A_i)},
+\end{align*}
+for all $k \in \{1,\ldots,n\}$.
+\end{itemize}
+\end{theorem}
+\end{frame}
+
+
+\begin{frame}
+\begin{block}{}
+$$\IP(A \cap B) = \IP(A \vert B) \IP(B)$$
+\end{block}
+\begin{block}{Law of Total Probability}
+$$\IP(B)
+= \sum_{i=1}^n \IP(B \vert A_i ) \IP(A_i)$$
+\end{block}
+\begin{block}{Bayes' Theorem}
+\begin{align*}
+\IP(A_k \vert B) = \IP(B \vert A_k ) \frac{\IP(A_k)}{\sum_{i=1}^n \IP(B \vert A_i) \IP(A_i)},
+\end{align*}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Independence}
+\begin{block}{Definition: Independence}
+Two events $A,B \subseteq \Omega$ are independent if
+$$ \IP(A \cap B) = \IP(A) \IP(B).$$
+\end{block}
+
+\ \\ \ \\
+If $\IP(B) \neq 0$ we can re-phrase this as
+$$ \IP(A \vert B) = \IP(A).$$
+\end{frame}
+
+
+
+%\begin{frame}
+%
+%\end{frame}
+
+\end{document}

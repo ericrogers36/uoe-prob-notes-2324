@@ -1,0 +1,237 @@
+\subsection{Transformations}
+
+\ssn{Motivating problem}
+
+You are working in a laboratory and know from experience that the result $X$ of some experiment is uniformly distributed in the range $[1,2]$. For a public presentation you want to do this experiment in a larger scale. You plan to triple the size, i.e.\ the new result $Y$ will be $Y=3 \cdot X$. To implement some safety precautions you need to know the distribution of $Y$. \\
+What is the pdf of $Y$ here?
+
+\end{n}
+
+\ssn{Example}
+
+Let $X \sim \unif(1,2)$ and $Y:= 3 \cdot X$. What is the pdf $f_X$?
+
+We know from Proposition \ref{PropCdfPdf} that $f_Y(y) = \partial_y F_Y (y)$, hence we can just concentrate on finding $F_Y$.
+First, we have a look at the definition $F_Y(y) = \PP (Y \leq y)$. Here we notice, that since $Y= 3X$, we can simply replace it to obtain $\PP(Y \leq y) = \PP(3X \leq y)$. Doing the equivalent transform of dividing both sides of the inequality by 3 we have $\PP(3X\leq y)= \PP(X \leq y/3)$. Notice that this is the cdf of $X$, which we know to be
+$$F_X(x)= \int_{-\infty}^x \1_{\{x \in [1,2]\}} dx
+= \left\{ \begin{array}{ll}
+0,\quad & x < 1 \\
+x-1, \quad & 1 \leq x \leq 2 \\
+1, \quad & 2 < x.
+\end{array}
+\right.$$
+Putting this together we have
+\begin{align*}
+F_Y(y)
+&
+= \PP(Y\leq y)
+%\\ &
+= \PP(3X \leq y)
+%\\ &
+= \PP \Big(X \leq \frac{y}{3} \Big)
+%\\ &
+= F_X \Big(\frac{y}{3} \Big)
+\\ &
+= \left\{ \begin{array}{ll}
+0,\quad & y/3 < 1 \\
+y/3-1, \quad & 1 \leq y/3 \leq 2 \\
+1, \quad & 2 < y/3.
+\end{array}
+\right. \quad
+%\\ &
+= \left\{ \begin{array}{ll}
+0,\quad & y < 3 \\
+y/3-1, \quad & 3 \leq y \leq 6 \\
+1, \quad & 6 < y.
+\end{array}
+\right.
+\end{align*}
+Differentiating, we get $f_Y(y) = \partial_y F_Y(y) = \frac13 \1_{\{ y \in [3,6] \} }$, i.e.\ $Y$ is uniformly distributed on $[3,6]$.
+
+\
+
+
+\end{n}
+
+\ssn{Theorem}
+
+
+We did the last example for a quite simple transformation and a quite simple distribution. Can we do this in general?
+
+Let us assume that now we are given the pdf of $X$, denoted by $f_X$ and that $Y:= g(X)$ for some function $g$. We can say the following.
+
+\tcb
+Let $X$ be a continuous random variable with given pdf $f_X$ and let $g: \RR \to \RR$ be such that its inverse $g^{-1}$ exists (i.e.\ there exists a function $g^{-1}$ such that $g^{-1}(g(x)) = x$), is differentiable and monotone increasing where $f_X$ is positive. Define $Y$ as $Y:= g(X)$. Then
+$$f_Y(y) 
+= f_X(g^{-1}(y))  \cdot (g^{-1})'(y).
+$$
+\etcb
+
+\begin{proof}
+We do the exact same calculation as above. In detail it is
+\begin{align*}
+F_Y(y)
+&
+= \PP(Y\leq y)
+%\\ &
+= \PP(g(X) \leq y)
+%\\ &
+= \PP (g^{-1}(g(X)) \leq g^{-1}(y))
+%\\ &
+= \PP (X \leq g^{-1}(y))
+%\\ &
+= F_X (g^{-1}(y)),
+\end{align*}
+where we used that applying the inverse of $g$ on both sides gives an equivalent statement. Finally, we differentiate to obtain
+\begin{align*}
+f_Y(y)
+&
+= \partial_y F_Y(y)
+\\&
+= \partial_y F_X( g^{-1}(y))
+\\ &
+= (F_X)'(g^{-1}(y)) \cdot (g^{-1})'(y)
+\\ &
+= f_X(g^{-1}(y)) \cdot (g^{-1})'(y),
+\end{align*}
+where the chain rule was applied.
+\end{proof}
+
+Now let us have a look at two examples where $g$ does not have an increasing inverse.
+
+\end{n}
+
+\ssn{Example}
+
+Let $X \sim Exp(\lambda)$, $g(x)= -a x$ for some $a > 0$ and $Y:=g(X)$.
+\\
+We can still use the basic calculation from above. However, the step where we formally applied the inverse of $g$ requires closer attention.
+\begin{align*}
+F_Y(y)
+&
+= \PP(Y\leq y)
+%\\ &
+= \PP(-aX \leq y)
+\end{align*}
+Here it becomes obvious that the calculation does not go the exact same way. Instead we obtain
+$$ \PP(-aX \leq y) = \PP\Big(X \geq -\frac{y}{a}\Big).$$
+Continuing our calculation with this slightly changed step and using that single points have probability 0, we get
+\begin{align*}
+F_Y(y)
+&
+=\PP\Big(X \geq -\frac{y}{a}\Big)
+%\\&
+= 1 - \PP\Big(X < -\frac{y}{a}\Big)
+= 1 - \PP\Big(X < -\frac{y}{a}\Big)
+= 1 - F_X\Big( -\frac{y}{a}\Big)
+.
+\end{align*}
+Now we again can differentiate to obtain that
+\begin{align*}
+f_Y(y)
+&= \partial_y F_Y(y)
+= \partial_y \Big(1-F_X\Big(-\frac{y}{a}\Big)\Big)
+= \frac1a f_X\Big(-\frac{y}{a}\Big)
+= \left\{ \begin{array}{ll}
+0, \quad & -\frac{y}{a} < 0 \\
+\frac1a \lambda e^{-\lambda (-\frac{y}{a})}, \ & 0 \leq -\frac{y}{a}
+\end{array} \right.
+\\ &
+= \left\{ \begin{array}{ll}
+0, \quad & y > 0 \\
+\frac{\lambda}{a} e^{\frac{\lambda}{a} y}, \ & 0 > y.
+\end{array}
+\right.
+\end{align*}
+Note that this is not an exponential distribution, since its mass is on the negative axes.
+
+\end{n}
+
+\ssn{Example}
+
+As a final example, we have a look at what happens, if $g$ is not invertible. For this, let $g(x)= x^2$, $X \sim \unif([-1,2])$ and $Y:= g(X)$, i.e.\ $Y:= X^2$ and $F_X(x) = \frac13 (1+x) \1_{\{x \in [-1,2]\}} + \1_{\{x > 2\}}$. Starting as usual, we have
+$F_Y(y)
+= \PP ( X^2 \leq y ).$ Here we see the problem, that we cannot invert, since left from $0$ the inverse is $-\sqrt{\cdot}$, while on the right it is $\sqrt{\cdot}$. Instead, we find the equivalent formulation $\vert X \vert \leq \sqrt{y}$. However, we need to require for this that $y \geq 0$. Because $X^2 \geq 0$, this is no problem and just means that $F_Y(y) =0$ for all $y<0$. Collecting all of that, we progress to
+$$ F_Y(y) 
+= \PP ( X^2 \leq y ) 
+= \PP ( \vert X \vert \leq \sqrt{y}) \1_{\{y \geq 0\}}
+= \PP ( -\sqrt{y} \leq X \leq \sqrt{y}) \1_{\{y \geq 0\}}
+.
+$$
+Replacing the probability with the cdf this reads as
+$$ F_Y(y)
+= \PP ( -\sqrt{y} \leq X \leq \sqrt{y}) \1_{\{y \geq 0\}}
+= (F_X(\sqrt{y})-F_X(-\sqrt{y}))\1_{\{y \geq 0\}}
+.
+$$
+Now we can use the explicit expression for $F_X$ from above to get
+\begin{align*}
+F_Y(y)
+&
+=
+\left[ \frac13 (1+\sqrt{y}) \1_{\{\sqrt{y} \in [-1,2]\}} + \1_{\{\sqrt{y} > 2\}} - \frac13 (1-\sqrt{y}) \1_{\{-\sqrt{y} \in [-1,2]\}} - \1_{\{-\sqrt{y} > 2\}} \right] \1_{\{y \geq 0\}}
+,
+\end{align*}
+which looks quite intimidating. However, in a first step we can simplify it, by removing all cases where $\sqrt{y}$ would have to be negative and as a second step, we split it up into the disjoint cases $\sqrt{y} \in [0,1]$, $\sqrt{y} \in [1,2]$ and $\sqrt{y} > 2$. Thus, we have
+\begin{align*}
+F_Y(y)
+&
+=
+\left[ \frac13 (1+\sqrt{y}) \1_{\{\sqrt{y} \in [0,2]\}} + \1_{\{\sqrt{y} > 2\}} + \frac13 (\sqrt{y}-1) \1_{\{\sqrt{y} \in [0,1]\}} - 0 \right] \1_{\{y \geq 0\}}
+\\ &
+=
+\left\{ \begin{array}{ll}
+0, \quad & y < 0 \\
+\frac13 (1+\sqrt{y}) + \frac13 (\sqrt{y}-1), \quad & 0 \leq \sqrt{y} \leq 1\\
+\frac13 (1+\sqrt{y}), \quad & 1 < \sqrt{y} \leq 2 \\
+1, \quad & 2 < \sqrt{y}
+\end{array}
+\right.
+\\ &
+=
+\left\{ \begin{array}{ll}
+0, \quad & y < 0 \\
+\frac23 \sqrt{y}, \quad & 0 \leq y \leq 1\\
+\frac13 (1+\sqrt{y}), \quad & 1 < y \leq 4 \\
+1, \quad & 4 < y
+\end{array}
+\right.
+.
+\end{align*}
+A quick sanity check is, whether this is actually a non-decreasing function as it should be. Since every single part is non-decreasing, we only need to have a look at the border cases $y=0,1,4$ which all turn out to be fine.
+
+So finally, we only have to differentiate to obtain $f_Y$. Doing so we get
+\begin{align*}
+f_Y(y)
+= \partial_y F_Y(y)
+= \left\{ \begin{array}{ll}
+0, \quad & y < 0 \\
+\frac{1}{3 \sqrt{y}}, \quad & 0 \leq y \leq 1\\
+\frac{1}{6 \sqrt{y}}, \quad & 1 < y \leq 4 \\
+0, \quad & 4 < y
+\end{array}
+\right.
+.
+\end{align*}
+
+\end{n}
+
+
+\subsection{Exercises and problems}
+
+\sse 
+The random variable $X \sim \gamma(2,\lambda)$ and $Y:= \ln (X)$. Find the pdf $f_Y$. \\ (Ans.: $f_Y(y) = \frac{\lambda^2}{2} e^y e^{-\lambda e^y} \1_{\{y > 0\}}$ )
+\end{e}
+
+\sse{}
+Show that for any continuous random variable $X$ it is true that $F_X(X) \sim \unif(0,1)$. 
+\end{e}
+
+\ssp{}
+Let $X$ have any continuous distribution and let $Y \sim \unif(0,1)$. Show that $Z:= F_X^{-1} (Y)$ has the same distribution as $X$, i.e.\ that $F_Z = F_X$.
+\end{e}
+
+\sse{}
+Let $X \sim \expo(\lambda)$.  Compute $F_Y$ for $Y:= X^2$.   (Ans: $(1-e^{-\lambda \sqrt{y}}) \1_{\{ y \geq 0 \}}$) 
+\end{e}
+

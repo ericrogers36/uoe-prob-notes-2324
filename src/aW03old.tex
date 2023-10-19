@@ -1,0 +1,400 @@
+\section{Foundations and Numbers} \label{s3} 
+
+\ssn{Learning outcomes}
+After studying this week you will be able to:
+\begin{itemize}
+\item explain and illustrate the properties of probability functions;
+\item use inclusion-exclusion to compute probabilities;
+\item check whether events are independent in simple situations;
+\item compute some probabilities relating to integers.
+\end{itemize}
+\end{n}
+
+\ssn{Motivating problem}
+What is the probability that two randomly chosen positive integers have greatest common divisor 1? 
+\end{n}
+
+\subsection{Preparation for the week}
+We draw together some ideas we have seen before with some new things to describe the axiomatic foundations of probability. 
+Before we start on that, here is a problem.
+
+\ssn{}
+What is the probability that a randomly selected positive integer is even? 
+\end{n}
+
+\ssn{Discussion}
+You probably did not hesitate: surely it's one half?  But there is a problem here: you cannot choose a positive integer with every value equally likely to be selected because there are infinitely many of them. The probability of choosing 123456789 has to be zero. And the probability of choosing a number less than $10^{10^{1000000}}$ has to be zero, because there are only a finite number of those.  So what does the question actually mean? 
+\end{n}
+
+\ssn{Definition} 
+To escape from that impasse, we make a definition:  by saying that \emph{the probability a positive integer has some property is $p$} we mean the following:  if we write $p(N)$ for the probability that a random chosen integer in the range $[1,N]$ has the property, then the limit of $p(N)$ as $N \map \infty$ exists and is equal to $p$. 
+\end{n}
+
+\ssn{Example}
+Let us check that according to this definition, 
+the probability of a random positive integer being divisible by 3 is $1/3$, as we should surely hope. We observe that the number of integers divisible by 3 in the range $[1,N]$ is whichever of the values $N/3, (N-1)/3,(N-2)/3$ is an integer. So letting $p(N)$ denote the probability that such an integer is divisible by 3 we have 
+ \[
+    \frac{N-2}{3N} = \frac13 - \frac2{3N}\leq \; p(N) \;\leq \;\frac{N}{3N} = \frac13.
+   \]
+So the limit of $p(N)$ as $N \map \infty$ is $1/3$.    
+\end{n}
+
+
+\ssn{Sample spaces}
+Turning now to foundations, recall that a \emph{sample space} $S$ is the set of all possible outcomes of an experiment or process.  The sample spaces we have seen so far have all had only finitely many elements.  We will assume this for the remainder of this week's work. 
+\end{n}
+
+\ssn{Events}
+An \emph{event} is a subset $A \subseteq S$ of the sample space $S$.  We say that the vent $A \subseteq S$ \emph{occurs} if the outcome of the experiment turns out to be an element of $A$. 
+
+Every event has a probability which is equal to the sum of the probabilities of its elements. 
+\end{n}
+
+
+
+\ssn{Example}
+Consider rolling a D6: the sample space is $S=\{ 1,2,3,4,5,6 \}$.   Then $A=\{ 1,2,3,5\} \subseteq S$ is an event.  (It is the event that you roll a Fibonacci number.) And of course 
+\[
+\PP(A) = \frac16 +\frac16 +\frac16 +\frac16 = \frac23. 
+\]
+\end{n}
+
+\ssn{Definition}
+Two events $A,B$ are said to be \emph{disjoint}  if $A \cap B = \emptyset$.   The word \emph{exclusive} is often used as synonym for disjoint.  
+
+If two events are disjoint then that means that they cannot both happen. This is because there is no point in the sample space (i.e.\ no outcome) which is common to both. 
+\end{n}
+
+\ssn{Probability functions}  \label{pf}
+We have a \emph{probability function} $\PP$ that associates to each event a probability. It satisfies
+\begin{enumerate}[(P1)]
+\item For all events $A$ we have $0 \leq \PP(A) \leq 1$.
+\item $\PP(S)=1$.
+\item If the events $A,B$ are disjoint then 
+   \[ \PP(A \cup B) = \PP(A) + \PP(B).
+   \]
+\item More generally, if the collection of events $A_1, A_2, \dots$ is such that for all $i\not=j$ we have $A_i \cap A_j = \emptyset$ then 
+ \[
+   \PP(A_1 \cup A_2  \cup \dots) =  \PP\left( \bigcup_i A_i \right) = \sum_i \PP(A_i). 
+ \]
+\end{enumerate}
+\end{n}
+
+
+\ssn{Three propositions} \label{pp}
+If $A$ is an event, then we write $A^c$ for $S \setminus A$: so $A^c$ is the event that happens precisely when $A$ does not. 
+\begin{itemize}
+\item $\PP(A^c) = 1 - \PP(A)$
+\item $\PP(\emptyset) = 0$
+\item If $B \subseteq A$ then $\PP(B) \leq \PP(A)$  
+\end{itemize}
+In particular, note that the final result implies that $\PP(A \cap B) \leq \PP(A)$.
+
+\begin{proof} 
+The first follows because $A$ and $A^c$ are disjoint and $A \cup A^c = S$ and $\PP(S)=1$.  The second then follows by specialising to $A=S$. For the third, because $B \subseteq A$ there is a disjoint composition $A = B \cup (A \setminus B)$  and so $\PP(A) = \PP(B) + \PP(A\setminus B)$. 
+\end{proof}
+\end{n}
+
+
+\ssn{Inclusion-exclusion principle (for two sets)}
+  Let $A,B$ be two events.  Then 
+  \[
+  \PP( A \cup B ) = \PP(A) + \PP(B) - \PP(A \cap B). 
+  \]
+\begin{proof}
+ Consider the following three decompositions into disjoint unions. 
+ \begin{eqnarray*}
+     A & = & ( A\cap B )  \cup (A \setminus B) \\
+     B & =&  ( A\cap B )  \cup (B \setminus A) \\
+     A \cup B &=& (A\cap B) \cup  (A \setminus B) \cup (B \setminus A) . 
+ \end{eqnarray*}
+ Since the unions are disjoint on the right-hand sides the probabilities add. 
+  \begin{eqnarray*}
+     \PP(A) & =&  \PP( A\cap B )  + \PP( A \setminus B) \\
+     \PP(B) & = & \PP( A\cap B )  + \PP(B \setminus A) \\
+    \PP( A \cup B) &=& \PP (A\cap B) + \PP(A \setminus B) +\PP(B \setminus A) . 
+ \end{eqnarray*}
+Subtracting the first two equations from the third we obtain the result. 
+\end{proof}
+\end{n}
+
+\ssn{Example}
+What is the probability that a randomly chosen positive integer is divisible by $3$ or by $5$? We proceed with the understanding that we are talking about limits of choosing from $[1,N]$ as $N \map \infty$. 
+
+Let $B_1, B_2$ be the events that the number is divisible by 3 and 5 respectively.    Then $\PP(B_1) = 1/3$ and $\PP(B_2) = 1/5$. The event $B_1 \cap B_2$ is that the number is divisible by $15$. So,  $\PP(B_1 \cap B_2) = 1/15$.   The event we are interested in is $B_1 \cup B_2$ and by the formula 
+ \[
+    \PP(B_1 \cup B_2) = \frac13+ \frac15 - \frac{1}{15} = \frac{7}{15}. 
+ \]
+\end{n}
+
+\ssn{Inclusion-exclusion for more sets} \label{gie}
+For three sets $A,B,C$, the formula becomes 
+ \[
+    \PP(A \cup B \cup C) = 
+    \PP(A) + \PP(B) + \PP(C) - \PP(A \cap B) - \PP(A \cap C) - \PP(B \cap C ) + \PP( A \cap B \cap C).
+ \]
+An analogous formula holds for more than three sets, summing over all possible multiple intersections with minus signs wherever the intersection is of an even number of sets.  See \S\ref{giep}
+\end{n}
+
+\sse{Exercise}
+What is the probability that a randomly chosen positive integer is divisible by at least one of $2,3,5$?  (Your answer should be a fraction but as a check, it should be approximately $0.73333$ as a decimal.) 
+\end{e}
+
+\sss
+Let $A,B,C$ be the events of being divisible by 2,3,5 respectively. Then the 2-fold intersections correspond to divisibility by 6,10,15 and the 3-fold intersection is divisibility by 30. So 
+\[
+  \PP(A\cup B \cup C) =\left( \frac12 + \frac13 + \frac15 \right) 
+  -\left( \frac16 +\frac1{10} + \frac1{15}\right)  + \frac1{30} = \frac{11}{15} \approx 0.73333 .
+\]
+
+One could also proceed without inclusion-exclusion by observing that the probability of not being divisible by $p$ is $1-1/p$.  The three events being independent, the probability of being divisible by none of the three is 
+ \[
+        \frac12, \frac23 \, \frac 45 = \frac4{15} 
+ \]
+ and so the answer is one minus that figure. 
+\end{s}
+
+\ssn{Definition}
+Two events $A,B$ are \emph{independent} if 
+\[
+    \PP( A \cap B) = \PP(A) \PP(B).
+\]
+\end{n}
+
+\ssn{Note}
+Compare this with the definition in week~\ref{s2} of two random variables being independent. It is capturing the same idea: that knowledge about whether $A$ has occurred tells us nothing about whether $B$ has. 
+\end{n}
+
+\ssn{A proposition on divisibility}
+Let $A$ be the event that a positive integer $n$ is divisible by $k$ and let $B$ be the event that it is divisible by $l$. Then $A$ and $B$ are independent if and only if $\mathrm{gcd}(k,l) = 1$. 
+
+\begin{proof}
+Let $k,l$ have greatest common divisor $d$. Then the least common multiple (lcm) of $k,l$ is $m=kl/d$. 
+A number $n$ is a multiple of both $k$ and $l$ if and only if $n$ is a multiple of $m$.
+
+Thus we have 
+ \[
+  \PP(A) = 1/k, \quad \PP(B) = 1/l, \quad \PP(A \cap B) = \frac1m = \frac{d}{kl}.
+  \]
+  So $\PP(A \cap B) = \PP(A) \, (B)$ if and only if $d=1$. 
+\end{proof}
+\end{n}
+
+\sse 
+What is the probability that a randomly chosen positive integer is divisible by 4 or by 14?
+\end{e}
+
+\sss
+Let $A,B$ be the events that $n$ is divisible by 4 and 14 respectively. Then $\PP(A) = 1/4$ and $\PP(B)=1/14$.  The number $n$ is divisible by both if and only if $n$ is a multiple of the lcm of 4 and 14 which is 28. So $\PP(A \cap B) = 1/28$.   Thus 
+ \[
+  \PP(A \cup B) = \frac14 + \frac1{14} - \frac1{28} = 
+     \frac27 . 
+ \]
+\end{s}
+
+
+\sse 
+I toss a coin three times.  let $A$ be the even that the first coin comes down H.  Which of the following events is independent of $A$?  Where the event is not independent of $A$ does the occurrence of $A$ make it more or less likely?
+\begin{enumerate}
+\item The event $B$ is that the second and third coins are both H
+\item The event $C$ is that there is precisely one H in the three tosses.
+\item The event $D$ is that there are precisely two H in the three tosses.
+\item The event $F$ is that the first coin comes down T. 
+\end{enumerate}
+\end{e}
+
+
+
+\sss 
+\begin{enumerate}
+\item The first toss has no effect on the succeeding ones and so this is independent.  Alternatively, calculate: $\PP(A) = 1/2$ and $\PP(B) = 1/4$;  the probability of $\PP(A \cap B) = \PP(\text{HHH}) = 1/8 = \PP(A) \PP(B)$. 
+\item Here $\PP(A)= 1/2, \PP(C) = 3/8$ and $\PP(A\cap C) = 1/8$ (because for the final calculation $A \cap C$ contains only the outcome HTT).   Thus $A$ and $C$ are not independent and $A$ makes $C$ less likely. 
+\item Here $\PP(A)= 1/2, \PP(D) = 3/8$ and $\PP(A\cap D) = 1/4$ (because for the final calculation $A \cap D = \{HHT, HTH\}$).   Thus $A$ and $D$ are not independent and $A$ makes $D$ more likely. 
+\item Clearly $A$ makes $F$ impossible and so they are not independent and $A$ makes $F$ less likely.  
+\end{enumerate}
+\end{s} 
+
+
+\subsection{Notes} 
+
+\ssn{Linearity of expectation} \label{exlin} 
+Let $X$ and $Y$ be random variables (on the same sample space). Then $k X$ (for $k \in \RR$) and $X+Y$ are also both random variables.  We have
+ \begin{enumerate}
+     \item $\EE(kX) = k \EE(X)$
+     \item $\EE(X+Y) = \EE(X) + \EE(Y)$
+ \end{enumerate}
+ Thus \emph{expectation is a linear function}. 
+ Both results follow from the formula for the expected value. 
+\end{n} 
+
+\ssn{Indicator functions}  Given a subset $A \subseteq S$ of a sample space, we define its \emph{indicator function} $I_A$ which is the function on $S$ defined by 
+ \[
+    I_A(x) = \begin{cases}   1 & x \in A \\ 0 & x \not\in A.
+     \end{cases} 
+ \]
+\end{n}
+
+\ssn{Use of indicator functions} 
+We can think of $I_A$ as being a random variable: it takes the value $1$ if the event happens and $0$ if it does not.   So,
+ \[
+ \EE(I_A) = \PP(A).
+ \]
+With this trick we can turn many probability problems into random variable problems.  
+\end{n}
+
+\ssn{Properties} Let $A,B$ be subsets of a sample space $S$. 
+\begin{enumerate}
+\item $I_A^2 = I_A$ (and more generally $I_A^k = I_A$ when $k \in \mathbb{N}$. 
+\item $I_{A^c} = 1 - I_A$
+\item $I_{A\cap B} = I_A I_B$ (and in particular if $A \subseteq B$ then 
+$I_A I_B = I_A$).
+\end{enumerate}
+The first of these properties is particularly important. It tells us in some sense that every probability problem can be turned into a random variable. 
+\end{n}
+
+\ssn{The general inclusion-exclusion principle} \label{giep}
+Writing the general version is fairly intimidating: 
+\[
+ \PP(A_1 \cup A_2 \cup\dots\cup A_n) =
+  \sum_{k=1}^n  (-1)^{k+1}  
+ \sum_{1\leq i_1 < i_2 <\dots < i_k \leq n}
+\PP( A_{i_1} \cap A_{i_2} \cap \dots \cap A_{i_k}  )
+\]
+\begin{proof} 
+We give a proof for the $n=3$ case using indicator functions. 
+
+Now suppose $M = A \cup B \cup \dots \cup C$. Then the function 
+ \[
+   (I_M - I_A) (I_M - I_B) (I_M - I_C) = 0 
+  \]
+ because for $x \not\in M$ all the terms vanish and for $x \in M$ we know $x$ is in at least one of $A,B,C$ and the corresponding term vanishes. 
+ Multiplying out and rearranging:
+  \[
+    I_M^3 = I_M^2 (I_A+I_B+I_C) - I_M (I_A I_B + I_A I_C + I_B I_C 0 
+       + I_A I_B I_C. 
+  \]
+Now, $I_MI_A = I_A$ since $A$ is a subset of $M$ and similarly for $B$ and $C$. So the ``$I_M$''s on the right-hand side can be dropped. And on the left we can replace $I_M^3$ by $I_M$.  Then 
+ \[
+  I_M = (I_A+I_B+I_C) - ( I_{A\cap B} + I_{A \cap C} + I_{B \cap C}) 
+    + I_{A \cap B \cap C}.
+\]
+Taking expectations of both sides (they are random variables) and using the linearity from \ref{exlin} we arrive at
+ \[
+  \PP(M) = (\PP(A) + \PP(B) + \PP(C) ) - 
+   (\PP(A \cap B) + \PP(A\cap C) + \PP(B \cap C) ) 
+    + \PP( A \cap B \cap C). 
+ \]
+\end{proof}
+
+\end{n}
+
+\ssn{Proposition}
+Let $A,B$ be independent. Then 
+ \begin{itemize}
+ \item $A$ and $B^c$ are independent;
+ \item $A^c$ and $B^c$ are independent. 
+ \end{itemize}
+\begin{proof}
+First observe that we can write $A$ as a disjoint union 
+ \[
+   A = (A \cap B) \cup (A \cap B^c) 
+ \]
+and so $\PP(A) = \PP(A \cap B) + \PP(A \cap B^c)$. 
+Rearranging and using independence of $A$ and $B$ we have
+\[
+  \PP(A \cap B^c) = \PP(A) - \PP(A) \PP(B) = \PP(A) \PP(B^c)
+\]
+and so the first part follows. For the second part, apply the first part to $B^c$ and $A$. 
+\end{proof}
+\end{n}
+
+\ssn{Independence of more than two events}
+We say that events $A_1,A_2, \dots ,A_n$ are \emph{independent} if for every collection $A_{j_1}, \dots , A_{j_k}$ of $k$ of the events (where $2 \leq k \leq n$) we have 
+ \[
+ \PP( A_{j_1} \cap A_{j_2} \cap  \dots \cap A_{j_k}) =
+  \PP(A_{j_1})  \PP(A_{j_2}) \dots \PP(A_{j_k}).
+ \]
+It is NOT true that $k \geq 3$ events are independent if every pair of the events is independent. See Exercise~\ref{pwinoti}. 
+\end{n}
+
+
+
+\subsection{Exercises and problems}
+
+\sse 
+What is the probability that a random positive integer is divisible by 8 or by 9? 
+\end{e}
+
+\sss 
+Since $\gcd(8,9)=1$, a number id divisible by both if and only if it is a multiple of 72. So by inclusion-exclusion the probability is
+\[
+  \frac18 + \frac19 - \frac1{72} = \frac29.
+\]
+\end{s}
+
+\sse  \label{pwinoti}
+Roll two D6.  Let $X_1$ and $X_2$ be the rolls on the first and second die respectively. Let $Y$ denote the sum of the rolls.  Find a value of $n$ such that every pair of the events 
+ \[
+    X_1 = 2, \quad   X_2 = 5, \quad  Y = n
+ \]
+ are independent.  Show that with this value of $n$ the three events $X_1,X_2,Y$ are \emph{not} independent. 
+\end{e}
+
+\sss
+The crucial value is $n=7$.  To check e.g.\ that $X_1=2$ and $Y=7$ are independent we just compute
+\[
+ \PP(X_1=2) = \frac16, \quad \PP(Y=7)  = \frac16, \quad \PP(\text{$X_1=2$ and $S=7$}) = \frac1{36}.
+\]
+To check that the three events are not independent, we observe
+ \[
+  \PP(\text{$X_1=2$ and $X_2=5$ and $Y=7$}) = \frac1{36}
+  \text{~~~~but~~~~} \PP(X_1=2) \, \PP(X_2=5) \, \PP(Y=7) =\frac1{216}.
+ \]
+\end{s}
+
+
+
+\ssp
+\begin{enumerate}
+\item Choose at random a permutation $\sigma$ from the set $S$ of all $n!$ permutations of $1,2,\dots,n$. What is the probability that it fixes the number 1 (i.e.\ that $\sigma(1)=1$).? What is the probability that it fixes all of the numbers $1,2, \dots,k$ where $k\leq n$. ?
+\item Write $A_k$ for the subset consisting of permutations that fix the number $k$.  Explain in words (no formulas) why 
+\[
+    D =  S \setminus ( A_1 \cup A_2 \cup \dots \cup A_n) 
+\]
+is the subset of all permutations that fix no object. (Such permutations are called ``derangements''.) 
+\item Use inclusion-exclusion to show that 
+\[
+\PP(D) = \frac1{2!}-\frac1{3!}+\frac1{4!}- \dots +(-1)^n \frac1{n!}
+\]
+Check that the formula works for $n=3$. 
+\item   
+I collect the class's matric cards, shuffle them and give each student one back. What is the (approximate) probability that no students ends up with their own matric card? (Calculate first the limit of $\PP(D)$ as $n \map \infty$.) 
+\end{enumerate}
+\end{e}
+
+\sss
+\begin{enumerate}
+\item The probabilities are $1/n$ and $(n-k)!/n!$ respectively. To see this is true, recall that there are $n!$ permutations of $n$ objects. If a permutation fixes $k$ objects, then all it can do is permute the other $n-k$ objects and so there are $(n-k)!$ such. 
+\item The union is all permutations that fix at least one object and so the complement is all those that fix no object.  
+\item In this case, 
+ \[ 
+  \PP( A_{i_1} \cap A_{i_2} \cap \dots \cap A_{i_k}  ) = \frac{(n-k)!}{n!}
+  \]
+  since the number of permutations that fix $k$ specified objects is $(n-k)!$.  There are 
+  \[
+  \binom{n}{k} = \frac{n!}{k! (n-k)!} 
+  \]
+ different ways of choosing which $k$ of the objects we are fixing. Thus inclusion-exclusion tells us the probability of the union is 
+ \[
+    \sum_{k=1}^n (-1)^{k+1}  \frac1{k!}
+ \]
+ and taking one minus that to compute $\PP(D)$ we arrive at the result. 
+ 
+ Checking for $n=3$ the probability is $2/6$ corresponding to the two 2-cycles. 
+ \item Comparing with the Maclaurin series of $e^x$,  the sum to infinity of the series is $1/e$. Thus for large $n$ we expect that to be the probability that nobody gets their card back. 
+\end{enumerate}
+\end{s}
+
+
+
+

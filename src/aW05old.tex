@@ -1,0 +1,448 @@
+\section{Random variables} \label{s5} 
+
+\ssn{Learning Outcomes}
+After studying this week you will be able to:
+\begin{itemize}
+\item explain what is meant by variance of a random variable;
+\item compute using the rules for combining expectations and variances;
+\item compute expected values and variances of standard and new examples;
+\item use probability generating functions to compute expected values and variances of discrete distributions.
+\end{itemize} 
+\end{n}
+
+\subsection{Preparation for the week}
+
+\ssn{Motivating problems}
+\begin{itemize}
+\item I keep tossing a D6. What is the expected number of tosses until I have seen every one of the possibilities occur at least once?
+\item I toss a coin 20 times.  What is the expected number of times that I will find pairs of consecutive H? (In this counting, by the way, I count every pair: a sequence THHHT will count as two occurrences of pairs of consecutive heads. 
+\item I draw a smooth curve on some squared paper. How might I estimate the length of the curve from the number of grid lines it crosses? 
+\end{itemize}
+\end{n}
+
+
+
+\ssn{Random variables}
+We need to talk about random variables. There are all sorts of interesting problems we could address if we had a little more theory.  
+
+A continuous probability distribution on an interval in $\RR$ just \emph{is} a random variable.  Many discrete problems too are about numerical outcomes and so are really questions about random variables. And if they are not, then they are about the probability of an event; but the probability of an event $E \subseteq S$ is the same thing as the expected value of the random variable $X$ such that that $X=1$ if the outcome is in $E$ and $X=0$ if it is not. So, mostly, this course is about random variables. 
+\end{n}
+
+
+
+\ssn{Fundamental situations}
+For us, there are two fundamental situations. 
+\begin{itemize}
+\item For a \emph{discrete random variable} $X$,we have a finite or countable set $S=\{ x_1, x_2, \dots \}$ of numerical outcomes, each with a corresponding probability 
+ \[ 
+    p_1 = \PP(X=x_1),\; p_2=\PP(X=x_2) ,\, \dots \qquad \text{where $\sum_i p_i = 1$}.
+   \]   
+\item For a \emph{continuous random variable} we have an interval $[a,b] \subseteq \RR$ and a piecewise continuous \emph{probability density function (pdf)} $f_X: [a,b] \map [0,\infty)$ such that 
+ \[
+  \PP(u\leq X \leq v) = \int_u^v f_X(x) \dd x, \qquad \text{where $\int_a^b f_X(x) \dd x = 1$.}
+ \]
+We assume that pdfs are defined to be zero outside the interval $[a,b]$ and so this makes sense even if $u$ or $v$ are outside $[a,b]$. 
+
+We also have the \emph{cumulative distribution function (cdf)}
+ \[
+    F_X(x) = \PP(X \leq x) = \int_{a}^x f_X(u)\, \dd u
+ \]
+so that $f_X(x) = F_X'(x)$.  It may be that $a=-\infty$ or $b=\infty$.
+\end{itemize}
+\end{n}
+
+\ssn{Expected value}
+As we have seen before, the expected value of $X$ is defined in the discrete case as 
+ \[
+  \EE(X) \;\stackrel{\text{def}}{=}\;  \sum_j \PP(X=x_j)j \; = \; \PP(X=x_1) x_1 +  \PP(X=x_2) x_2 + \dots . 
+  \]
+The expected value is defined in the continuous case as  
+\[
+ \EE(X) \stackrel{\text{def}}{=}  \int_a^b x \, f(x) \,\dd x.
+ \]
+In both cases, there are distributions for which the expected value does not exist (i.e.\ it is  ``infinite'') 
+\end{n}
+
+\ssn{Expected values of functions of $X$}
+Let $g$ be a function of $X$. Then $g(X)$ is itself a random variable and we can take its expected value: 
+ \[
+  \EE(g(X)) {=}  \PP(X=x_1) g(x_1) +  \PP(X=x_2) g(x_2) + \dots . 
+  \]
+ in the discrete case and 
+\[
+ \EE(g(X)) {=}  \int_a^b g(x) f(x) \dd x.
+ \]
+In both cases (except when $X$ takes only finitely many values) , it may be that $\EE(g(X))$ does not exist even if $\EE(X)$ does. 
+\end{n}
+
+\ssn{Examples}
+\begin{itemize}
+\item The expected value of a constant is itself:  $\EE(b) = b$. The expected value of $X+b$ where $b$ is a constant is just $\EE(X) + b$. (Here, $X+b$ means the random variable obtained by taking a sample from $X$ and adding the number $b$ to it.)  
+\item Let $X$ be the random variable that is the roll of a D5.  Then $\EE(X)=3$.  Suppose we want to compute $\EE(X^2)$.  Then we evaluate
+ \[
+    \frac15 1^2 + \frac15 2^2 +\frac15 3^2 +\frac15 4^2 +\frac15 5^2= \frac{55}5 = 11.
+ \]
+ Note by the way that here and generally $\EE(X^2) \not= (\EE(X))^2$. 
+ \item Let $X$ be a discrete random variable taking non-negative integer values. Then 
+ \[
+      \EE(s^X) = \sum_j \PP(X=j) s^j = G_X(s),
+ \]
+the probability generating function of $X$. 
+ \item Consider the continuous random variable $X$ on $[0,1]$ with $f_X(x) = 2x$.  Then 
+  \[
+    \EE(X) = \int_0^1 x (2x) \,\dd x = \frac23, \qquad 
+      \EE(e^X) = \int_0^1 e^x (2x) \,\dd x = 2
+  \]
+ (where the final integral is evaluated ``by parts''). 
+\end{itemize}
+\end{n}
+
+
+\ssn{Variance}
+A fundamental thing to ask about a probability distribution is whether samples from it are mainly clustered close to the mean, or whether values are more widely spread.  To provide a measure, we define the \emph{variance} of a random variable by 
+ \[
+    \var(X) = \EE \left( (X - \EE(X))^2 \right) . 
+  \]
+As for expected values, it is possible that the variance does not exist (i.e.\ that it is ``infinite''). 
+\end{n}
+
+\ssn{Examples}
+\begin{itemize}
+\item Consider again rolling a D5.  Here, $\EE(X)=3$ and so we can compute the variance as follows.
+ \[
+   \var(X)= \EE( (X-3)^2 ) = 
+    \frac15 (1-3)^2 + \frac15 (2-3)^2 +\frac15 (3-3)^2 +\frac15 (4-3)^2 +\frac15 (5-3)^2= \frac{10}5 = 2.
+ \]
+ \item Let's compute the variance of a uniform distribution $X$ on $[0,1]$. 
+ The pdf is $f_X(x)=1$ and $\EE(X)= 1/2$. Thus 
+  \[
+  \var(X) = \EE((X-\EE(X))^2) = \EE\left( \left( X-\frac12\right)^2 \right) = \int_0^1 \left( x - \frac12\right)^2 1 \, \dd x =\frac1{12}. 
+  \]
+\end{itemize}
+
+\end{n}
+
+\ssn{Proposition} \label{linev}
+Let $X$ be a random variable with expected value $\EE(X)$ and variance $\var(X)$. Let $a,b$ be real numbers.  Then 
+ \[
+   \EE(aX+b)= a \EE(X) + b, \qquad \var(aX+b) = a^2 \var(X). 
+ \]
+ \begin{proof}
+ Exercise. 
+ \end{proof}
+\end{n}
+
+\ssn{Theorem}
+Let $X$ and $Y$ be random variables with finite expected values. Then 
+  \[
+      \EE( X+Y) = \EE(X)  + \EE(Y).
+  \]
+ If also $X$ and $Y$ are independent, then 
+  \[
+       \EE(XY) = \EE(X) \EE(Y).
+  \]
+\begin{proof} (A bit more challenging than some of our proofs: you may want to come back to it later.) 
+We give a proof only for the discrete case now.  Let $X$ taking values $x_i$ with probabilities $p_i$ and $Y$ taking values $y_j$ with probabilities $q_j$ be two random variables.   Then 
+ \[
+     \sum_{j} \PP(\text{$X=x_i$ and $Y=y_j$}) = \PP(X=x_i)
+ \]
+because the event $X=x_i$ is the disjoint union of all the events ``$X=x_i$ and $Y=y_j$'' over $j$.   
+
+Now consider 
+\begin{eqnarray*}
+ \EE(X+Y) &=& \sum_{\text{all $i,j$}}  \PP(\text{$X=x_i$ and $Y=j_j$}) (x_i+y_j)  \\
+ &=& \sum_{i} \sum_j   \PP(\text{$X=x_i$ and $Y=x_j$}) x_i +
+        \sum_{j} \sum_i   \PP(\text{$X=x_i$ and $Y=j_j$}) y_j \\
+  &=&  \sum_{i}    \PP(\text{$X=x_i$}) x_i +
+        \sum_{j}   \PP(\text{$Y=j_j$}) y_j \\
+  &=& \EE(X) + \EE(Y).
+\end{eqnarray*}
+
+Turning to the second claim, recall that $X$ and $Y$ being independent means that 
+ \[
+   \PP(\text{$X=x_i$ and $Y=y_j$}) = \PP(X=x_i) \, \PP(Y=y_j). 
+ \]
+Then 
+\begin{eqnarray*}
+  \EE(XY) &=& \sum_i \sum_j \left(  \PP(\text{$X=x_i$ and $Y=y_j$}) x_iy_j \right) \\
+  &=& \sum_i \sum_j \left( \PP(X=x_i) \, \PP(Y=y_j)  x_iy_j \right) \\
+  &=& \left( \sum_i \PP(X=x_i)x_i \right) \left( \sum_j \PP(Y=y_j)  y_j \right) \\
+  &=& \EE(X) \, \EE(Y). 
+\end{eqnarray*}
+\end{proof}
+\end{n}
+
+\ssn{Proposition}
+The variance of $X$ (when it exists) is given by 
+ \[
+      \var(X) = \EE( X^2) - \left(\EE(X)\right)^2.
+ \]
+ (This formula is usually an easier way of calculating the variance than using the definition.) 
+ \begin{proof}
+ \begin{eqnarray*}
+   \var(X) &=&  \EE( (X-\EE(X))^2) \\ 
+     &=&  \EE( X^2 - 2\EE(X) X + (\EE(X))^2) \\
+     &=& \EE(X^2) - 2 \EE(\EE(X)X) + \EE( (\EE(X))^2) \\
+     &=& \EE(X^2) - 2 \EE(X) \EE(X) + (\EE(X))^2 \\
+     &=&  \EE( X^2) - \left(\EE(X)\right)^2. 
+ \end{eqnarray*}
+ \end{proof}
+\end{n}
+
+\ssn{Theorem} 
+If the variance of $X,Y$ exists and $X,Y$ are independent then 
+\[
+  \var(X+Y) = \var(X) + \var(Y) .
+ \]
+ (SLOGAN: Expected values always add, but variances only add when the random variables are independent.) 
+ \begin{proof}
+   \begin{eqnarray*}
+     \var(X+Y) &=& \EE((X+Y)^2) - (\EE(X+Y))^2 \\
+      &=& \EE( X^2 +2\EE(X) X +(\EE(X))^2) - 
+        (\EE(X) + \EE(Y))^2 \\
+    &=& \EE(X^2)+2 \EE( \EE(X) X ) + \EE( (\EE(X))^2) - 
+    ( (\EE(X))^2 + (\EE(Y))^2 + 2\EE(X)\EE(Y) ) \\
+ &=&  ( \EE( X^2) - \left(\EE(X)\right)^2 ) + 
+     (\EE( Y^2) - \left(\EE(Y)\right)^2)  \\
+    &=& \var(X) + \var(Y) 
+   \end{eqnarray*}
+ \end{proof}
+\end{n} 
+
+
+\ssn{Example}
+We can now solve one of our motivating examples: what is the expected number of pairs of consecutive heads if you toss a coin $n$ times? 
+
+Let $X_j$ for $1 \leq j \leq n-1$ be the random variable that takes the value 1 if the $j$-th and 
+$(j+1)$-th tosses are both heads and 0 otherwise.   
+Each of the $X_j$ separately has expected value $1/4$ since that is the probability that two coins both come down heads.   
+
+The number we are interested in is the expected value of $\sum_{j=1}^{n-1} X_j$.  So 
+ \[
+  \EE\left( \sum_{j=1}^{n-1} X_j \right) = \sum_{j=1}^{n-1} \EE(X_j) = \frac{n-1}4. 
+ \]
+ 
+ Here,  $X_j$ and $X_{j+1}$ here are not independent. It is tempting to think that we would need independence to add expectations --- but we don't! 
+ \end{n}
+
+\sse{}
+What is the variance of a single roll of a D3?  (Try to calculate this in your head first!) 
+\end{e}
+
+\sss
+In your head: $\EE(X)=2$.   Then $(X- \EE(X))^2$ is zero one third of the time and otherwise equal to one. So $\var(X) = 2/3$. 
+\end{s}
+
+
+
+\sse{} 
+Compute the expected value and variance of the uniform distribution on the interval $[a,b]$ where $a<b$.   
+\end{e}
+
+\sss
+To have area one the (constant) pdf must be
+\[
+  f_X(x) = \frac1{b-a} \quad \text{on $[a,b]$}.
+\]
+The expected value has to be the midpoint: $\EE(X) = (a+b)/2$ but check that with an integral if you like. 
+
+Also 
+ \[
+    \EE(X^2) =  \frac1{b-a} \int_a^b x^2 \dd x = 
+     \frac{b^3 - a^3}{3(b-a)} = \frac{b^2+ab+a^2}{3}.
+ \]
+ Then after a short calculation, 
+ \[
+     \var(X) = \EE(X^2) - (\EE(X))^2 = \frac{(b-a)^2}{12}.
+ \]
+ 
+\end{s}
+
+\sse 
+Show that the variance of an exponential random variable $X$ with parameter $\lambda >0$ is $1/\lambda^2$. (Recall $f_X(s) = \lambda e^{-\lambda x}$ on $[0,\infty)$.  (Use the ``quick'' $\EE(X^2) - (\EE(X))^2$ formula for variance. Integration by parts is your friend. Or use the results we found about Gamma functions.)
+\end{e}
+
+\sss
+The expected value is 
+ \begin{eqnarray*}
+   \EE(X) &=& \int_0^\infty \lambda x e^{-\lambda x} \dd x \\ 
+    &=& \left[ x e^{-\lambda x}  \right]_0^\infty   + \int_0^\infty e^{-\lambda x} \dd x \\
+     &=&   0 + \left[ \frac{-1}\lambda  e^{-\lambda x}\right ]_0^\infty = \frac1\lambda.
+ \end{eqnarray*}
+ Similarly, integrating by parts twice,  
+  \[
+      \EE (X^2) = \frac2{\lambda^2}
+  \]
+ and so $\var(X) = 2/\lambda^2 - (1/\lambda^2) = 1/\lambda^2$. 
+\end{s}
+
+
+\subsection{Notes}
+
+\ssn{Generating functions}
+Recall that for a discrete random variable $X$ taking values in the non-negative integers, writing $j = \PP(X=j)$ we have 
+ \[
+   G_X(s) = \EE(s^X) = \sum_{j} p_j s^j = p_0 + p_1s+p_2 s^2 + \dots . 
+  \]
+We know that $G_s(1) = 1$ because $\sum_j p_j = 1$ from the basic laws of probability. Differentiating, 
+ \[
+    G_X'(s) = \sum_{j} p_j j s^{j-1} \quad \text{and so} \quad G'_X(1)=\EE(X).
+  \]
+Differentiating again 
+ \[
+     G_X''(s) = \sum_{j} p_j j(j-1) s^{j-2} \quad \text{and so} \quad G''_X(1)=\EE(X^2)- \EE(X).
+  \]
+Combining these we arrive at the very useful formula 
+ \[
+ \var(X) = \EE(X^2) - \left( \EE(X)\right)^2 = G_X''(1) + G_X'(1) - \left(G_X'(1)\right)^2.
+ \]
+\end{n}
+
+\ssn{Example: the geometric distribution}
+The geometric distribution with parameter $p$ has $\PP(X=k)= q^{k-1}p$ which is the probability of the first success in a sequence of independent Bernoulli trials occurring with the $k$-th instance. Computing
+\[
+   G_X(s) = \sum_{k=1}^\infty q^{k-1}p s^k = ps \sum_{j=0}^\infty (qs)^j = \frac{ps}{1-qs},
+\]
+where the final step is summing a geometric series. 
+
+Continuing, 
+ \[
+   G_X'(s) = \frac{p}{(1-qs)^2} \quad \text{and so} \quad \EE(X)= G_X'(1) = \frac1p.
+ \]
+ Furthermore 
+ \[ 
+  G_X''(s)=\frac{2pq}{(1-qs)^3} \quad\text{and so} \quad G_X''(1) = \frac{2q}{p^2}.
+ \]
+ So we can calculate 
+ \[
+   \var(X) = \EE(X^2) - \left( \EE(X)\right)^2 = G_X''(1) + G_X'(1) - \left(G_X'(1)\right)^2 = \frac{q}{p^2}.
+ \]
+\end{n}
+
+\ssn{Expectation and variance of Binomial distribution}
+Consider a Bernoulli trial: a single experiment where the outcomes are ``success'' with probability $p$ and ``failure'' with probability $q=1-p$.  Define a random variable $X$ which takes the value $X=1$ in the event of success and $X=0$ in the event of failure. Then the expected value of $X$ is just $\EE(X)=p$ and the expected value of $X^2$ is also $p$. Thus we deduce 
+ \[
+    \EE(X) = p, \qquad \var(X) = p-p^2 = pq.
+ \]
+
+Turning to the binomial distribution, we are performing $n$ independent Bernoulli trials;  call the corresponding random variables $X_j$ where $j=1,\dots,n$. The total number of successes precisely the sum $Y= \sum_1^n X_j$ of these $n$ independent random variables, each. So (extending the results about sums of expectations and variances to sums of more than one variable) we have that the expected value and variance of a binomial random variable are $np$ and $npq$ respectively.
+\end{n}
+
+\ssn{Proposition}  \label{wlln0}
+Let $X_1,X_2, \dots$ be independent, identically distributed random variables, each with mean $\EE(X)=\mu$ and variance $\var(X)$.  Let $n\in \mathbb N$ and consider the ``averaged of the first $n$''
+\[
+       A_n = \frac1n \left(   X_1 + X_2 + \dots + X_n \right).
+ \]
+Then (remembering that $\EE(aX)= a\EE(X)$ and $\var(aX) = a^2 \var(X)$) we have 
+  \[
+     \EE(A_n) = \mu , \qquad  \var(A_n) = \frac{\var(X)}n. 
+  \]
+ So, the larger $n$ is the smaller the variance of the average.  
+\end{n}
+
+\ssn{Theorem (Chebyshev's inequality)}
+Let $X$ be a random variable with expected value $\EE(X)=\mu$ and (finite) variance $\var(X)$. Then for every positive number $a$ we have 
+\[
+    \PP( | X-\mu| \geq a) \leq \frac{\var(X)}{a^2}.
+\]
+\begin{proof}
+Rearranged in the form 
+\[
+      \var(X) \geq \PP( | X-\mu| \geq a) a^2
+ \]
+the result is essentially obvious.  If we know that with probability $p$ we have
+$| X-\mu| \geq a$ then also with that probability we have $( X-\mu)^2 \geq a^2$ and therefore the variance, which is the expected value of  $( X-\mu)^2$, must be at least $pa^2$. 
+\end{proof}
+\end{n}
+
+\ssn{Theorem (The weak law of large numbers)}
+Consider an infinite sequence of independent, identically distributed random variables as in \S\ref{wlln0}.  Then for any $a>0$ we have 
+ \[
+     \PP( A_n - \mu \geq a ) \map 0 \; \text{as $n \map \infty$.}
+ \]
+ \begin{proof}
+ Chebyshev's inequality applied to $A_n$ tells us that 
+  \[
+     \PP( | A_n - \mu | \geq a) \leq \frac{\var(A_n)}{a^2} = \frac{\var{X}}{a^2 n}
+  \]
+  which tends to zero as $n$ tends to infinity. 
+ \end{proof}
+\end{n}
+
+\ssn{Discussion} 
+The weak law of large numbers closes a circle. We defined (not really in the  mathematical sense) what we mean by the probability of a coin coming down heads being $1/2$ by saying that if we tossed it very many times, we would expect to get heads half the time.  The theorem we just proved says something exact about the situation: given a ``tolerance'' $a$, however small it may be, we can make the probability of the proportion of heads differing from $1/2$ by more than $a$ as small as we like by tossing the coin enough times. 
+\end{n}
+
+\ssn{A diversion and exercise that will be solved in lectures (optional)}
+I have a floor ruled with parallel lines unit distance apart. I take some stiff, thin wire of length $L$ and bend it into a reasonably smooth curve of some sort that will lie flat on the plane.  I toss the wire in the air so that it lands randomly on the floor.  What is the expected number of times the curve meets the ruled lines? 
+
+You could approximate the the wire by a large number $n$ of straight line segments of length $L/n$. Let $X_j$ be the random variable that is $1$ if the $j$-th segment crosses a line and zero otherwise. Then the expected number of crossings of the whole curve in this approximation is given by 
+ \[
+  \EE\left(  \sum_{j=1}^n X_j \right) =  \sum_{j=1}^n \EE(X_j).
+  \]
+Now, $\EE(X_j)$ must be independent of $j$: it is the expected number of crossings of the lines on the floor by a randomly tossed line segment of length $L/n$.  The conclusion of all this is that the expected number of crossings must be proportional to $L$.  Calculate the constant of proportionality and hence find the probability that a line segment of unit length crosses the lines on the floor if randomly dropped. 
+\end{n}
+
+
+\subsection{Exercises and Problems}
+
+\sse{}
+I repeatedly roll a Dn.  Let $X=k$ if I first roll a ``1'' on the $k$-th roll.  What is the expected value and variance of $X$? 
+\end{e}
+
+\sss
+This is geometric with $p=1/n$. So the expected value is $1/p = n$ and the variance is $q/p^2 = n(n-1)$
+\end{s}
+
+
+\sse{}
+Consider the RV $X$ defined to be the number of pairs of consecutive H I obtain in 4 tosses of a coin.  (As usual, HHHH counts as 3 such pairs.) 
+Calculate the expected value of $X$ directly by listing all 16 outcomes and also indirectly by considering $X$ as the sum of three RVs.
+\end{e}
+
+\sss
+Listing all outcomes, I get 
+ \[
+ \PP(X=0) = \frac8{16}, \quad \PP(X=1) = \frac5{16},  \quad
+ \PP(X=2) = \frac2{16}, \quad \PP(X=3) = \frac1{16}.
+ \]
+So 
+\[
+  \EE(X) = \frac1{16} ( 8 (0) + 5 (1) + 2  (2) + 1 (3) ) = \frac34.
+\]
+
+Alternatively (and more simply), let $X_j$ where $j=1,2,3$ denote the number of pairs of heads consisting of the $j$-th and $(j+1)$-th tosses.  Then $\EE(X_j) = 1/4$ and $X = X_1+X_2+X_3$ and so $\EE(X)=3/4$. 
+\end{s}
+
+\sse 
+Prove Proposition~\ref{linev} as follows.
+\begin{itemize}
+\item Prove that $\EE(aX+b)= a \EE(X) + b$ from the definition for the discrete case and the continuous case separately. 
+\item Use the definition $\var(X) = \EE((X-\EE(X))^2)$ and the first part of this exercise to prove that $\var(aX+b)= a^2 \var(X)$. 
+\end{itemize}
+\end{e}
+
+\sss
+In the discrete case, let $X$ take values $x_1,x_2,\dots$ with probabilities $p_1,p_2,\dots$.  Then 
+ \begin{eqnarray*}
+ \EE(aX+b) &=& \sum_k p_k (a x_k + b) \\
+   &=& a \sum_k p_k  x_k  b \sum_k p_k  \\
+   &=& a \EE(X) + b. 
+ \end{eqnarray*}
+ The steps for the continuous case are completely analogous. 
+\end{s}
+
+\ssp \label{chebex}
+Use Chebyshev's inequality to to find a value of $n$ such that if you toss a coin $n$ times the proportion of heads will be within 0.01 of 0.5 with probability at least 0.95. 
+\end{e}
+
+\sss 
+The number of heads $N$ in $n$ tosses is binomial $(n, 1/2)$.This has expected value $n/2$ and variance $n/4$. The proportion of heads is $X = N/n$ which thus has expected value $0.5$ and variance $1/(4n)$. 
+
+Substituting into Chebyshev's inequality,
+ \[
+   \PP( |X-\frac12| \geq 0.01 ) \leq \frac{1/(4n)}{(0.01)^2}.
+ \]
+Solving, we require $n \geq 50,000$. 
+\end{s}
+

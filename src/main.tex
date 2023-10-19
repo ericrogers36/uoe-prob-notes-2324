@@ -29,7 +29,7 @@
 \raggedbottom 
 
 \usepackage{tikz, pgfplots}
-\pgfplotsset{compat=1.17}
+\pgfplotsset{compat=1.18}
 \usepgfplotslibrary{groupplots}
 
 
@@ -73,29 +73,9 @@
   title={\centering #1},width=0.92\linewidth]%
     #2 \end{tcolorbox}}}
 
-%\setmainfont{Liberation Serif}
-%\setsansfont{Liberation Sans}[Scale=MatchLowercase]
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}[Scale=MatchLowercase]
 \renewcommand{\familydefault}{\sfdefault}
-
-\newcommand{\1}{\mathbbm{1}}
-\newcommand{\bA}{\mathbb{A}}
-\newcommand{\bD}{\mathbb{D}}
-\newcommand{\bE}{\mathbb{E}}
-\newcommand{\bF}{\mathbb{F}}
-\newcommand{\bL}{\mathbb{L}}
-\newcommand{\bN}{\mathbb{N}}
-\newcommand{\bP}{\mathbb{P}}
-\newcommand{\bQ}{\mathbb{Q}}
-\newcommand{\bR}{\mathbb{R}}
-\newcommand{\bV}{\mathbb{V}}
-\newcommand{\bZ}{\mathbb{Z}}
-
-\newcommand{\IE}{\mathbb{E}}
-\newcommand{\IP}{\mathbb{P}}
-\newcommand{\IR}{\mathbb{R}}
-\newcommand{\Var}{\operatorname{Var}}
-\newcommand{\Cov}{\operatorname{Cov}}
-\newcommand{\Cor}{\operatorname{Cor}}
 
 \newcommand{\NN}{{\mathbb N}}
 \newcommand{\PP}{{\mathbb P}}
@@ -122,6 +102,8 @@
 \newcommand\gamm{{\mathop{Gamma}}}
 \newcommand\norm{{\mathop{Normal}}}
 
+\newcommand{\1}{\mathbbm{1}}
+
 
 \newcommand{\rd}[1]{{\color{red} #1 }}
 \newcommand{\bl}[1]{{\color{blue} #1 }} 
@@ -141,31 +123,31 @@
 
 
 \title{Probably OK} 
-\author{by Stefan Engelhardt, \\ based on notes from Toby Bailey} 
-\date{2023-2024}
+\author{created by Toby Bailey, \\ edited by Stefan Engelhardt} 
+\date{2022-2023}
 
-%\includeonly{
-%aW00
-%,aW01
-%,aW02
-%,aW03
-%,aW04
-%,aW05
-%%
-%,aW06
-%%
-%,aW07
-%%
-%,aW08
-%%
-%,aW09
-%%
-%, aW10
-%, aW11
-%%,aWsummary
-%%,aWP
-%%,aWextras
-%}
+\includeonly{
+aW00
+,aW01
+,aW02
+,aW03
+,aW04
+,aW05
+%
+,aW06
+%
+,aW07
+%
+,aW08
+%
+,aW09
+%
+, aW10
+, aW11
+%,aWsummary
+%,aWP
+%,aWextras
+}
 
 %\includeonly{aWsummary}   
 
@@ -175,66 +157,20 @@
 \setcounter{tocdepth}{2}
 \tableofcontents 
 
-%%Week 00
-\section{Why study probability?} 
-\input{sourceFiles/00_Motivation}
-
-%%Week 01
-\section{Foundations of probability, inclusion-exclusion and equally likely outcomes} \label{s1} 
-\input{sourceFiles/01_IdeasDefinitions}
-\input{sourceFiles/01_discreteUniform}
-\input{sourceFiles/01_InclusionExclusion}
-
-%%Week 02
-\section{Conditional probabilities, random variables and the binomial distribution}
-\input{sourceFiles/02_Conditional}
-\input{sourceFiles/02_Bayes}
-\input{sourceFiles/02_IndependenceConditional}
-\input{sourceFiles/02_RV}
-\input{sourceFiles/02_Binomial}
-
-%%Week 03
-\section{More discrete and continuous distributions}
-\input{sourceFiles/03_Geom}
-\input{sourceFiles/03_ContDistr}
-\input{sourceFiles/03_ExpDistr}
-\input{sourceFiles/03_Pois}
-\input{sourceFiles/03_ExercisesGeomExp}
-
-%%Week 04
-\section{Expectation}
-\input{sourceFiles/04_E}
-\input{sourceFiles/04_LinearityOfE}
-\input{sourceFiles/04_CondExp}
-
-%%Week 05
-\section{More expectations and variance}
-\input{sourceFiles/05_ECont}
-\input{sourceFiles/05_Var}
-
-%%Week 06
-\section{Sums are Normal}
-\input{sourceFiles/06_Normal}
-
-%%Week 07
-\section{Several Random Variables}
-\input{sourceFiles/07_SeveralRV}
-
-%%Week 08
-\section{Transformations, Chebyshev's inequality and LLN}
-\input{sourceFiles/08_Trans}
-\input{sourceFiles/08_ChebyWLLN}
-
-%%Week 09
-\section{Covariance and Correlation}
-\input{sourceFiles/09_CovCor}
-
-%%Week 010
-\section{More and more}
-\input{sourceFiles/xx_GammaDistr}
-\input{sourceFiles/xx_RandomWalk}
-%\appendix
-%\include{aWsummary}
-%\include{aWP}
-%\include{aWextras}
+\include{aW00}
+\include{aW01}
+\include{aW02}
+\include{aW03}
+\include{aW04}
+\include{aW05}
+\include{aW06}
+\include{aW07}
+\include{aW08}
+\include{aW09}
+\include{aW10}
+\include{aW11}
+\appendix
+\include{aWsummary}
+\include{aWP}
+\include{aWextras}
 \end{document} 

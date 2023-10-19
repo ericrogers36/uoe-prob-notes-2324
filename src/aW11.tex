@@ -1,0 +1,234 @@
+\section{More interesting content} \label{s11}
+
+\subsection{Minimum and Maximum of Random Variables}
+
+\ssn{Motivation}
+In a large room are $n$ light bulbs. The owner is a little miserly and only changes them when all have burned out. How long is it till this has happened?
+\end{n}
+
+\ssn{Maximum of Random Variables}
+Let $X_i$, $i \in \{1,2,\ldots, n \}$ be i.i.d. random variables with cdf $F_X$. 
+Then
+\begin{align*}
+    F_{\max_i X_i} (x)
+    &
+    = \PP ( \max_i X_i \leq x)
+    \\ &
+    = \PP ( \text{each } X_i \text{ is } \leq x)
+    \\&
+    = \PP ( X_1 \leq x, X_2 \leq x, \ldots , X_n \leq x)
+    \\ &
+    = \Pi_{i=1}^n \PP (X_i \leq x)
+    \\ &
+    = F_X(x)^n
+    .
+\end{align*}
+Depending on what distribution we assume $X_i$ to have, we get an explicit result. 
+
+In the motivation above a standard choice would be to assume $X_i \sim \expo(\lambda)$, but note that it is not confined to this.
+\end{n}
+
+\ssn{Motivation}
+In a production hall there are $n$ lamps. Regulations demand that when one of them faults, all have to be exchanged for new ones. How long is it till the next set of lamps gets installed?
+\end{n}
+
+\ssn{Minimum of Random variables}
+Again, let $X_i$, $i \in \{1,2,\ldots, n \}$ be i.i.d. random variables with cdf $F_X$. 
+Then
+\begin{align*}
+    F_{\min_i X_i} (x)
+    &
+    = \PP ( \min_i X_i \leq x)
+    \\ &
+    = 1 - \PP ( \min_i X_i > x)
+    \\ &
+    = 1 -  \PP ( X_1 > x, X_2 >x, \ldots , X_n > x )
+    \\ &
+    = 1 - \Pi_{i=1}^n (1- \PP ( X_i \leq x))
+    \\ &
+    = 1 - (1- F_X(x))^n
+    .
+\end{align*}
+If we once more do our canonical choice of saying that the life of lamps is exponentially distributed to some parameter $\lambda>0$, then this simplifies for $x>0$ to
+\begin{align*}
+    F_{\min_i X_i} (x)
+    &
+    = 1 - ( 1 - (1 - e^{-\lambda x}))^n
+    %\\&
+    = 1- (e^{- \lambda x})^n
+    %\\&
+    = 1 - e^{-(n\lambda) x}.
+\end{align*}
+This means that the minimum of i.i.d. exponential random variables is again exponentially distributed with $\min_i X_i \sim \expo(n\lambda)$.
+\end{n}
+
+
+\subsection{Convolution/Sum of Random Variables}
+
+\ssn{Motivation}
+A shop has only $2$ items of some product in stock. The time till the next customer wants to buy this product is exponentially distributed to some parameter $\lambda > 0$. What is the distribution of the time when both items got sold?
+
+\
+
+Since the first product gets sold after an exponential random variable and then we again have to wait till the time given by another independent exponential random variable has past, we want to know the distribution of the sum of two exponential random variables.
+\end{n}
+
+\ssn{Derivation for discrete random variables}
+Let $X$ and $Y$ be two independent discrete random variables. Because they are discrete, we can partition the universal set into the sets $\{ Y=y \}$ for $y$'s being all the values $Y$ can take. Thus we obtain
+\begin{align*}
+    \PP(X+Y=k)
+    &
+    = \PP (X=k-Y)
+    \\ &
+    = \sum_y \PP(\{X=k-Y\} \cap \{ Y = y \} )
+    \\ &
+    = \sum_y \PP (X=k-y, Y=y )
+    \\ &
+    = \sum_y \PP (X=k-y) \PP (Y=y),
+\end{align*}
+which we can rewrite with respect to the mass function as
+$$ p_{X+Y}(k) = \sum_y p_X(k-y) p_Y(y).$$
+\end{n}
+
+\ssn{Theorem} \label{thm:X+Y}
+\
+\tcb
+Let $X$ and $Y$ be two independent random variables. If they are discrete then
+$$ p_{X+Y}(k) = \sum_y p_X(k-y) p_Y(y)$$
+and if they are continuous then
+$$f_{X+Y}(z) = \int_\RR f_X(z-y) f_Y(y) dy.$$
+\etcb
+\end{n}
+
+\ssn{Example}
+As a first very simple example let us calculate the distribution of the sum of two independent $\bern(p)$ rv's. We already know that the result should be a $\bino(2,p)$, but this is agread way of checking that our calculation is correct. Since both $X$ and $Y$ only take values in $\{0,1\}$, we have
+$$ p_{X+Y} (k) 
+= \sum_{y=0}^1 p_X(k-y) p_Y(y)
+= \PP(X= k) \PP(Y=0) + \PP(X=k-1) \PP (Y=1).
+$$
+Because it is easy to see that values for $k$ outside of $\{0,1,2\}$ will result in probability of $0$, we only need to concern ourselves with
+\begin{align*}
+    k=0:& \quad p_{X+Y}(0) = \PP(X=0)\PP(Y=0) + \PP(X=-1)\PP(Y=1) = (1-p)^2
+    ,\\
+    k=1:& \quad p_{X+Y}(1) = \PP(X=1)\PP(Y=0) + \PP(X=0)\PP(Y=1) = 2p(1-p)
+    ,\\
+    k=2:& \quad p_{X+Y}(2) = \PP(X=2)\PP(Y=0) + \PP(X=1)\PP(Y=1) = p^2
+    .
+\end{align*}
+This can also be written as $p_{X+Y}(k) = \binom{2}{k} p^k (1-p)^{n-k}$, which is exactly the desired $\bino(2,p)$ distribution.
+\end{n}
+
+\ssn{Example}
+Assume that $X,Y \sim \norm(0,1)$ and independent. What is the distribution of $X+Y$? Let us start with the calculation:
+\begin{align*}
+    f_{X+Y}(z)
+    &
+    = \int_\RR f_X(z-y) f_Y(y) dy
+    %\\ &
+    =
+    \int_\RR \left( \frac{1}{\sqrt{2 \pi}} \right)^2 e^{- \frac{ (z-y)^2}{2}} e^{- \frac{y^2}{2}} dy
+    %\\ &
+    = \int_\RR \frac{1}{2\pi} e^{- \frac{ z^2 - 2zy + 2 y^2}{2}} dy
+    .
+\end{align*}
+Now we stand in front of the problem of getting rid of this integral. As mentioned before, there is no primitive that we can use. Hence, we have to resort to another tactic. Looking at the integral we notice that it still looks very much like the density of a general normal distribution. If it was a general normal distribution, then the integral over the density function would be equal to $1$ and would therefore disappear. 
+
+So let us try this. Since $y$ is our integration variable, we need the density to look like $\frac{1}{\sqrt{2 \pi}} e^{- \frac{(y-\mu)^2}{2 \sigma^2}}$. Since there is a factor of $2$ in front of $y^2$, we have to choose $\sigma^2 = \frac12$, which means that we now have $\frac{y^2 -yz + \frac12 z^2}{2 \cdot \sigma^2}$ in the exponent. Furthermore choosing $\mu = \frac12 z$ this becomes $\frac{(y- \mu)^2 + \frac14 z^2}{2 \sigma^2}$. This is not exactly a normal density, but everything differing from the density of $\norm(\mu,\sigma^2)$ are just constants in regard to the integration variable $y$ and hence can be put in front of the integral.
+
+Putting that together we obtain
+\begin{align*}
+    f_{X+Y}(z)
+    &
+    = \int_\RR \frac{1}{2\pi} e^{- \frac{ z^2 - 2zy + 2 y^2}{2}} dy
+    \\ &
+    = \int_\RR \frac{1}{\sqrt{2\pi 2}}\frac{1}{\sqrt{2\pi \frac12}} e^{- \frac{(y-\frac12 z)^2 + \frac14 z^2}{2 \frac12}} dy
+    \\ &
+    = \frac{1}{\sqrt{2\pi 2}} e^{- \frac{z^2}{2 \cdot 2}} \int_\RR \frac{1}{\sqrt{2\pi \sigma^2}} e^{- \frac{(y-\mu)^2 }{2 \sigma^2}} dy
+    \\&
+    = \frac{1}{\sqrt{2\pi 2}} e^{- \frac{z^2}{2 \cdot 2}} \cdot 1
+    .
+\end{align*}
+As we can see here, this again is the pdf of a normal distribution, namely of $\norm(0,2)$. I.e. $X+Y \sim \norm(0,2)$.
+\end{n}
+
+\ssn{Theorem} \ \\
+The sum of two independent normal random variables is again normally distributed:
+\tcb
+Let $X \sim \norm( \mu_X, \sigma_X^2)$ and $Y \sim \norm(\mu_Y, \sigma_Y^2)$ be independent. Then
+$$ X+Y \sim \norm ( \mu_X + \mu_Y, \sigma_X^2 + \sigma_Y^2).$$
+\etcb
+\end{n}
+
+\ssn{Example}
+Now we consider the case of $X$ and $Y$ being $\unif (1,5)$ distributed and independent. As always we start by writing down the general formula and inserting the density functions:
+$$ f_{X+Y}(z)
+= \int_\RR f_X (z-y) f_Y(y) dy
+= \int_\RR \frac{1}{5-1} \1_{\{ z-y \in [1,5] \}} \frac{1}{5-1} \1_{\{ y \in [1,5] \}} dy
+. $$
+Because $y$ is the integration variable we rewrite the first indicator function to $\1_{\{ z-y \in [1,5] \}} = \1_{\{ y \in [z-5,z-1] \}}$. What those indicators mean is that when either of them is $0$ we integrate nothing. If both are $1$, we integrate. Hence, our area of integration is the intersection of the intervals $[z-5,z-1]$ and $[1,5]$ from the indicator functions. Thus, we have to find out how large those intersections are for all values of $z$. To this end, it is a nice approach to first think about the values of $z$ where the behaviour of the length of intersection changes. The first such value is $z=2$, since for smaller $z$ they do not intersect, while for larger $z$ they do. Similarly for $z=10$. Finally for $z=6$ both intervals are equivalent. So, we do a case analysis between those points. We get
+\begin{align*}
+    f_{X+Y}(z) 
+    &
+    = \left\{ \begin{array}{ll}
+        \frac{1}{16} \int_\RR 0 dy, & z < 2 \\
+        \frac{1}{16} \int_\RR \1_{\{ y \in [1,z-1] \} } dy, & 2 \leq z \leq 6 \\
+        \frac{1}{16} \int_\RR \1_{\{ y \in [z-5,5] \} } dy, & 6 \leq z \leq 10 \\
+        \frac{1}{16} \int_\RR 0 dy, & 10 < z 
+    \end{array} \right.
+    = \left\{ \begin{array}{ll}
+        0, & z < 2 \\
+        \frac{1}{16} (z-2), & 2 \leq z \leq 6 \\
+        \frac{1}{16} (10-z), & 6 \leq z \leq 10 \\
+        0, & 10 < z 
+    \end{array} \right.
+    .
+\end{align*}
+As a sanity check, we compute the integral of this pdf and confirm that it yields $1$:
+\begin{align*}
+    \int_\RR f_{X+Y}(z) dz
+    &
+    = \int_2^6 \frac{1}{16} (z-2) dz + \int_6^10 \frac{1}{16} (10-z) dz
+    \\&
+    = \frac{1}{16} \left[ \frac12 z^2 - 2 z \right]_2^6 + \frac{1}{16} \left[ 10 z - \frac12 z^2 \right]_6^10
+    \\ &
+    = \frac{1}{16}( 18 - 12 - 2 + 4) + \frac{1}{16}( 100 - 50 - 60 + 18)
+    \\ &
+    = 1.
+\end{align*}
+\end{n}
+
+\ssn{Some further sums} \label{DistrSumsStandard}
+There are even more distributions where, when you sum up multiple random variables, you get another standard distribution. Examples are:
+\begin{enumerate}[(i)]
+\item
+$X\sim \bino(n_X,p)$, $Y \sim \bino(n_Y,p)$ $\Rightarrow$ $X+Y \sim \bino(n_X+n_Y,p)$,
+\item
+$X\sim Expo(\lambda)$, $Y\sim Expo(\lambda)$ $\Rightarrow$ $X+Y \sim Gamma(2,\lambda)$,
+\item
+$X\sim Gamma (\alpha, \lambda)$, $Y\sim Gamma (\beta, \lambda)$ $\Rightarrow$ $X+Y \sim Gamma (\alpha + \beta, \lambda)$,
+\item
+$X\sim \norm (\mu_1, \sigma_1^2)$, $Y\sim \norm (\mu_2, \sigma_2^2)$ $\Rightarrow$ $X+Y \sim \norm (\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2 )$,
+\item
+$X\sim Poisson(\lambda_1)$, $Y\sim Poisson (\lambda_2)$ $\Rightarrow$ $X+Y \sim Poisson (\lambda_1 + \lambda_2)$,
+\item
+$X\sim Expo(\lambda_1)$, $Y\sim Expo(\lambda_2) $ $\Rightarrow$ $\min \{ X,Y \} \sim Expo (\lambda_1 + \lambda_2 )$
+.
+\end{enumerate}
+\end{n}
+
+\sse
+Prove the statements $(i),(ii),(iii),(v)$ from the list in \ref{DistrSumsStandard}.
+\\
+(\textit{Hint}: For distributions that do not take values on $\RR$, or $\ZZ$, first think about which values they and their sums can take.)
+\end{e}
+
+\sse
+Derive a formula similar to the one in Theorem \ref{thm:X+Y} for the distribution of $X-Y$.
+\end{e}
+
+\sss
+If $X$ and $Y$ are discrete then
+$$ p_{X-Y}(k) = \sum_y p_X(k+y) p_Y(y)$$
+and if they are continuous then
+$$f_{X-Y}(z) = \int_\RR f_X(z+y) f_Y(y) dy.$$
+\end{s}

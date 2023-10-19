@@ -1,0 +1,390 @@
+\documentclass[11pt,pdf,ngerman,UKenglish]{beamer}%,handout
+\usepackage[UKenglish]{babel}
+\usepackage{array}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%%\usepackage{amsfonts}
+%%\usepackage{amstext}
+\usepackage{amsthm}
+%\usepackage{stmaryrd}
+\usepackage{relsize}
+%\usepackage{graphics}
+\usepackage{graphicx}
+%\usepackage{mathptmx}
+%\usepackage[scaled]{uarial}
+\usepackage[T1]{fontenc}
+%%\usepackage{a4wide}
+\usepackage{makeidx}
+\usepackage{textcomp}
+\usepackage{ulem}
+\usepackage{geometry}
+%\usepackage{bbm}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{sverb}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{tabularx, multirow}
+%\usepackage{booktabs}
+%\usepackage{txfonts}
+%\usepackage[ansinew]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage{enumerate}
+\usepackage{bbold}
+\usepackage{dsfont}
+\usepackage{listings}
+\usepackage{xifthen}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.11}
+\usepackage{xcolor}
+\usepackage{subfigure}
+
+\usepackage{epsdice}
+
+
+\lstset{
+	language=Matlab,% choose the language of the code
+	basicstyle=\footnotesize,% the size of the fonts that are used for the code
+	numbers=left,% where to put the line-numbers
+	numberstyle=\scriptsize,% the size of the fonts that are used for the line-numbers
+	stepnumber=1,% the step between two line-numbers. If it's 1 each line will be numbered
+	numbersep=5pt,% how far the line-numbers are from the code
+	%backgroundcolor=\color{white},% choose the background color. You must add \usepackage{color}
+	showspaces=false,% show spaces adding particular underscores
+	showstringspaces=false,% underline spaces within strings
+	showtabs=false,% show tabs within strings adding particular underscores
+	%frame=single,% adds a frame around the code
+	%tabsize=2,% sets default tabsize to 2 spaces
+	captionpos=t,% sets the caption-position to bottom
+	%caption=\lstname,
+	breaklines=false,% sets automatic line breaking
+	breakatwhitespace=false,% sets if automatic breaks should only happen at whitespace
+	escapeinside={\%*}{*)}% if you want to add a comment within your code
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\IR}{\mathds{R}}
+%\newcommand{\IN}{{\mathbb{N}}}
+\newcommand{\IN}{\mathds{N}}
+\newcommand{\IZ}{{\mathbb{Z}}}
+\newcommand{\IF}{{\mathbb{F}}}
+\newcommand{\IK}{{\mathbb{K}}}
+\newcommand{\IQ}{{\mathbb{Q}}}
+\newcommand{\IC}{{\mathbb{C}}}
+%\newcommand{\IP}{{\mathbb{P}}}
+\newcommand{\IP}{\mathbb{P}}
+\newcommand{\IE}{{\mathbb{E}}}
+%\newcommand{\E}{\mbox{I\negthinspace E}}% Zeichen für den Erwartungswert
+\newcommand{\E}{\mathds{E}}
+\newcommand{\F}{\mathcal{F}}
+\renewcommand{\S}{\mathcal{S}}
+
+\newcommand{\de}{\delta}
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\sk}{{\,|\,}}
+\newcommand{\arccot}{\operatorname{arccot}}
+\newcommand{\1}{\mathbb{1}}
+\newcommand{\supp}{\operatorname{supp}}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\Re}{\operatorname{Re}}
+\newcommand{\aeq}{\Leftrightarrow}
+%\newcommand{\M}{\widetilde{\text{M}}}
+\newcommand{\erfc}{\operatorname{Erfc}}
+\newcommand{\erf}{\operatorname{Erf}}
+\newcommand{\qvar}[2]{\langle #1 , #1 \rangle _{#2}}
+%\newcommand{\qvar}[2]{<\hspace{-1.5mm}#1\hspace{-0.3mm},\hspace{-0.5mm}#1\hspace{-1.5mm}>_{#2}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\SEP}{\text{SEP}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\conv}{\operatorname{conv}}
+
+\newcommand{\Law}{\text{Law}}
+ 
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+
+\newcommand*{\cA}{\mathcal{A}}
+\newcommand*{\cB}{\mathcal{B}}
+\newcommand*{\cC}{\mathcal{C}}
+\newcommand*{\cD}{\mathcal{D}}
+\newcommand*{\cE}{\mathcal{E}}
+\newcommand*{\cF}{\mathcal{F}}
+\newcommand*{\cG}{\mathcal{G}}
+\newcommand*{\cH}{\mathcal{H}}
+\newcommand*{\cI}{\mathcal{I}}
+\newcommand*{\cJ}{\mathcal{J}}
+\newcommand*{\cK}{\mathcal{K}}
+\newcommand*{\cL}{\mathcal{L}}
+\newcommand*{\cM}{\mathcal{M}}
+\newcommand*{\cN}{\mathcal{N}}
+\newcommand*{\cO}{\mathcal{O}}
+\newcommand*{\cP}{\mathcal{P}}
+\newcommand*{\cQ}{\mathcal{Q}}
+\newcommand*{\cR}{\mathcal{R}}
+\newcommand*{\cS}{\mathcal{S}}
+\newcommand*{\cT}{\mathcal{T}}
+\newcommand*{\cU}{\mathcal{U}}
+\newcommand*{\cX}{\mathcal{X}}
+\newcommand*{\cY}{\mathcal{Y}}
+
+\renewcommand{\d}{\operatorname{d} \hspace{-0.5mm}}
+\newcommand{\Dt}{\operatorname{D}^t}
+\newcommand{\Dw}{\operatorname{D}^w}
+\newcommand{\diff}[3][]{\ifthenelse{\isempty{#1}}{#3_{#2}}{#3_{#1 #2}}}
+%\newcommand{\diff}[3][]{\ifthenelse{\isempty{#1}}{\partial_{#2} #3}{\partial_{#1} \partial_{#2} #3}}
+
+\newcommand{\p}[3]{#1^{(#2)}_{#3}}
+\newcommand{\Xz}[2]{X^{(2), (#1) }_{ #2 }}
+\newcommand{\Xd}[2]{X^{(3), (#1) }_{ #2 }}
+\newcommand{\dx}[1]{\frac{\d}{\d x^{(#1)}}}
+\newcommand{\X}[2]{\p{X}{#1}{#2}}%{X^{(#1)}_{#2}}
+\newcommand{\x}[1]{x^{(#1)}}
+\renewcommand{\u}[2]{\ifthenelse{\isempty{#2}}{u^{(#1)}}{u^{(#1)}_{#2}}} %\p{u}{#1}{#2}}
+\newcommand{\ut}[2]{\p{\tilde{u}}{#1}{#2}}%{\tilde{u}^{(#1)}_{#2}}
+\newcommand{\Z}[2]{\p{\tilde{Z}}{#1}{#2}}%{\tilde{Z}^{(#1)}_{#2}}
+\newcommand{\Zo}[2]{\p{Z}{#1}{#2}}%{Z^{(#1)}_{#2}}
+\newcommand{\W}[1]{\widetilde{W}_{#1}}
+\newcommand{\Y}[2]{\p{Y}{#1}{#2}}%{Y^{(#1)}_{#2}}
+\newcommand{\Zh}[1]{\hat{Z}_{#1}}
+
+\newcommand{\myitem}{$\bullet$\hspace*{-3mm}}
+
+\newcommand{\Ito}{It\^o\ }
+\newcommand{\Itos}{It\^o's\ }
+
+
+\newtheoremstyle{thm}% name
+{10pt}% Space above
+{18pt}% Space below 
+{\itshape}% Body font
+{}% Indent amount: Indent amount: empty = no indent, \parindent = normal paragraph indent
+{\bf}% Theorem head font
+{}% Punctuation after theorem head
+{\newline }% Space after theorem head: { } = normal interword space; \newline = linebreak
+{}% Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{def}% name
+{10pt}% Space above
+{18pt}% Space below 
+{}% Body font
+{}% Indent amount: Indent amount: empty = no indent, \parindent = normal paragraph indent
+{\bf}% Theorem head font
+{}% Punctuation after theorem head
+{\newline }% Space after theorem head: { } = normal interword space; \newline = linebreak
+{}% Theorem head spec (can be left empty, meaning `normal')
+
+
+\theoremstyle{thm}
+
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{algorithm}[theorem]{Algorithm}
+
+\theoremstyle{def}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{example}[theorem]{Example}
+%\newtheorem{remarks}[theorem]{Remark}
+
+\renewenvironment{proof}{\par\noindent\textit{Proof.~}}{\hfill \qedsymbol\newline}
+
+ 
+ 
+ 
+%\newtheorem{satz}{Satz}
+%\newtheorem{theorem}{Theorem}%[section]
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{remarks}{Bemerkung}
+%\newtheorem{definition}{Definition}
+%\newtheorem{example}{Beispiel}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Madrid %Singapore %Copenhagen %Warsaw
+\mode<presentation>{\usetheme{Frankfurt}}
+
+\title{Probability}
+\author{Stefan Engelhardt}
+\date{10th October 2023}%{\today}%{25st Jannuary 2022}
+%\logo{...}
+
+\setbeamercovered{transparent}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+% Remove logo from the next slides
+\logo{}
+
+
+
+
+\begin{frame}{Important Discrete Distributions}
+$Bernoulli(p)$:\quad $\IP(X =1)=p$, $\IP(X=0)=1-p$
+\\
+$\to$ sucess or failure of an experiment
+\\
+\textit{Example:} Has a radioactive atom decayed after time $t$?
+\\ \ \\
+$Binomial(n,p)$:\quad $\IP(X=k) = {n \choose k} p^{k} (1-p)^{n-k}$
+\\
+$\to$ sum of $n$ independent Bernoulli rv's
+\\
+\textit{Example:} Out of 100 atoms, how many have decayed after time $t$?
+\\ \ \\
+$Geom(p)$:\quad $\IP(X=k)=p(1-p)^{k-1}$
+\\
+$\to$ independent Bernoulli experiments until the first success
+\\
+\textit{Example:} How many atoms do we have to check until we find one that has decayed after time $t$?
+\\ \ \\
+$Poisson(\lambda)$:\quad $\IP(X = k) = \frac{\lambda^k}{k!} e^{-\lambda}$
+\\
+$\to$ number of arrivals/successes/events until some point of time
+\\
+\textit{Example:} The number of atoms that decayed after time $t$.
+\end{frame}
+
+
+\begin{frame}{Important Continuous Distributions}
+%\vfill
+
+$U([a,b])$: \quad $f(x) = \1_{[a,b]}(x) \frac{1}{b-a}$
+\\
+every point is equally "likely"
+\\
+\textit{Example:} The $x$-coordinate of the first decayed atom in a square.
+\\ \ \\
+$Exp(\lambda)$:\quad $f(x)= \lambda e^{-\lambda x} \1_{[0,\infty)}(x)$
+\\
+memoryless waiting time
+\\
+\textit{Example:} The time until a radioactive atom decays.
+\\ \ \\
+Gaussian/normal distribution
+\\
+(later)
+
+\vfill
+\vfill
+\vfill
+Note: $\1_A(x) := \begin{cases} 1, & x \in A,\\ 0, & \text{otherwise.} \end{cases}$
+\end{frame}
+
+
+%\begin{frame}{Independence}
+%Events: \\ \vspace*{1mm}
+%$A$, $B$ are independent $:\Leftrightarrow$ $\IP(A \cap B) = \IP(A) \cdot \IP(B)$
+%\\ \
+%\pause
+%\\
+%Random variables: \\ \vspace*{1mm}
+%$X$ and $Y$ are independent $:\Leftrightarrow$ $ \IP( X \in A, Y \in B) = \IP(X \in A) \cdot \IP(Y \in B)$ for all "nice" $A,B$
+%
+%\pause
+%\ \\
+%$\Leftrightarrow$ \\
+%$f_{X,Y}(x,y) = f_X(x) \cdot f_Y(y)$
+%\end{frame}
+
+
+\begin{frame}{Expectations}
+When we throw a fair coin and you get \pounds$1$ if it comes down heads and nothing otherwise, how much do you get on average per one such experiment?
+
+\pause
+\vfill
+
+When we throw a fair coin and you get \pounds$1$ if it comes down heads and you have to pay me \pounds$1$ when it comes down tails, how much do you get on average per one such experiment?
+
+\pause
+\vfill
+
+If we throw a D6 and you get the number of dots in \pounds, what can you expect to get on average?
+\end{frame}
+
+
+\begin{frame}{Expectations}
+Now we play the following: I throw a D6. On '1' and '2' I get \pounds$2$ and on '3' to '6' you get \pounds$1$. What is now your expected win/loss?
+\vfill
+\pause
+Let us formulate this differently. If I roll something smaller than 3, I get \pounds$2$ and if I roll something larger or equal 3, you get \pounds$1$. What is the probability of those events and how do we calculate the expectation?
+\end{frame}
+
+
+\begin{frame}{Definition of Expectation}
+\begin{block}{Definition: Expectation}
+The expectation for a random variable $X$ is defined by:
+\\ \ \\
+If $X$ is discrete:
+$$ \IE [ X ] := \sum_{x_i} x_i \cdot \IP( X = x_i) = \sum_{x_i} x_i \cdot p_X(x_i).$$
+\ \\
+If $X$ is continuous:
+$$ \IE [ X ] := \int_{-\infty}^\infty x \cdot f_X(x) dx.$$
+\end{block}
+\vfill
+
+We call $\IE[X]$ the expectation, mean or average of $X$.
+\end{frame}
+
+
+\begin{frame}{Expectation}
+\begin{block}{}
+Let $g$ be an arbitrary "nice" function. The expectation of $g$ applied to a random variable $X$ is defined by:
+\\ \ \\
+If $X$ is discrete:
+$$ \IE [ g(X) ] := \sum_{x_i} g(x_i) \cdot \IP( X = x_i)$$
+\ \\
+If $X$ is continuous:
+$$ \IE [ g(X) ] := \int_{-\infty}^\infty g(x) \cdot f_X(x) dx.$$
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Example calculations}
+Let us calculate some expectations.
+\\ \ \\
+$X \sim Bernoulli(p)$. Then $\IE[X] = $ \pause $p$.
+\\ \ \\
+$X \sim U(\{k, \ldots, m \})$. Then $\IE[X] = $ \pause $\frac{k+m}{2}$.
+\\ \ \\
+$X \sim Bin(n,p)$. Then $\IE[X] = $ \pause $n \cdot p$.
+\\ \ \\
+$X \sim Poisson(\lambda)$. Then $\IE[X] = $ \pause $\lambda$.
+\\ \ \\
+$X \sim Geom(p)$. Then $\IE[X] = $ \pause $\frac1p$.
+\\ \ \\
+$X \sim U([a,b])$. Then $\IE[X] = $ \pause $\frac{b-a}{2}$.
+\\ \ \\
+$X \sim Exp(\lambda)$. Then $\IE[X] = $ \pause $\frac1\lambda$.
+\end{frame}
+
+
+\begin{frame}{Further Examples}
+
+Let $X \sim U([a,b])$ and $Y \sim Exp(\lambda)$. We obtain
+
+\ \\ \ \\
+$$\IE[X^2] = \pause \frac{b^2 + ab + a^3}{3},$$
+
+$$\IE[Y^2] = \pause \frac{2}{\lambda^2},$$
+
+$$\IE[e^Y] = \pause \frac{\lambda}{\lambda -1}.$$
+
+\end{frame}
+
+
+%\begin{frame}
+%
+%\end{frame}
+
+\end{document}

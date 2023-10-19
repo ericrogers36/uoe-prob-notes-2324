@@ -1,0 +1,61 @@
+
+\subsection{Random Variables}
+
+\ssn{Definition: Random variable}
+For a binomial distribution problem, the sample space $S$ might be taken to be all the possible $2^n$ length-$n$ sequences of successes and failures. But all we are interested in is the number of successes, which is a function on the sample space taking numerical values.  Thus we make the definition:
+
+\tcb
+A \ul{random variable} is a function on the sample space.
+\etcb 
+We usually use capital letters from late in the alphabet (very often $X$) as the symbol for a random variable. 
+
+In probability we will often de-emphasise or even ignore the sample space and work with the random variable directly. 
+
+These capital $X$ random variable gadgets are a bit like the $x$ that appears for a variable in algebra, except that we imagine it takes various different values probabilistically. 
+
+We will assume for now that our random variables, like our sample spaces, are \ul{discrete}; this means that they take a finite or countably infinite number of possible values $x_1, x_2, \dots$.  
+\end{n}
+
+\ssn{Uniform random variable}
+The \emph{standard uniform random variable} on $\{1,2, \dots , n\}$ is a random variable $X$ such that 
+ \[
+   \PP(X=k) = \frac1n \quad \text{for $k \in \NN, \;  k \leq n$}
+ \]
+Rolling an $n$-sided die (which we usually denote `Dn') is assumed to be such a random variable.
+
+We use the symbol `$\sim$' to indicate that a random variable is distributed according to a standard law. Thus here we will sometimes write 
+ \[
+     X \sim \mathop{Unif}(1,\dots, n). 
+ \]
+\end{n} 
+
+\ssn{Bernoulli random variable}
+A \emph{Bernoulli random variable} with parameter $p$ (where $0 \leq p \leq 1$) is a random variable such that $\PP(X=1) = p$ and $\PP(X=0) = q$ where $q=1-p$. 
+
+We will write $X \sim \mathop{Bern}(p)$ to indicate that $X$ is distributed as a Bernoulli random variable with parameter $p$. 
+
+So a Bernoulli random variable is a one-off trial that succeeds with probability $p$.  It is the trivial $n=1$ case of a binomial random variable.
+\end{n}
+
+\ssn{Binomial random variable}
+A Binomial random variable with parameters $n \in \NN$ and $p$ (where $0 \leq p \leq 1$) is a random variable taking values $\{ 0,1, \dots , n \}$ with 
+ \[
+   \PP(X=k) =   \binom nk p^k q^{n-k} =  \frac{n!}{k! \, (n-k)!} p^k q^{n-k}
+ \]
+ We will write $X \sim \mathop{Binom}(n,p)$ to indicate that $X$ is distributed as a binomial random variable with parameters $n$ and $p$.
+\end{n}
+ 
+ \ssn{Events}
+ When working with a random variable $X$, events can be defined in terms of the values taken.  So for instance $X=3$ and $1 \leq X \leq 4$ define events. Thus we can refer to their probabilities $\PP(X=3)$ and $\PP( 1 \geq X \leq 4)$. 
+\end{n}
+ 
+ \ssn{Definition: Independence of random variables} 
+ If we have two random variables $X,Y$ defined on the same sample space we say that
+ \tcb 
+ $X$ and $Y$ are \ul{independent} if for all values $x,y$ we have 
+ \[
+     \PP( \text{$X=x$ and $Y=y$} ) \quad = \quad \PP( X=x) \, \PP(Y=y).
+  \]
+ \etcb 
+\end{n}
+ 

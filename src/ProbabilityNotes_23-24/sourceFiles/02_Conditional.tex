@@ -1,0 +1,234 @@
+\label{s3} 
+
+%\ssn{Learning outcomes}
+%After studying this week you will be able to:
+%\begin{itemize}
+%\item Calculate conditional probabilities from the definition; 
+%\item State and use the law of total probability; 
+%\item Calculate conditional expectations.
+%\item Explain and use the idea of properties of a random positive integer.
+%\end{itemize}
+%\end{n}
+
+\subsection{Conditional Probability}
+
+\ssn{Urns}
+People who study probability have a lot of urns.  They keep balls in their urns, usually of two or more different colours. They choose  balls from their urn randomly, with their eyes closed, so that any ball in the urn is equally likely to be chosen. Sometimes they put the ball back once they have checked its colour, but sometimes they do not.  We call the former ``sampling with replacement'' and the latter ``sampling without replacement''.    
+\end{n}
+
+\ssn{Problem} 
+I have an urn containing 3 red balls and 2 blue balls.  Consider the following scenarios. 
+\begin{itemize}
+    \item I choose a ball from the urn, replace it and then choose another ball. 
+    \item I choose a ball from the urn without replacement and then choose another ball.
+\end{itemize}
+In each case, what is the probability that both the balls I choose are red?  You should think about the solution before continuing. 
+\end{n}
+
+\ssn{Solution} 
+Let $A$ be the event that the first ball is red.  Let $B$ be the event that the second ball is red.  
+\begin{itemize}
+    \item In the first case, $\PP(A) = 3/5$ and since the ball is replaced $\PP(B) = 3/5$.   Here $A$ and $B$ are independent events (in that whether $A$ has occurred has no influence on $B$).  Thus 
+    \[
+  \PP(\text{both red}) =    \PP(A \cap B) = \PP(A) \, \PP(B) = \frac9{25}.
+    \]
+\item In the second case, if the first ball we took was red, then the urn contains 2 red and 2 blue balls and 
+the probability that the second ball is also red is now $1/2$. We say ``the probability of $B$ given $A$ is equal to $1/2$ and we write $\PP(B \st A) = 1/2$.  Overall then the probability of both balls being red is 
+ \[
+      \frac35 \, \frac12 = \frac3{10}. 
+ \]
+The formula we are using here is 
+  \[
+      \PP(A \cap B) = \PP(A) \PP(B \st A). 
+  \]
+We will now formalise this. 
+    \end{itemize}
+\end{n}
+
+\ssn{Definition: Conditional probability} Let $A, B \subseteq S$ be events with $\PP(A) \not=0$. Then
+\tcb
+The \ul{conditional probability of $B$ given $A$} is defined by 
+ \[
+    \PP(B \st A) = \frac{\PP(B \cap A)}{\PP(A)}. 
+ \]
+\etcb 
+This equation is often used ``multiplied out'' as
+ \[
+    \PP(A \cap B) = \PP(B) \, \PP(A \st B). 
+  \]
+This makes it clearer that the meaning of $\PP(A \st B)$ is that it is \emph{the probability of $A$ given that we know that $B$ has occurred.}
+\end{n}
+
+\ssn{Example}
+
+My friend rolls two D6 in secret.  I ask what the sum of the rolls is and he tells me it is 8. What is the probability that one of the dice is a `6'?   
+    
+    Let $A$ be the event that the dice sum to $8$. Then $\PP(A) = 5/36$.  Let $B$ denote the event that I roll at least one 6.  Then $A \cap B$ is the event that I roll one of $(6,2)$ and $(2,6)$ so $\PP(B \cap A) = 2/36$.  Thus 
+     \[
+         \PP( B \st A ) = \frac{\PP(B \cap A)}{\PP(A)} = 
+          \frac{1/18}{5/36} = \frac25. 
+     \]
+    \end{n}
+
+
+\sse{}
+My friend rolls two D6 in secret. I ask if at least one of the dice is a `6' and he says ``yes''. What is the probability that the sum of the two dice is 8?   
+\end{e}
+
+\esol 
+We are now being asked for $\PP( A \st B)$.  Exactly 11 rolls of the 36 contain a `6' and so $\PP(B) = 11/36$.  So 
+     \[
+         \PP( A \st B ) = \frac{\PP(B \cap A)}{\PP(B)} = 
+          \frac{1/18}{11/36} = \frac2{11}. 
+     \]
+\eesol
+\fi
+
+\ssn{Proposition: the law of total probability} \label{totprob} 
+Suppose we partition a sample space $S$ into $n$ pairwise disjoint events $A_1, \dots , A_n$. Let $B \subseteq S$ be an event.\footnote{Strictly we should insist each $A_j$ has nonzero probability so that the conditional probabilities are defined.} Then 
+\tcb
+ \[  \PP(B) = \PP(B \st A_1)\, \PP(A_1) + \dots + \PP(B \st A_n) \, \PP(A_n)
+ \]
+\etcb
+In the case of just two sets, we get that for events $A,B$ we have 
+\tcb
+ \[ 
+   \PP(B) = \PP(B \st A)\, \PP(A) + \PP(B \st A^c)\, \PP(A^c)
+ \]
+\etcb
+\begin{proof}
+We will consider just the case $n=2$; the general case is similar. Thus we partition the sample space into a disjoint union $S = A \cup A^c$.  Then also $B$ is partitioned as 
+ \[
+    B = ( B \cap A ) \cup (B \cap A^c) 
+ \]
+So 
+ \begin{eqnarray*}
+    \PP(B) & =& \PP( B \cap A ) \cup \PP (B \cap A^c) \\ 
+     &=& \PP(B \st A) \, \PP(A) + \PP(B \st A^c) \, \PP(A^c)
+ \end{eqnarray*} 
+\end{proof}
+\end{n}
+
+\ssn{Example} 
+ We have been implicitly calculating in this way already. 
+ Consider for example the dice from workshop 1. The red one is numbered (4,4,4,4,4,1) and the blue one (6,3,3,3,3,3). Let $A$ be the event that red rolls a 4.  Let $B$ be the event that red wins.  Then 
+  \begin{eqnarray*}
+    \PP(B)  &=& \PP(B \st A) \PP(A) + \PP(B \st A^c) \PP(A^c)    \\
+    &=& \frac56 \, \frac56  + 0 \, \frac16 = \frac{25}{36}.
+ \end{eqnarray*} 
+ It is worth matching this calculation to the tree diagram that one might draw for this. 
+\end{n}
+
+\sse{}
+I toss four coins. What is the probability that I get 4 heads, given that I get at least 3 heads?    (Ans: $1/5$)
+\end{e}
+
+\sse{}
+Show from the definition of conditional probability that given three events $A, B, C$ such that $\PP(A\cap B) \not=0$ we have 
+ \[
+   \PP( A \cap B \cap C) = \PP(A) \, \PP( B \st A) \, \PP( C \st A \cap B). 
+ \]
+What has this to do with calculating probabilities by the tree method when the tree has three rather than two stages?
+\end{e} 
+
+\sse{}
+Each morning I go for a walk along the river. Independently each day I choose a short walk with probability $1/2$, a medium walk with probability $1/4$ and a long walk with probability $1/4$.  I see a kingfisher on my walk with probabilities $1/10 , 2/10, 3/10$ on the short, medium and long walks respectively. What is the probability that on a random day I see a kingfisher? (Ans: $7/40$) 
+\end{e} 
+
+
+%TODO
+{\color{red}
+\ssn{The ``spot the largest number'' problem (details not examinable)} 
+In the first lecture we played a game. I had 30 cards with positive integers on them. I turned them over one at a time and your task was to identify (when it appeared) the card with the largest number on it. 
+
+A possible strategy is to let a proportion $\alpha$ (where $0 < \alpha < 1$) of the cards go by and then choose the first card after that which has on it a number larger than any you have seen.  What would be a good value of $\alpha$ to maximise our chance of winning the game? And what would our winning percentage be if (say) I was turning over $n$ cards where $n$ is very large? 
+
+We can codify the problem as follows. Imagine the numbers on the $n$ cards are denoted $x_0, x_1, \dots , x_{n-1}$ in decreasing order of size. The cards are in some random order.  So if $n=5$ the cards might be in the order 
+ \[
+       ( x_2, x_4, x_3, x_0, x_1) 
+ \]
+ If $\alpha = 2/5$ then I divide this list into two: an initial segment $I$ which contains a proportion $\alpha$ of the total and the rest $R$:
+  \[
+     I = ( x_2, x_4 ) \qquad R = (x_3, x_0, x_1).
+  \]
+ In this case the strategy succeeds: the largest element in $I$ is $x_2$ and the first element in $R$ that is larger than $x_2$ is indeed $x_0$.  If we swapped $x_0$ and $x_1$ the strategy would fail. There is a problem that $\alpha n$ might not be an integer, but we are imagining that $n$ is in fact  very large and the error in taking the nearest integer to $\alpha n$ is very small. 
+ 
+ Our sample space here is all permutations of the $n$ cards.  Let $W$ for win be the event that our strategy succeeds.  
+ 
+ Let $A_k, k = 0,1,\dots, n-1$ denote the event that the largest element of $I$ is $x_k$. These events partition the sample space. Note to get started that if $A_0$ occurs then the strategy fails. But if $A_1$ occurs we certainly win. If $A_2$ occurs then everything depends on which of $x_0$ and $x_1$ appears first in $R$. So our probability of success is $1/2$. Thus 
+  \[
+     \PP(W \st A_0) = 0, \quad \PP(W \st A_1) = 1, \quad \PP(W \st A_2) = \frac12. 
+  \]
+More generally, $P(W \st A_k) = 1/k$ for $k>0$ because it is just the probability of $x_0$ being the first of $x_0, \dots , x_{k-1}$ to appear in $R$. 
+
+To use the first formula in \$\ref{totprob} we need to compute $\PP(A_k)$. In general, each $x_k$ has a probability $\alpha$ of appearing in $I$ and $1-\alpha$ of appearing in $R$. Strictly speaking, these are not independent because if $x_j$ appears in $I$ it makes others in the list a tiny bit less likely to appear in $I$.  But as $n \map \infty$ this effect becomes very small. So we approximate as 
+ \[
+    \PP( A_k) = \alpha (1- \alpha)^k
+ \]
+where the $\alpha$ is the probability of $x_k \in I$ and the rest is the probability of all of $x_0, \dots , x_{k-1}$ appearing in $R$. 
+
+So, \$\ref{totprob} gives us 
+ \[
+   \PP(W) \approx \sum_{k=1}^\infty \alpha (1-\alpha)^k \frac1{k} .
+ \] 
+ Now, the Taylor series of $-\log(1-x)$  is 
+  \[
+     - \log(1-x) \sim x + \frac{x^2}2 + \frac{x^3}3 + \dots 
+ \]
+ and so putting $x = 1-\alpha$ we arrive at the large-$n$ approximation 
+  \[
+      \PP(W) \approx - \alpha \log(1-\alpha).
+   \]
+We now want to find the value of $\alpha$ that maximises this; the usual calculus method shows that this has a maximum at $\alpha = 1/e \approx 0.3679$ where its maximum value is also $1/e$. 
+\end{n}
+}
+
+\ssn{Note}
+By proper mathematical standards we are playing fast and loose in the above argument. It is true that in the limit as $n \map \infty$ our approximations of all the $\PP(A_k)$ are correct. It is also true that in the limit the infinite sum of the Taylor series we used does indeed converge to the function. But here we are taking limits of limits and it turns out that great care is needed to check that is legitimate. These sorts of issues are addressed in FPM and Honours Analysis. 
+\end{n}
+
+
+
+
+
+\ssn{Conditioning on the first step}
+This is a useful trick that enables us to compute probabilities and expectations almost by magic.  It relies on the Law of Total Probabilities both in the vanilla form and the expectations version.  
+
+Consider the following problem.  Let $X$ be the number of times I have to toss a fair coin until I first get two consecutive H. We will compute $\EE(X)$ and to ease things we will give it a name $\EE(X) = s$. 
+
+Consider now three ways our sequence of tosses might start. 
+\[
+   T \dots   \qquad HT\dots \qquad HH
+\]
+where there are no dots after the final option because we have our two consecutive H in that case $X=2$ and we stop.  The probabilities of these three different beginnings are $1/2, 1/4, 1/4$ respectively and they cover all possibilities.  
+
+The law of total probabilities for expectations now says
+ \[
+   \EE(X) = \PP(T\dots) \EE(X \st T\dots) + 
+           \PP(HT\dots) \EE(X \st HT\dots) + 
+            \PP(HH,\dots) \EE(X \st HH) .
+ \]
+The expectation on the left-hand side is $s$ (which is what we are trying to calculate).  For $\EE(X \st T\dots)$ notice that having tossed a T, we are in the same position as when we started, \emph{except we have already used up a toss}.  So $\EE(X \st T\dots) = s+1$.  By an identical argument, $\EE(X \st HT\dots) = s+2$.  And finally $\EE(X \st HH) = 2$ because we have already achieved our two consecutive H. 
+
+Substituting these in we get an equation for $s$ that we can solve. (Exercise for the reader which you are advised to do before the online quiz.) 
+\end{n}
+
+ 
+
+\ssn{Example}
+I roll a D6. What is the probability $p$ that I get the first `6' before I roll any odd numbers? 
+
+ Let $W$ be the event that I roll a 6' before any odd numbers. 
+Let $A$ be the event that my first roll is odd. Let $B$ be the event that my first roll is a `6'.   Let $C$ be the event that my first roll is a `2' or a `4'.  
+
+Then $\PP(W \st A) = 0$ and $\PP(W \st B) = 1$.  On the other hand, rolling a `2'or a `4' has no effect on my likelihood of achieving $W$.   So $\PP(W \st C) = p$. 
+So
+\begin{eqnarray*}
+ p = \PP(W) &=& \PP(W \st A) \PP(A) + \PP(W \st B) \PP(B) + 
+ \PP(W \st C) \PP(C) \\
+  &=&  0 \,\frac12 + 1 \, \frac16 + p \frac13.
+\end{eqnarray*}
+Solving, $p=1/4$. 
+
+(In fact, there is a smarter way of solving this problem.  We can rephrase it as asking whether of the numbers 1,3,5,6, the 6 appears first. Clearly any one of the four are equally likely to appear first.) 
+\end{n}

@@ -1,0 +1,82 @@
+
+\subsection{Chebyshev's Inequality and the Law of Large Numbers}
+
+\ssn{Theorem (Chebyshev's inequality)}
+Let $X$ be a random variable with expected value $\EE(X)=\mu$ and (finite) variance $\var(X)$. Then for every positive number $a$ we have 
+\[
+    \PP( | X-\mu| \geq a) \leq \frac{\var(X)}{a^2}.
+\]
+\begin{proof}
+Rearrange the inequality in the form 
+\[
+      \var(X) \geq \PP( | X-\mu| \geq a) a^2. 
+ \]
+If you think about this, you may come to the conclusion that this is almost ``obvious''.  Let us write down a proof anyway. 
+
+Calculate $\var(X)$ using the law of total probability for expectation'' conditioning on $|x-\mu| \geq a$ we have 
+\[
+  \var(X) = \EE( (X - \mu)^2 \st |x-\mu| \geq a ) \PP( |x-\mu| \geq a) 
+ +  \EE( (X - \mu)^2 \st |x-\mu| <  a ) \PP( |x-\mu| < a).
+\]
+Both terms on the right-hand side are positive and the first term is greater than or equal to $a^2 \PP( |x-\mu| \geq a)$. 
+\end{proof}
+\end{n}
+
+\ssn{Theorem (The weak law of large numbers)}
+Consider an infinite sequence of independent, identically distributed random variables as in \S\ref{wlln0}.  Then for any $a>0$ we have 
+ \[
+     \PP( A_n - \mu \geq a ) \map 0 \; \text{as $n \map \infty$.}
+ \]
+ \begin{proof}
+ Chebyshev's inequality applied to $A_n$ tells us that 
+  \[
+     \PP( | A_n - \mu | \geq a) \leq \frac{\var(A_n)}{a^2} = \frac{\var(X)}{a^2 n}
+  \]
+  which tends to zero as $n$ tends to infinity. 
+ \end{proof}
+\end{n}
+
+\ssn{Discussion} 
+The weak law of large numbers closes a circle. We defined (not really in the  mathematical sense) what we mean by the probability of a coin coming down heads being $1/2$ by saying that if we tossed it very many times, we would expect to get heads half the time.  The theorem we just proved says something exact about the situation: given a ``tolerance'' $a$, however small it may be, we can make the probability of the proportion of heads differing from $1/2$ by more than $a$ as small as we like by tossing the coin enough times. 
+\end{n}
+
+\ssn{Example}
+Lets return to one of our motivating examples: what is the expected number of pairs of consecutive heads if you toss a coin $n$ times? 
+
+Let $X_j$ for $1 \leq j \leq n-1$ be the random variable that takes the value 1 if the $j$-th and 
+$(j+1)$-th tosses are both heads and 0 otherwise.   
+Each of the $X_j$ separately has expected value $1/4$ since that is the probability that two coins both come down heads.   
+
+The number we are interested in is the expected value of $\sum_{j=1}^{n-1} X_j$.  So 
+ \[
+  \EE\left( \sum_{j=1}^{n-1} X_j \right) = \sum_{j=1}^{n-1} \EE(X_j) = \frac{n-1}4. 
+ \]
+ 
+ Here,  $X_j$ and $X_{j+1}$ here are not independent. It is tempting to think that we would need independence to add expectations --- but we don't! 
+ \end{n}
+
+
+
+
+
+\ssp \label{chebex}
+Use Chebyshev's inequality to to find a value of $n$ such that if you toss a coin $n$ times the proportion of heads will be within 0.01 of 0.5 with probability at least 0.95. 
+\end{e}
+
+\sss 
+The number of heads $N$ in $n$ tosses is binomial $(n, 1/2)$.This has expected value $n/2$ and variance $n/4$. The proportion of heads is $X = N/n$ which thus has expected value $0.5$ and variance $1/(4n)$. 
+
+Substituting into Chebyshev's inequality,
+ \[
+   \PP( |X-\frac12| \geq 0.01 ) \leq \frac{1/(4n)}{(0.01)^2}.
+ \]
+Solving, we require $n \geq 50,000$. 
+\end{s}
+
+\sse{}  Let $X \sim \bino(n,p)$ and $Y \sim \bino(m,p)$ be independent. Then $X+Y \sim \bino(n+m, p)$.   Understand this statement 
+\begin{itemize}
+    \item by thinking about an example such as tossing a coin or rolling dice; 
+    \item by thinking of a binomial rv as a sum of Bernoulli ones
+    \item and by thinking about the generating functions.
+\end{itemize}
+\end{e} 

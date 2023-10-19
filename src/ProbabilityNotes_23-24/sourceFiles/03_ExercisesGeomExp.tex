@@ -1,0 +1,58 @@
+
+\subsection{Exercises and problems}
+
+\sse 
+Invent a random variable $X$ that is sufficiently simple that you can compute its expected value $\EE(X)$, the value of $\EE(x^2)$ and its cdf $F_X(x)$.   
+\end{e}
+
+\sse{}
+Let $X \sim \gamm(z,\lambda)$.  Compute $\EE(X^2)$.   (Ans: $z(z+1)/\lambda^2$) 
+\end{e}
+
+\sse{}
+Let $X \sim \geom(\lambda)$.  Compute $\EE(X^2)$.   (Ans: $2/\lambda^2$) 
+\end{e}
+
+\ssp{}
+A room has two new light bulbs fitted and left permanently on at time $t=0$. They are the only illumination in the room. Each one independently has a failure time described by an exponential random variable $T$ with parameter $\lambda = 1$. 
+\begin{enumerate}
+    \item Write down the pdf, cdf and expected value of $T$.
+    \item Consider a time $t=x$. What is the probability that both bulbs have failed (and so the room is dark) at the time $t=x$? 
+    \item Let $X$ be the random variable which is the time that the room goes dark.  Compute the pdf of $X$ and its expected value. 
+\end{enumerate}
+(Hint: the second part is asking you to calculate the cdf of $X$.) 
+\end{e}
+
+
+
+\sse 
+Evaluate
+\begin{enumerate}
+\item Let $X$ be the result of rolling a D6. What is the probability of $X=6$ given that $X$ is even?  What is the expected value of $X$ given that $X$ is even? 
+\item Rolling a D6, let $Y$ be the number of rolls it takes until I roll a `6'. What is the probability that $Y=5$ given that $Y>3$? 
+\item Rolling a D6 again, what is the expected total number of `6's I roll in 8 attempts, given that my first two rolls are 6,2?  
+\end{enumerate}
+Answers: (1) $1/3$, $4$; (2) $5/36$; (3) $2$.  
+\end{e}
+
+\ssp{} This (optional) problem solves the question about ``stopping at the largest number'' from the first lecture in the limit as $n\map \infty$.  We will play fast and loose with limits, and so this derivation is not entirely rigorous. The problem is equivalent to the following. 
+
+Consider numbers $x_0,x_1,x_2,\dots,x_{n-1}$ where the numbers are in \emph{decreasing} order.  Now arrange the $n$ numbers in a list in a random order.  Choose a number $0 < \alpha < 1 $.  Consider the ``initial segment'' consisting of the first $\alpha N$ numbers in the list (of course, $\alpha n$ is not necessarily an integer, but choose the integer that's closest). 
+
+Let the RV $K$ be defined by $K=k$ if $x_k$ is the largest number in the initial segment.    Now find the first number in the list that is larger than $x_K$: what is the probability $\PP(W)$ where $W$ is the event that this is $x_0$, the largest of all the numbers?  
+
+We will answer this in the limit as $n \map \infty$. We calculate $p$ by conditioning on the value of $k$ where $k$ is the smallest value such that $x_k$ is in the initial segment. 
+\begin{enumerate}
+    \item Explain why $\PP(W \st k=0) = 0$.
+    \item Explain why in the limit $n \map \infty$ we have $\PP(K=k) = \alpha (1-\alpha)^k$ for $k < n-k$. 
+    \item Explain why $\PP(W \st K=k) = \frac1k$ for $k \geq 1$.
+    \item Justify (as far as you can) the claim that  as $n \map \infty$ we have 
+     \[
+        \PP(W) \approx \alpha \sum_{k=1}^\infty (1-\alpha)^k \frac1k.  
+     \]
+     \item Comparing with the Taylor series for $\log(1-x)$, deduce that \[
+           \PP(W) \approx - \alpha \log(\alpha).
+     \]
+     \item Use calculus to deduce that $\PP(W)$ is maximised by taking $\alpha = 1/e$ and the maximum value is also $1/e$. 
+\end{enumerate}
+\end{e}

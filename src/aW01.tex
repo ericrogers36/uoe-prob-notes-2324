@@ -1,0 +1,367 @@
+\section{Foundations of probability, inclusion-exclusion and equally likely outcomes} \label{s1} 
+
+
+
+\ssn{Learning outcomes}   
+After studying this week you will be able to: 
+\begin{itemize}
+\item State and use the intuitive definition of probability
+\item Use the axioms of probability to prove some simple results.
+\item Solve simple examples in the situation of ``equally likely outcomes''.
+\item Use Inclusion-exclusion to solve some simple exercises. 
+\end{itemize}
+\end{n}  
+\subsection{Basic ideas} 
+
+
+\ssn{Intuitive ``definition'' of probability} If we toss a fair coin many times then we expect about half of the tosses will result in ``heads'' (hereafter abbreviated as `H'). We say
+\begin{quotation}
+   ``the probability of the result `heads' when tossing a fair coin is $\PP (H) = 1/2$''. 
+\end{quotation}
+And of course the probability of ``tails'' (T) must also be one half: $\PP(T)=1/2$.
+
+Similarly, when rolling a fair $6$-sided die (hereafter abbreviated to ``D6'') with faces $1,2,\dots,6$, the probability of obtaining a $6$ is equal to $\PP (6) = 1/6$ (as indeed it is for any of the other five possible outcomes).
+
+We could ask also what is the probability that on rolling the die the result is a perfect square.  The only perfect squares on the die are $1$ and $4$ and so two of the six possibilities are perfect squares. Thus the probability is $1/3$. 
+\tcb
+We will be using $\PP$ a lot for the function that takes some ``event'' and evaluates its probability. Use a big, beautiful, ``blackboard bold'' $\PP$ in your notes and hand-ins, etc. It's easier to do maths right with a nice, clear notation. 
+
+\vspace*{-5.5ex}
+{\huge \[ \PP( \text{``blah''}) = \text{the probability that ``blah'' happens} \] } 
+\etcb
+\end{n}
+
+\ssn{Questions} \label{qs} 
+We would like to answer questions like the following: 
+\begin{enumerate} 
+\item If I roll a D6 12 times, what is the probability that I get exactly three `6's?
+\item If I keep rolling a D6, what is the probability that the first `6' appears on the tenth roll? 
+\item If I keep rolling a D6, what is the probability that the third `6' appears on the tenth roll? 
+\item If I keep tossing a coin, what is the probability that it takes 12 rolls until I get two `heads' in a row? 
+\item How many rolls of a D6 should I expect to have to make before I have seen all six possible rolls at least once?  
+\end{enumerate} 
+We will as the course goes on develop methods to answer all these questions. If you have done some probability before, you may be able to answer the first one or two, but what about the last three?  For now, what we will do is develop some concepts and notation that help express such problems and their solutions clearly. 
+\end{n}
+
+\subsection{Mathematical formulation} 
+
+\ssn{Introduction} 
+A great advance that mathematics made around a century ago was the idea of the ``axiomatic method''. A fundamental idea in this is that one develops an abstract framework that covers as wide a range of problems as possible. This provides a solid base for ones reasoning.  We state and prove results (``theorems''. ``propositions'', etc) that we can apply and which allows us to avoid repeating the same reasoning over and over again in similar problems. 
+\end{n} 
+
+\ssn{Experiments} 
+In probability we are normally thinking of real or imaginary \ul{experiments} that we could (at least in principle) carry out.
+For instance, you or I could start rolling a D6 (a fair 6-sided die) and count how many rolls it takes before the first `6' appears. 
+\end{n} 
+
+\ssn{Definition: Sample spaces (discrete and otherwise)} \hfill 
+\tcb 
+A \ul{sample space} for an experiment is a set $S$ whose elements are all the possible outcomes of the experiment.  
+\etcb 
+
+We will assume until further notice that all our sample spaces are  \emph{discrete}, meaning that they consist of a finite or countable\footnote{A set $A$ is countable if you can list its elements in an infinite list: $A = \{ a_1, a_2, a_3, \dots\}$ } number of elements.  (We will consider later sample spaces such as the real line $\RR$ which are ``continuous'' rather than discrete.) \end{n} 
+
+\ssn{Examples} For the experiments behind the first four examples in \S\ref{qs}, possible sample spaces are as follows. 
+\begin{enumerate}
+    \item We take $S$ to be the set of all possible outcomes of rolling a die twelve times: 
+     \[ 
+      S = \left\{ (a_1, \dots ,a_{12}) \st a_j \in \{1,2,3,4,5,6\} \right\}.
+      \]
+      So, for example, $(2,1,1,3,4,2,6,5,4,6,1,3)$ is an element of $S$. 
+    \item Set $S$ to be the set of all finite sequences of rolls that terminate when the first `$6$' appears.  So, for instance, $(1,2,2,2,3,5,1,2,3,4,6)$ is an element of $S$. 
+    \item Set $S$ to be the set of all finite sequences of elements of $\{1,2,3,4,5,6\}$ that terminate when the third `$6$' appears. 
+    \item 
+    Set $S$ to consist of all sequences of `H's and `T's that terminate on after the first appearance of two consecutive `H's.  
+    So, for instance, $(H,T,H,T,T,T,H,T,H,H)$ is an element of $S$.  
+\end{enumerate}
+\end{n} 
+
+\ssn{Definition: Probability function}\label{prbfn}  Let $S = \{ x_1, x_2, x_3, \dots \}$ be a discrete sample space. The list of elements may be finite so that it stops after $x_n$ for some $n$, or we may be in the countably infinite case. 
+\tcb
+ A \ul{probability mass function} on $S$ is a function $\PP$ on $S$ such that writing $p_j = \PP(x_j)$ we have 
+ \[
+ 0 \leq p_j \leq 1 \text{ for all $j$} \qquad \text{and} \qquad  \sum_j p_j = 1. 
+ \]
+ Sometimes we will omit ``mass'' and refer just to a ``probability function''. In the finite case the index $j$ in the formulas above runs over the values $1,2,\dots , n$ and in the countably infinite case $j$ runs over all the natural numbers. 
+\etcb
+\noindent 
+The number $p_j$ is thus the probability that the experiment will result in the outcome $x_j$. The first condition restricts $\PP(x_j)$ to be something that makes sense as a probability; the second is sometimes called the ``honesty condition''.  
+\end{n} 
+
+\ssn{Example}{}
+We could choose a sample space with three outcomes $S = \{ a, b, c \}$ and set 
+ \[
+    \PP(a) = \PP(b) = \frac27, \quad \PP(c) = \frac37.
+ \]
+We can do this, even if we do not have an actual ``experiment'' in mind that has outcomes with those probabilities. 
+\end{n} 
+
+\ssn{Definition: Event} We are often interested in how likely it is that the outcome lies in some particular subset of the sample space. 
+\tcb 
+Let $S$ be a discrete sample space.  An \ul{event} is a subset $A \subseteq S$ of the sample space.  
+\etcb 
+\noindent
+If we carry out our experiment and the outcome is $x$ then we say $A$ has \emph{occurred} if and only if $x \in A$. 
+\footnote{When we come to the continuous case, where the sample space may be an interval in $\RR$, we will discover that not every subset of $S$ is an event.}
+\end{n} 
+
+\ssn{Definition: probability of an event} \label{prevent} 
+We extend the definition of $\PP$ to events as follows. 
+\tcb 
+Suppose we have an event $A \subset S$. We define the probability of $A$ by 
+ \[
+   \PP(A) =  \sum_{\{ j \st x_j \in A\}} p_j. 
+ \]
+\etcb
+\noindent 
+In other words, the probability of an event is the sum of the probabilities of all its elements. Of course, such a sum might have infinitely many terms, but that is not a problem here as you will be able to prove for yourself once you have taken a course in real analysis (such as FPM). 
+\footnote{Hardliners might consider that we are ``abusing notation'' by allowing $\PP$ to take either an element or a subset as an argument.}   
+\end{n}
+
+\ssn{Example} 
+The probability of rolling a perfect square with a D6 is the probability of the event $A \subseteq S$ where 
+ \[
+     A = \{ 1,4 \}, \quad S = \{ 1,2,3,4,5,6  \}.
+ \]
+So $\PP(A) = \PP(1) + \PP(4) = \frac16 + \frac16 = \frac13$. 
+\end{n} 
+
+\ssn{Examples} 
+ For the experiments in \S\ref{qs}, we are seeking to evaluate the probabilities of the following events. 
+\begin{enumerate}
+    \item $A = \{ \text{elements of $S$ where the sequence contains exactly three `$6$'s } \} \subseteq S$ 
+    \item Set $A$ to be the subset of $S$ consisting of all sequences of length $10$. 
+    \item Set $A\subseteq S$ to consist of all the sequences of length 10.  
+    \item Set $A \subseteq S$ to be the subset consisting of all sequences where the first pair of consecutive `$6$'s are in the 11th and 12th positions. 
+\end{enumerate}
+\end{n} 
+
+\ssn{Definition: disjoint events}\hfill  
+\tcb
+Two events $A, B$ in $S$ are said to be \ul{disjoint} if $A \cap B = \emptyset$.  
+\etcb
+\noindent
+Events that are disjoint cannot both occur. Sometimes ``(mutually) exclusive'' is used as an alternative to ``disjoint''. 
+\end{n} 
+
+\ssn{Example}
+If I toss four coins, the events ``I get at least three heads'' and ``I get at least two tails'' are disjoint. 
+
+On the other hand, ``I get at least two heads'' and ``I get at least two tails'' are not disjoint. 
+\end{n} 
+
+\ssn{Proposition: properties of a probability function} \label{prprops}  
+Let $\PP$ be a probability function on $S$. 
+\tcb 
+\begin{enumerate}[(P1)]
+\item For all events $A$ we have $0 \leq \PP(A) \leq 1$.
+\item $\PP(S)=1$.
+\item If the events $A,B$ are disjoint then 
+   \[ \PP(A \cup B) = \PP(A) + \PP(B).
+   \]
+\item More generally, if the finite or countably infinite collection of events $A_1, A_2, \dots$ are \ul{pairwise} \ul{disjoint} (meaning that for all $i\not=j$ we have $A_i \cap A_j = \emptyset$) then 
+ \[
+   \PP(A_1 \cup A_2  \cup \dots) =  \PP\left( \bigcup_i A_i \right) = \sum_i \PP(A_i). 
+ \]
+\end{enumerate}
+\etcb
+\noindent
+The proofs follow immediately from the definition in \S\ref{prevent}.  
+\end{n} 
+
+\ssn{Definition: Complement}\hfill 
+\tcb 
+Let $A \subseteq S$ be an event. The \ul{complement} of $A$ (sometimes just described as ``not $A$'') is the event
+ \[
+     A^c = S \setminus A = \{ x \in S \st x \not\in A \}.
+ \]
+\etcb
+\noindent
+So $A^c$ is the event that occurs precisely when $A$ does not occur. 
+\end{n}
+
+\ssn{Set theory notation} 
+Given two subsets $A,B \subseteq S$, we can form their \ul{union} $A \cup B$, their \ul{intersection} $A \cap B$ and the \ul{set difference} $A \setminus B$. 
+ 
+If we roll a D6 and set $A$ to be the event of rolling an odd number and $B$ to be the event of rolling a perfect square then 
+ \[
+    S=\{1,2,3,4,5,6\}, \quad A = \{ 1,3,5\}, \quad B = \{ 1, 4\}.
+ \]
+In this case 
+ \[
+      A \cup B = \{ 1,3,4,5\}, \quad A \cap B = \{ 1 \}, \quad A \setminus B = \{ 3,5 \}. 
+ \]
+ \tcb 
+ \begin{itemize}
+     \item The event $A \cup B$ is that $A$ or $B$ occurs;
+     \item the event $A \cap B$ is that $A$ and $B$ both occur;
+     \item the event $A \setminus B$ is that $A$ occurs but $B$ does not. 
+ \end{itemize}
+ As always in maths, the `or' in the first statement includes the possibility of both occurring, 
+  \etcb 
+\end{n} 
+
+\ssn{Proposition}
+Let $A \subseteq S$ be an event.  Then 
+\tcb \[ \PP(A^c) = 1 - \PP(A) \] 
+ \etcb 
+\begin{proof}
+By definition $A \cup A^c= S$ and also $A \cap A^c = \emptyset$ and so $A$ and $A^c$ are disjoint. Therefore by the second and third items of Proposition~\ref{prprops} 
+ \[
+   \PP(A) + \PP( A^c) = \PP( S) = 1. 
+ \]
+\end{proof}
+This all expresses the (possibly obvious) idea that if the probability of something happening is $1/4$ then the probability of its not happening is $3/4$.  It is good however to see that it follows from \S\ref{prprops} and so it is not another fundamental property.
+
+Applying the proposition to $A=S$ we see that $\PP(\emptyset)=0$. That expresses the idea that when we carry out our experiment, it cannot be that nothing in the sample space happens. 
+\end{n} 
+
+\ssn{Proposition} 
+Let $A, B \in S$ be events with $A \subseteq B$.  Then $\PP(A) \leq \PP(B)$. 
+\begin{proof}
+One could argue from the definition of a probability function, but it is neater to use the fundamental properties in \S\ref{prprops}.  So 
+ \[
+       B = A \cup ( B\setminus A )
+ \]
+as a \emph{disjoint} union. So 
+ \[
+       \PP(B) = \PP(A) + \PP(B \setminus A) 
+ \]
+and since probabilities are non-negative, $\PP(A) \leq \PP(B)$. 
+\end{proof}
+\end{n} 
+
+\ssn{Equally likely outcomes}
+Consider a sample space $S_n$ which has $n$ elements. Let $\PP(x) = 1/n$ for all $x \in S_n$, so that all outcomes of the experiment are equally likely.   By the discussion in \S\ref{prbfn} this defines a probability mass function on $S_n$. Let  $A \subseteq S_n$ be an event.  
+\tcb
+\[
+  \text{For ``equally likely outcomes'' we have}\quad\quad \PP(A) = \frac{\# A}{\# S}
+\]
+where we write $\# A$ for the number of elements in the set $A$, etc.
+\etcb
+\end{n} 
+
+\ssn{Definition: uniformly random}
+When we have an experiment with an ``equally likely outcomes'' probability function, we often say that the outcome is  \ul{uniformly random}.  
+
+Thus, for example, rolling a D6 is equivalent to choosing a natural number less than or equal to six ``uniformly randomly''. 
+\end{n}
+
+\ssn{Examples}
+\begin{enumerate}
+    \item Rolling a die has six equally likely outcomes. What is the probability that we roll an even number? Let $S = \{ 1,2,3,4,5,6\}$ and let $A = \{ 2,4,6 \}$.  Then 
+    \[
+       \PP(A) = \frac{\# A}{\# S} = \frac36 = \frac12. 
+    \]
+ \item I toss a coin four times. What is the probability I get three heads and one tail?   Here $S$ is the set of all sequences of four terms, each of which can be `H' or `T'. Every such sequence is equally likely.  There are 16 such sequences so $\# S = 16$.  The event we want is 
+  \[
+      A = \{ (T,H,H,H), (H,T,H,H), (H,H,T,H), (H,H,H,T) \}. 
+  \]
+ So the probability is $\PP(A) = {\# A}/{\# S} = 1/4$. 
+\end{enumerate}
+\end{n}
+
+
+\sse{}  I toss a coin three times. What is the probability that I get: (A) three heads; (B) precisely two heads and (C) at most one head? 
+\end{e} 
+
+\sss 
+The sample space consists in this case of all eight possible sequences of heads and tails and \emph{all eight outcomes are equally likely}:  
+\[
+ S = \{ TTT, TTH, THT, THH, HTT, HTH, HHT, HHH \}.  
+ \]
+Precisely one of the eight possibilities has three heads and so the answer to (A) is $1/8$.  There are three possibilities with precisely two heads and so the answer to (B) is $3/8$.  For (C), the relevant elements of $S$ are TTT, TTH, THT, HTT.   Thus the probability is $4/8 = 1/2$. 
+\end{s}
+
+\sse
+What is the probability of getting more heads than tails if I toss a coin four times.  And (without doing a complicated calculation) what is the probability if I toss it 19 times?  
+\end{e}
+\sss 
+The sample space now has 16 elements. There is one element HHHH which is all heads and four possibilities with three heads and one tail. (Think where the tail is.) So the probability is $5/16$.  If I toss 19 times, there cannot be equal numbers of H and T.  By symmetry, ``more H'' and ``more T'' have to be equally likely and so the probability is $1/2$. 
+\end{s}
+
+\ssn{Using tables} 
+Sometimes a table can simplify equally likely outcome arguments. Consider the following. 
+
+I have two six-sided dice, one black, one white, with non-standard labelling. (Black) is labelled with five `3's and a single `6'.  (White) is labelled with two `1's, one `4' and three `5's.     If both are rolled, what is the probability that (black) beats (white)?
+
+Let us take as sample space all $6^2=36$ different ways two dice can land.  Since there are five `3's on the red die and two `1's on the blue,  $5 \times 2 = 10$ of the 36 equally likely rolls come out as a `3' and a `1'.  Computing the other outcomes, we get 
+\begin{center}
+\begin{tabular}{|c|ccc|}
+ \hline 
+   & White 1 & White 4 &  White 5 \\ 
+  \hline
+ Black 3 & 10 & 5 & 15   \\
+ Black 6 & 2 & 1  & 3  \\
+ \hline
+\end{tabular}
+\end{center}
+Notice the numbers in the table add up to $36$ as they should.  Black wins in the top left entry and all the bottom row.  Thus the probability of a black win is $(10+2+1+3)/36 = 4/9$. 
+\end{n}
+
+\sse{}
+If I roll the Black die in the previous example against a standard D6, what is the probability of Black winning, Black losing and of the two rolls being equal? 
+\end{e}
+
+\ssn{Inclusion-exclusion principle (for two sets)}
+  Let $A,B$ be two events.  Then 
+  \[
+  \PP( A \cup B ) = \PP(A) + \PP(B) - \PP(A \cap B). 
+  \]
+\begin{proof}
+ Consider the following three decompositions into disjoint unions. 
+ \begin{eqnarray*}
+     A & = & ( A\cap B )  \cup (A \setminus B) \\
+     B & =&  ( A\cap B )  \cup (B \setminus A) \\
+     A \cup B &=& (A\cap B) \cup  (A \setminus B) \cup (B \setminus A) . 
+ \end{eqnarray*}
+ Since the unions are disjoint on the right-hand sides the probabilities add. 
+  \begin{eqnarray*}
+     \PP(A) & =&  \PP( A\cap B )  + \PP( A \setminus B) \\
+     \PP(B) & = & \PP( A\cap B )  + \PP(B \setminus A) \\
+    \PP( A \cup B) &=& \PP (A\cap B) + \PP(A \setminus B) +\PP(B \setminus A) . 
+ \end{eqnarray*}
+Subtracting the first two equations from the third we obtain the result. 
+\end{proof}
+\end{n}
+
+
+
+\ssn{Example} 
+I choose a natural number $n$ in the interval $[1,100]$ uniformly randomly. What is the probability that $n$ is divisible by 2 or by 5?
+\begin{enumerate}
+    \item Our ``or'' just above is, as always in mathematics is ``inclusive'': we include the possibility that the number is divisible by both. 
+    \item Recall that ``uniformly randomly'' just means all options are equally likely.
+    \item Let $A$ be the event that I choose a number divisible by two. There are fifty such numbers and so $\PP(A) = 50/100$. Similarly, let $B$ be the event that I choose a number divisible by five. There are twenty such numbers and so $\PP(B) = 20/100$. 
+    \item Then $A \cap B$ is the event that $n$ is divisible by both two and five; equivalently, $n$ is divisible by ten. So $\PP(A \cap B) = 10/100$. 
+    \item The probability we want is $\PP(A \cup B)$ which by inclusion-exclusion is 
+    \[
+     \PP(A \cup B) = \PP(A) + \PP(B) - \PP(A \cap B) = 
+      \frac{50}{100} + \frac{20}{100} - \frac{10}{100} = \frac35. 
+    \]
+\end{enumerate}
+\end{n}
+
+\sse{}
+I choose a natural number $n$ in the interval $[1,400]$ uniformly randomly. What is the probability that $n$ is divisible by 4 or by 10?  (Take care: the answer is \emph{not} $\frac{13}{40}$.) 
+\end{e} 
+
+\sss
+A number is divisible by both 4 and 10 if and only if it is divisible by their ``least common multiple'' which is 20.  The answer is $\frac{3}{10}$. 
+\end{s}
+
+\sse{} 
+I have three red cards numbered $1,2,3$ and three blue cards numbered $1,2,3$.  I shuffle all six cards together thoroughly (so that all possible orderings of the six are equally likely). I then take the top 2 cards from the pile. 
+
+Let $A$ be the event that the two cards are the same colour and let $B$ be the event that at least one of the cards is a `3'. Consider the sample space $S$ for this experiment to be all subsets $\{ x,y \}$ where $x$ and $y$ are different elements of the set $\{ r1, r2, r3, b1, b2, b3\}$. Compute the probabilities of the events
+ \[
+   A,\quad B,\quad A^c,\quad A \cup B,\quad A \cap B,\quad A \setminus B. 
+ \]
+(Hint: Your sample space should have 15 elements.) 
+\end{e}
+
+
+
+
+
+
