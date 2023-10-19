@@ -1,7 +1,20 @@
 \section{Conditional probabilities, random variables and the binomial distribution}
 
 \subsection{Conditional Probability}
-
+\begin{defn}[\textbf{Conditional Probability}]
+Let $A, B \subseteq S$ be events with $\PP(A) \not=0$ The conditional probability of $B$ given $A$ is defined by
+\[\PP(B \vert A) := \frac{\PP(A \cap B)}{\PP(A)}.\]
+\end{defn}
+\noindent Here, $\PP( B \vert A)=$"The probability of $B$ occurring when we know that $A$ has occurred.". This equation is often used ``multiplied out'' as
+\[\PP(A \cap B) = \PP(B) \, \PP(A \st B). \]
+This makes it clearer that the meaning of $\PP(A \st B)$ is that it is \emph{the probability of $A$ given that we know that $B$ has occurred.}
+\begin{examp}
+I roll two D6 in secret. I have a look and reveal to you that the sum of the two dice is $8$. What is the probability that one of the dice shows a '$6$'?\\ \linebreak
+Let $\Omega = \{ (\omega_1,\omega_2):\ \omega_1,\omega_2 \in \{1, \ldots, 6 \}\}$ and $\PP(\{\omega\}) = \frac{1}{36}$.\\ \linebreak
+Define $A:=\{ (\omega_1,\omega_2): \omega_1+ \omega_2 = 8 \} = \{ (2,6),(3,5), (4,4), (5,3), (6,2)\}$\\ and $B:=\{ (6,1),\ldots,(6,5),(6,6),(5,6),\ldots,(1,6) \}$.\\ \linebreak
+Then $\vert A \vert =5$, $A \cap B= \{ (2,6),(6,2)\}$ and hence $\vert A \cap B \vert = 2$ giving us that
+\[ \PP(B \vert A) = \frac{\PP(A \cap B)}{\PP(A)} = \frac{ 2/36}{5/36} = \frac25.\]
+\end{examp}
 \subsection{Bayes' Theorem}
 
 \subsection{Exercises}
