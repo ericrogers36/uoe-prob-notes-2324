@@ -8,7 +8,18 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb} 
+
 \usepackage{amsthm}
+\theoremstyle{plain}% default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{cor}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+
+
 \usepackage{graphicx}
 \usepackage{pifont}
 \usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
@@ -61,11 +72,11 @@
 \newcommand{\etcb}{\end{tcolorbox}}
 
 
-\newenvironment{proof}{%
-\par\noindent\textit{Proof.~}}%
-{\hfill\ensuremath{\square}\par}
-\newcommand{\bpr}{\begin{proof}}
-\newcommand{\epr}{\end{proof}}
+%\newenvironment{proof}{%
+%\par\noindent\textit{Proof.~}}%
+%{\hfill\ensuremath{\square}\par}
+%\newcommand{\bpr}{\begin{proof}}
+%\newcommand{\epr}{\end{proof}}
 
 \newcommand{\beq}[1]{\begin{equation}\label{#1}}
 \newcommand{\eeq}{\end{equation}}
@@ -96,7 +107,7 @@
 \newcommand{\dd}{\mathrm{d}}
 \newcommand\var{{\mathrm{Var}}} 
 \newcommand\cov{{\mathrm{Cov}}} 
-\newcommand\cor{{\mathrm{Cor}}} 
+\renewcommand\cor{{\mathrm{Cor}}} 
 \newcommand\bino{{\mathop{Binom}}}
 \newcommand\geom{{\mathop{Geom}}}
 \newcommand\unif{{\mathop{Unif}}}
