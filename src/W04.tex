@@ -2,4 +2,145 @@
 
 \subsection{Idea and Definition}
 
+\subsection{Idea and definition}
+Roll a 4-sided die 1000 times and add together your scores. You would expect to roll about 250 each of 1,2,3 and 4 and if you did that exactly you would score 
+\[
+   (250 \times 1) +  (250 \times 2) + (250 \times 3) + (250 \times 4 ) = 2500.  
+\]
+You could rewrite that as 
+\[
+  1000 \left( \left( \frac{1}{4}  \times 1\right) 
+   + \left( \frac{1}{4}  \times 2\right) 
+   +\left( \frac{1}{4}  \times 3\right) +\left( \frac{1}{4}  \times 4\right) \right) = 1000 \times \frac{5}{2}    
+\]
+and we see that each roll of the die contributes an ``expected value'' of $\frac{5}{2}$ to the total. 
+
+\begin{defn}[\textbf{Expected value}]
+Suppose that the random variable $X$ takes a finite or countable number of different numerical values $x_i$. Let the probability that $X$ takes the value $x_i$ be denoted $p_i$ so that 
+ \[
+     \PP (X=x_i) = p_i \qquad \text{where} \sum_i p_i = 1. 
+ \]
+\noindent The \ul{expected value} $\EE(X)$ of $X$ is defined to be 
+ \[
+  \EE(X)  = \sum_i p_i x_i
+ \]
+ where the sum is taken over all relevant values of $i$.
+ (If there are countably infinite outcomes the sum may turn out infinite and so $\EE(X)$ may not exist.) 
+\end{defn}
+ 
+\ssn{Examples}
+\begin{enumerate}
+\item In the 4-sided die example above the possible values of $X$ are 1,2,3,4 and so $x_1=1, x_2=2, x_3 = 3, x_4=4$. Correspondingly, $p_1=p_2=p_3=p_4 = \frac{1}{4}$. Calculating, we find that 
+ \[
+    \EE(X) = \frac14 \times 1 + 
+       \frac14 \times 2 + 
+     \frac14 \times 3 + 
+     \frac14 \times 4   
+    = \frac{5}{2}. 
+  \]
+\item I toss a coin three times and let $X$ denote the number of times that I get H.  Then from earlier, 
+\[
+  \PP(X=0)=\frac{1}{8}, \quad  \PP(X=1)=\frac{3}{8}, \quad  \PP(X=2)=\frac{3}{8}, \quad  \PP(X=3)=\frac{1}{8}
+\]
+and so 
+\[
+ \EE(X) = \frac{1}{8} \times 0 + \frac{3}{8} \times 1 + \frac{3}{8} \times 2 + \frac{1}{8} \times 3  = \frac{3}{2}.  
+\]
+\item Let $X \sim \mathop{Bern}(p)$ be a Bernoulli random variable.   Then $X$ takes the values $0,1$ with probabilities $(1-p), p$ respectively. Thus 
+ \[
+    \EE(X) = (1-p) 0 + p 1 = p. 
+ \]
+\end{enumerate}
+\end{n}
+
+It may help to think in terms of betting. For instance, in the last example one might imagine a game where somebody tosses three coins of equal worth and has to give you all those that come down ``heads''.  Then a ``fair'' price to pay for playing each game would be $2.5$ coins in the sense that if you played many times you would expect to come out even in the long run. 
+\end{n}
+
+
+\begin{defn}[\textbf{Linear combinations of Random Variables}]
+ Let $X,Y$ be random variables on the same sample space. Let $k \in \RR$. Then we can define a random variable $kX$ whose value is $k$ times whatever the value of $X$ is. 
+ 
+ We can also consider a random variable $X + Y$. What this means is that we perform our experiment which generates a value for both $X$ and $Y$ and we take the sum to get the value of $X+Y$. 
+\end{defn}
+ 
+\begin{thm}[\textbf{Additivity of expected value}]
+ Let $X,Y$ be discrete random variables.  Then 
+  \begin{itemize}
+      \item $\EE(k X) = k \EE(X)$
+      \item $\EE(X+Y) = \EE(X) + \EE(Y)$
+  \end{itemize}
+\end{thm}
+\begin{proof}
+The first claim is easier.  Suppose $X$ takes values $x_1,x_2,\dots$ with probabilities $p_1, p_2, \dots$.  Then $kX$ takes values $k x_1, k x_2 , \dots$ with those same probabilities.  So
+ \[
+   \EE(kX) = \sum_i p_i k x_i = k \sum_i p_i  x_i = k \EE(X).
+ \]
+ 
+ For the second statement, suppose $Y$ takes values $y_1, y_2, \dots$ with probabilities $q_1, q_2, \dots$.   Now, thinking in terms of events, 
+  \[
+      \{ X=x_i \} = \bigcup_j  \{ \text{$X = x_i$ and $Y=y_j$} \} 
+  \]
+  which is a disjoint union.  So taking probabilities,
+ \[
+    \PP(X=x_i) =  \sum_{j} \PP(\text{$X=x_i$ and $Y=y_j$}). 
+ \]
+ 
+ Now consider 
+\begin{eqnarray*}
+ \EE(X+Y) &=& \sum_{\text{all pairs $(i,j)$}}  \PP(\text{$X=x_i$ and $Y=j_j$}) (x_i+y_j)  \\
+ &=& \sum_{i} \sum_j   \PP(\text{$X=x_i$ and $Y=x_j$}) x_i +
+        \sum_{j} \sum_i   \PP(\text{$X=x_i$ and $Y=j_j$}) y_j \\
+  &=&  \sum_{i}    \PP(\text{$X=x_i$}) x_i +
+        \sum_{j}   \PP(\text{$Y=j_j$}) y_j \\
+  &=& \EE(X) + \EE(Y).
+\end{eqnarray*}
+Going from the first to the second line, we are splitting $x_i + y_j$ into two terms and we are also using the fact that a sum over all combinations of values of $i$ and $j$ can be done by taking the sum over $j$ and then the sum over $i$ or \emph{vice versa}. 
+ \end{proof}
+ This result extends easily to sums of more random variables by e.g.\ treating $X+Y+Z$ as  $(X+Y)+Z$. 
+\end{n}
+ 
+ \ssn{Slogan} \hfill 
+   \tcb 
+   \begin{center} 
+   {\Large Expectations of random variables add}  \\[1.5ex] 
+    This is true even if they are not independent.
+   \end{center}
+   \etcb
+\end{n}
+ 
+ \ssn{Example} 
+  Let $X$ be the random variable that is the result of rolling three D6 and taking  the sum.  Then we can write $X = X_1 + X_2 +X_3$ where $X_j$ is the number appearing on the $j$th die.  Each of the $X_j$ has expected value $7/2$. Thus 
+   \[
+     \EE(X) = \frac72 + \frac 72 + \frac72 = \frac{21}{2}. 
+   \]
+\end{n}
+ 
+ \ssn{Proposition: Expectation of binomial random variable}
+ Let $X \sim \mathop{Binom}(n,p)$.  Then $\EE(X) = np$. 
+ \begin{proof} 
+ We can write 
+  \[
+      X = X_1 + X_2 + \dots + X_n
+  \]
+ where $X_j$ is the Bernoulli random variable which takes the value $1$ if the $j$th trial is successful and $0$ otherwise. From \S\ref{exex} we know that $\EE(X_j) = p$ and therefore we know that $\EE(X) = np$. 
+ \end{proof}
+ You might argue that this result is not surprising: if we try $n$ times where each try independently succeeds with probability $p$, we might ``expect'' $np$ successes.  
+\end{n}
+ 
+ \ssp{} 
+  I toss a coin $n$ times. Let $X$ be the number of consecutive pairs of H that I get. (So a sequence like $T,H,H,H,T$ would count as two such pairs.) What is the expected value of $X$? (Hint: it may help to consider random variables $X_j$ where $X_j=1$ if the $j$th and $(j+1)$th tosses are both H and $X_j=0$ otherwise.) 
+  
+  You should be able to check your answer be working out the probability explicitly for $n=2,3,4$. 
+ \end{e}
+ 
+ \ssp{}
+ Imagine a game of tennis where there is no ``deuce / advantage'' and the first player to four points wins.  Suppose player A wins each point independently with probability $p$ and $B$ wins with probability $q=1-p$.  How likely is player A to win? (Hint: imagine that instead of stopping when one player reaches four points, the players play 7 points and then stop. At that point, one but not both players must have scored 4 points.)  It is not easy to simplify the answer but you could ask Wolfram Alpha to, or you could plot the answer against $p$. 
+ \end{e}
+ 
+ \ssp{} 
+ You and I play the following game. Hidden from you, I put a coin in my hand: with probability $p$ it is a 10 pence coin and otherwise it is a 20 pence coin. 
+ You now guess which coin is in my hand: you guess it is 20 pence with probability $q$ and otherwise you guess it is a 10 pence coin.  You win the coin if you guess correctly and otherwise win nothing.  What is your expected gain in pence from playing this game once with me? 
+ 
+ Challenge: suppose we are going to play repeatedly and you want to maximise your gain and I wish to minimise my loss. What value of $p$ should I choose and what value of $q$ should you choose? (This question is somewhat ill-defined, but it does have an interesting possible answer!) 
+ \end{e}
 \subsection{Linearity of Expectation}
