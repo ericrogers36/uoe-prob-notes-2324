@@ -89,11 +89,9 @@ Dividing by $\PP(B)$ gives the result.
 We could easily have solved the problem above using Bayes' Theorem; it would be essentially the same calculation. 
 \begin{thm}[\textbf{Bayes' Theorem -  ``probability of causes" form}]
 Let our sample space $\Omega$ be partitioned into disjoint events $A_k, \, k=1,2,\dots, n$.  Then for $1\leq j \leq n$, 
-\tcb
 \[
-   \PP(A_j \st B)  =   \frac{\PP(B \st A_j)\,\PP(A_j)}{ \sum_{k=1}^n \PP(B \st A_k) \,\PP(A_k)}
+   \PP(A_k \st B)  =   \frac{\PP(B \st A_k)\,\PP(A_k)}{ \sum_{i=1}^n \PP(B \st A_i) \,\PP(A_i)}
  \]
- \etcb 
 \end{thm}
 \begin{proof}
 Put $A=A_j$ in the previous version of the theorem and then expand $\PP(B)$ using the law of total probability.
