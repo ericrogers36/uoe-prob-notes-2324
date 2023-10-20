@@ -1,0 +1,104 @@
+\section{Foundations of probability, inclusion-exclusion and equally likely outcomes}
+
+\subsection{Basic Ideas}
+In probability theory, we describe most things as an experiment, for example, throwing a coin. If we toss a coin, we can either get ``heads'' $(H)$ or ``tails'' $(T)$.\footnote{Of course, there is the small probability that the coin lands on its side, which is very unlikely to happen, but possible - we usually ignore this.} We need something to model, and the first thing we use for modelling is the \ul{state space / universal set}. 
+
+\subsection{Mathematical Formulation}
+\begin{defn}[\textbf{State Space / Universal Set}]
+We denote the \emph{state space} or \emph{universal set} by $\Omega$ or $S$. 
+\end{defn}
+The \emph{state space} or \emph{universal set} is the setting: the state of reality. Quite often we reduce the state space to the possible outcomes: e.g. for a coin, heads and tails, however it can be arbitrarily complicated. 
+For some time our sample spaces will be \emph{discrete}, meaning that they consist of a finite or countable\footnote{A set $A$ is countable if you can list its elements in an infinite list: $A = \{ a_1, a_2, a_3, \dots\}$ } number of elements.  Later, we will consider sample spaces such as the real line $\RR$ which are ``continuous'' rather than discrete. In more advanced applications the sample space can also be a function space or even more complicated. \\ \linebreak
+We are often interested in how likely it is that the outcome lies in some
+particular subset of the sample space.
+\begin{defn}[\textbf{Event}]
+An \emph{event} is a "nice" subset of the state space, i.e. an event $A$ fulfils $A \subseteq \Omega$.
+The set of all events often is denoted by $\mathcal{A}$, $\mathcal{E}$ or $\mathcal{F}$.
+\end{defn}
+\begin{defn}[\textbf{Probability Measure}]
+A \emph{probability measure} $\PP$ is a map taking events as argument with
+\begin{enumerate}
+\item $\PP: \mathcal{A} \to [0,1]$,
+\item $\PP(\Omega)=1$,
+\item For a countable index set $I$ with $(A_i)_{i \in I}$ being disjoint events we have $\PP( \bigsqcup_{i \in I} A_i) = \sum_{i\in I} \PP(A_i)$.
+\end{enumerate}
+\end{defn}
+\noindent\textbf{Remark:} The third property means that we can sum up the probability of \textbf{disjoint} events. Stating this property for just two events $A$ and $B$ gives us
+\begin{enumerate}[\hspace{5mm}3.]
+\item For $A \cap B = \emptyset$, we have $\PP(A \cup B) = \PP(A) + \PP(B)$.
+\end{enumerate}
+
+
+
+
+\subsection{Discrete Uniform Distribution}
+\begin{defn}[\textbf{Discrete Uniform Distribution}]
+Let $\Omega$ be non-empty and finite and $\PP(\{\omega\})= \frac{1}{\vert \Omega \vert }$ for all $\omega \in \Omega$.  Then
+\[ \PP(A) = \frac{ \vert A \vert }{ \vert \Omega \vert }. \]
+We call this setting a \underline{discrete uniform distribution} or \underline{uniformly random}.
+\end{defn}
+
+\subsection{Inclusion-Exclusion Principle}
+
+\begin{thm}[\textbf{Inclusion-Exclusion Principle for 2 sets}]
+Let $A$ and $B$ be two events. Then
+\[\PP(A \cup B) = \PP(A) + \PP(B) - \PP(A \cap B).\]
+\end{thm}
+\begin{proof}
+Observe that $A \cup B = (A \setminus B) \sqcup (A \cap B) \sqcup (B \setminus A)$, which is a disjoint union. Hence,
+\begin{align*}
+\PP(&A \cup B) 
+\\ 
+&= \PP( (A \setminus B) \sqcup (A \cap B) \sqcup (B \setminus A) )
+\\&
+= \PP(A \setminus B) + \PP(A \cap B) + \PP(B \setminus A)
+\\&
+= \PP(A \setminus B) + \PP(A \cap B) + \PP(A \cap B) + \PP(B \setminus A) - \PP(A \cap B)
+\\&
+= \PP((A \setminus B) \sqcup (A \cap B) ) + \PP( (A \cap B) \sqcup (B \setminus A)) - \PP( A \cap B)
+\\&
+= \PP( A ) + \PP(B) - \PP( A \cap B).
+\end{align*}
+\end{proof}
+\noindent This can be generalised as follows.
+\begin{thm}[\textbf{General Inclusion-Exclusion Principle}]
+Let $n \in \NN$ and $A_i$, $i\in \{ 1, \ldots, n \}$ be events. Then
+\[\PP\left(\bigcup_{i=1}^n A_i \right) = \sum_{k=1}^n (-1)^{k+1} \sum\limits_{1 \leq i_1 < \ldots < i_k \leq n} \PP\left( \bigcap_{j=1}^k A_{i_j}\right).\]
+\end{thm}
+\begin{proof}
+See workshop of Week 1.
+\end{proof}
+
+\begin{example}
+I choose a natural number $n$ in the interval $[1,100]$ uniformly randomly. What is the probability that $n$ is divisible by 2 or by 5?
+\begin{enumerate}
+    \item Our ``or'' just above is, as always in mathematics is ``inclusive'': we include the possibility that the number is divisible by both. 
+    \item Recall that ``uniformly randomly'' just means all options are equally likely.
+    \item Let $A$ be the event that I choose a number divisible by two. There are fifty such numbers and so $\PP(A) = 50/100$. Similarly, let $B$ be the event that I choose a number divisible by five. There are twenty such numbers and so $\PP(B) = 20/100$. 
+    \item Then $A \cap B$ is the event that $n$ is divisible by both two and five; equivalently, $n$ is divisible by ten. So $\PP(A \cap B) = 10/100$. 
+    \item The probability we want is $\PP(A \cup B)$ which by inclusion-exclusion is 
+    \[
+     \PP(A \cup B) = \PP(A) + \PP(B) - \PP(A \cap B) = 
+      \frac{50}{100} + \frac{20}{100} - \frac{10}{100} = \frac35. 
+    \]
+\end{enumerate}
+\end{example}
+
+\subsection{Exercises}
+\begin{exer}
+I choose a natural number $n$ in the interval $[1,400]$ uniformly randomly. What is the probability that $n$ is divisible by 4 or by 10?  (Take care: the answer is \emph{not} $\frac{13}{40}$.) 
+\end{exer} 
+
+\begin{sol}
+A number is divisible by both 4 and 10 if and only if it is divisible by their ``least common multiple'' which is 20.  The answer is $\frac{3}{10}$. 
+\end{sol}
+
+\begin{exer} 
+I have three red cards numbered $1,2,3$ and three blue cards numbered $1,2,3$.  I shuffle all six cards together thoroughly (so that all possible orderings of the six are equally likely). I then take the top 2 cards from the pile. 
+
+Let $A$ be the event that the two cards are the same colour and let $B$ be the event that at least one of the cards is a `3'. Consider the sample space $S$ for this experiment to be all subsets $\{ x,y \}$ where $x$ and $y$ are different elements of the set $\{ r1, r2, r3, b1, b2, b3\}$. Compute the probabilities of the events
+ \[
+   A,\quad B,\quad A^c,\quad A \cup B,\quad A \cap B,\quad A \setminus B. 
+ \]
+(Hint: Your sample space should have 15 elements.) 
+\end{exer}
