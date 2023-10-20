@@ -258,25 +258,22 @@ From a tree, I compute that Harry says that Dick says that Tom told the truth (`
 Two events $A,B \subseteq \Omega$ are independent if
 \[ \PP(A \cap B) = \PP(A) \PP(B).\]
 \end{defn}
-If $\PP(B) \neq 0$ we can re-phrase this as
+\noindent If $\PP(B) \neq 0$ we can re-phrase this as
 \[ \PP(A \vert B) = \PP(A),\]
 i.e.\ the probability of $A$ happening is the same regardless of whether $B$ happened. \\ \linebreak
 \noindent
-The event $A \cap B$ is the intersection of the two events: it occurs precisely when both $A$ and $B$ occur. We say two events are ``dependent'' if they are not independent. 
+The event $A \cap B$ is the \emph{intersection} of the two events: it occurs precisely when both $A$ and $B$ occur. We say two events are ``dependent'' if they are not independent. 
 
 We will say more about independence next week.  Two events being independent means that knowing that one has occurred does not change the probability that the other occurs.  
 
 \subsection{Random Variables}
 
-
-    
-
 For a binomial distribution problem, the sample space $S$ might be taken to be all the possible $2^n$ length-$n$ sequences of successes and failures. But all we are interested in is the number of successes, which is a function on the sample space taking numerical values.  Thus we make the definition:
 
 \begin{defn}[\textbf{Definition: Random variable}]
-A \ul{random variable} is a function on the sample space.
+A \ul{random variable} is a measurable\footnote{Usually, one has to work hard to construct functions which are not measurable.} function on the sample space.
 \end{defn}
-We usually use capital letters from late in the alphabet (very often $X$) as the symbol for a random variable. 
+Usually, this is $X:\Omega\to \RR$. We usually use capital letters from late in the alphabet (very often $X$) as the symbol for a random variable. 
 
 In probability we will often de-emphasise or even ignore the sample space and work with the random variable directly. 
 
@@ -284,34 +281,27 @@ These capital $X$ random variable gadgets are a bit like the $x$ that appears fo
 
 We will assume for now that our random variables, like our sample spaces, are \ul{discrete}; this means that they take a finite or countably infinite number of possible values $x_1, x_2, \dots$.  
 
-\ssn{Uniform random variable}
-The \emph{standard uniform random variable} on $\{1,2, \dots , n\}$ is a random variable $X$ such that 
- \[
-   \PP(X=k) = \frac1n \quad \text{for $k \in \NN, \;  k \leq n$}
- \]
-Rolling an $n$-sided die (which we usually denote `Dn') is assumed to be such a random variable.
+\begin{defn}[\textbf{Discrete Uniform random variable}]
+We call a random variable $X$ discretely uniformly distributed on $\{ 1, \ldots, n \}$ if
+$$ \PP( X =k) = \frac1n \quad \text{for all } k \in \{1,\ldots, n \}.$$
+We write
+\[X \sim Unif(\{1,\ldots, n\}).\]
+\end{defn} 
+\noindent Note that we use the symbol `$\sim$' to indicate that a random variable is distributed according to a standard law. 
 
-We use the symbol `$\sim$' to indicate that a random variable is distributed according to a standard law. Thus here we will sometimes write 
- \[
-     X \sim \mathop{Unif}(1,\dots, n). 
- \]
-\end{n} 
+\begin{defn}[\textbf{Bernoulli random variable}]
+A Bernoulli random variable with parameter $p \in [0,1]$ is a random variable such that
+\[ \PP(X=1)=p \qquad \text{ and } \qquad \PP(X=0)=1-p=:q. \] 
+\end{defn}
+\noindent \textbf{Remark:} A Bernoulli random variable is a one-off trial that succeeds with probability $p$.  It is the trivial $n=1$ case of a binomial random variable.
 
-\ssn{Bernoulli random variable}
-A \emph{Bernoulli random variable} with parameter $p$ (where $0 \leq p \leq 1$) is a random variable such that $\PP(X=1) = p$ and $\PP(X=0) = q$ where $q=1-p$. 
-
-We will write $X \sim \mathop{Bern}(p)$ to indicate that $X$ is distributed as a Bernoulli random variable with parameter $p$. 
-
-So a Bernoulli random variable is a one-off trial that succeeds with probability $p$.  It is the trivial $n=1$ case of a binomial random variable.
-\end{n}
-
-\ssn{Binomial random variable}
-A Binomial random variable with parameters $n \in \NN$ and $p$ (where $0 \leq p \leq 1$) is a random variable taking values $\{ 0,1, \dots , n \}$ with 
- \[
-   \PP(X=k) =   \binom nk p^k q^{n-k} =  \frac{n!}{k! \, (n-k)!} p^k q^{n-k}
- \]
- We will write $X \sim \mathop{Binom}(n,p)$ to indicate that $X$ is distributed as a binomial random variable with parameters $n$ and $p$.
-\end{n}
+\begin{defn}[\textbf{Binomial random variable}]
+A Binomial random variable with parameters $n\in \NN$ and $p \in (0,1)$ is a random variable taking values in $\{0,\ldots,n\}$ with
+$$\PP(X=k)= {n\choose k} p^k (1-p)^{n-k} = \frac{n!}{k!(n-k)!} p^k (1-p)^{n-k}.$$
+We write
+\[ X \sim Bin(n,p) \quad \text{or} \quad X \sim Binom(n,p)\]
+to indicate that $X$ is distributed as a binomial random variable with parameters $n$ and $p$.
+\end{defn}
  
  \ssn{Events}
  When working with a random variable $X$, events can be defined in terms of the values taken.  So for instance $X=3$ and $1 \leq X \leq 4$ define events. Thus we can refer to their probabilities $\PP(X=3)$ and $\PP( 1 \geq X \leq 4)$. 
@@ -327,7 +317,7 @@ If we have two random variables $X,Y$ defined on the same sample space we say th
 \begin{example}
 What is the probability that on rolling three D6 I get exactly one `6'? 
 
-There are exactly three routes through the tree that give this outcome and each has probability 
+\noindent There are exactly three routes through the tree that give this outcome and each has probability 
  \[
       \left( \frac16 \right) \left( \frac56 \right)^2 = \frac{25}{216}.
  \]
@@ -336,7 +326,7 @@ Thus the probability is
      3 \frac{25}{216} = \frac{25}{72}. 
  \] 
 \end{example}
-\textbf{Generalisation:} Let us consider a general version of the problem.  Supposing we have a process that each time it is carried out produces independently a ``success'' (S) with probability $p$ or a failure (F) with probability $q=1-p$. In the examples in \S\ref{mp2}, success is finding a faulty component or correctly guessing the answer to a question.  We are assuming that each execution of the process is ``independent'', meaning that its success or failure  each time is not influenced by what might have happened before.  If we now repeat this process $n$ times, what is the probability that we get exactly $k$ successes? 
+\noindent \textbf{Generalisation:} Let us consider a general version of the problem.  Supposing we have a process that each time it is carried out produces independently a ``success'' (S) with probability $p$ or a failure (F) with probability $q=1-p$. In the examples in \S\ref{mp2}, success is finding a faulty component or correctly guessing the answer to a question.  We are assuming that each execution of the process is ``independent'', meaning that its success or failure  each time is not influenced by what might have happened before.  If we now repeat this process $n$ times, what is the probability that we get exactly $k$ successes? 
 \begin{example}
 Suppose $n=10$ and $k=7$ and $p=1/4$. One particular sequence of successes and failures is $SSFFSSFSSS$. Thinking of a large probability tree, the probability of this exact sequence is 
  \[
@@ -368,38 +358,32 @@ Note that we have just derived the probability of getting exactly 7 out of 10 by
  (I give many decimal places because leaving out the 1/10 possibility only affects the fifth decimal place!) 
 \end{sol}
 
-For the general problem, the probability of $k$ successes in $n$ trials is as follows.  
-\tcb 
-\ul{Binomial distribution} 
+For the general problem, the probability of $k$ successes in $n$ trials is as follows.    
   \[
        \PP( \text{$k$ successes}) =  \binom nk p^k q^{n-k} =  \frac{n!}{k! \, (n-k)!} p^k q^{n-k}. 
   \]
- \etcb 
-\end{n}
 
-\ssn{Example}
+\begin{example}
 I roll a D6 twelve times.  How likely is it that I roll precisely two sixes?   Here, $n=12, k=2$ and $p=1/6$. So the answer is 
  \[
     \binom{12}2 \left(\frac{1}{6}\right)^2  \left(\frac{5}{6}\right)^{10}
      \approx 0.296.
  \]
-\end{n}
+\end{example}
 
-\sse{Exercise}
+\begin{exer}
 I toss a fair coin 6 times.  How likely is it that I roll $k$ heads where $k=0,1,2,3,4,5,6$? 
-\end{e}
-\sss 
+\end{exer}
+\begin{sol}
 Use the formula with $n=6$ and $p=1/2$.  For instance, $\PP(k=3) = 20/64 = 5/16$. 
-\end{s}
-
-
+\end{sol}
 
 \begin{table}[h]  
   \begin{tabular}{cc} 
-    \includegraphics[width=0.45\textwidth]{images/binom15P25.png} & 
-    \includegraphics[width=0.45\textwidth]{images/binom15P75.png} \\
-     \includegraphics[width=0.45\textwidth]{images/binom15P5.png} & 
-    \includegraphics[width=0.45\textwidth]{images/binom15P15.png} \\
+    \includegraphics[width=0.45\textwidth]{existing-materials/ProbabilityNotes_23-24/images/binom15P25.png} & 
+    \includegraphics[width=0.45\textwidth]{existing-materials/ProbabilityNotes_23-24/images/binom15P75.png} \\
+     \includegraphics[width=0.45\textwidth]{existing-materials/ProbabilityNotes_23-24/images/binom15P5.png} & 
+    \includegraphics[width=0.45\textwidth]{existing-materials/ProbabilityNotes_23-24/images/binom15P15.png} \\
   \end{tabular}
  \caption{\label{binpics} Binomial with $n=15$ and $p=0.15, 0.25, 0.5, 0.75$ in some order}
 \end{table}

@@ -1,7 +1,17 @@
 \section{More discrete and continuous distributions}
 
 \subsection{Geometric Distribution}
+\textbf{Motivating Problem:} I have a process which, independently I execute it, has a probability $p$ of success. Let $X$ be the number of tries up to and including my first success. What is the probability that $\PP(X=k)$, i.e.\ I succeed for the first time on my $k$-th try. 
 
+Setting $q=1-p$, to succeed on the $k$-th attempt, I have to fail $k-1$ times in a row and then succeed. Since the tries are all independent, we have 
+ \[
+         \PP(X=k) = q^{k-1} p. 
+  \] 
+\begin{defn}[\textbf{Geometric Distribition}]
+We call a random variable $X$ geometrically distributed to the parameter $p \in (0,1)$ if
+\[ \PP(X=k)= (1-p)^{k-1}p, \quad \text{for all } k \in \{ 1,2,\ldots \}.\]
+In this case we write $X \sim Geom(p)$.
+\end{defn}
 \subsection{Continuous Distributions}
 
 \subsection{Exponential Distribution}
@@ -9,3 +19,12 @@
 \subsection{Poisson Distribution}
 
 \subsection{Exercises and Problems}
+\begin{exer} 
+One day each week I go fishing in a lake and  I independently have a probability of $1/52$ of catching the big carp that lives there.
+Let $X=k$ if I first catch the carp on my $k$-th day fishing. 
+\begin{enumerate}
+    \item On which day of fishing am I most likely to catch the carp? 
+    \item What is the probability that I first catch the carp on my third day fishing? 
+    \item What is the expected number of fishing days until I catch the carp? 
+\end{enumerate}
+\end{exer}
