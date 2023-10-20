@@ -18,6 +18,31 @@ and
 \[ \PP(B \vert A) = \frac{\PP(A \cap B)}{\PP(A)} = \frac{ 2/36}{5/36} = \frac25.\]
 \end{example}
 
+\begin{prop}[\textbf{Law of Total Probability}]
+Let $n\in \NN$ and $A_i$ for all $i \in \{1,\ldots,n\}$ be disjoint events that partition the state space $\Omega$. For an arbitrary event $B$ we have
+\begin{align*}
+\PP(B)
+= \sum_{i=1}^n \PP(B \vert A_i ) \PP(A_i).
+\end{align*}
+\end{prop}
+\begin{corr}
+For two events $A$ and $B$ it holds true that
+\begin{align*}
+\PP(B) = \PP(B \vert A) \PP(A) + \PP(B \vert A^C) \PP(A^C)
+.
+\end{align*}
+\end{corr}
+\begin{proof}
+We will consider just the case $n=2$; the general case is similar. Thus we partition the sample space into a disjoint union $S = A \cup A^c$.  Then also $B$ is partitioned as 
+ \[
+    B = ( B \cap A ) \cup (B \cap A^c) 
+ \]
+So 
+ \begin{eqnarray*}
+    \PP(B) & =& \PP( B \cap A ) \cup \PP (B \cap A^c) \\ 
+     &=& \PP(B \st A) \, \PP(A) + \PP(B \st A^c) \, \PP(A^c)
+ \end{eqnarray*} 
+\end{proof}
 \subsection{Bayes' Theorem} 
 
 Bayes' Theorem (or sometimes Bayes' ``rule'' or ``formula'') has a simple proof but is of huge importance in  answering questions about how probable it is that some event has ``caused'' an observed result.  It is hugely important in Statistics: there is a whole approach to statistical analysis using ``Bayesian methods''.  It is fundamental also in machine learning. 
@@ -48,25 +73,22 @@ In taking probabilities conditional upon an event $B$, one is zooming in on $B$,
 \caption{\label{condo} The whole sample space for 5 coin tosses (left). ``Zooming in'' on the half with $\geq 3$ heads, we see that $11/16$ start with an `H'. So $\PP(\text{starts with H} \st \text{number of H $\geq 3$ }) = 11/16$.} 
 \end{figure}
 
-\ssn{Bayes' Theorem} 
-Let $A,B$ be events with $\PP(B)\not= 0$.  Then 
-\tcb  
+\begin{thm}[\textbf{Bayes' Theorem} ]
+Let $A,B$ be events with $\PP(B)\not= 0$. Then 
 \[
     \PP( A \st B) = \PP( B \st A) \frac{\PP(A)}{\PP(B)}.
  \]
-\etcb 
+\end{thm}
 \begin{proof}
 We compute $\PP(A \cap B)$ in two different ways: 
  \[ 
  \PP(B \st A) \PP(A) = \PP(A \cap B) = \PP(A \st B) \PP(B). 
  \]
-Dividing by $B$ gives the result. 
+Dividing by $\PP(B)$ gives the result. 
 \end{proof}
 We could easily have solved the problem above using Bayes' Theorem; it would be essentially the same calculation. 
-\end{n}
-
-\begin{thm}[\textbf{Bayes' Theorem}]
-Let our sample space $S$ be partitioned into disjoint events $A_k, \, k=1,2,\dots, n$.  Then for $1\leq j \leq n$, 
+\begin{thm}[\textbf{Bayes' Theorem -  ``probability of causes" form}]
+Let our sample space $\Omega$ be partitioned into disjoint events $A_k, \, k=1,2,\dots, n$.  Then for $1\leq j \leq n$, 
 \tcb
 \[
    \PP(A_j \st B)  =   \frac{\PP(B \st A_j)\,\PP(A_j)}{ \sum_{k=1}^n \PP(B \st A_k) \,\PP(A_k)}
