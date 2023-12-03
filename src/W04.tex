@@ -1,7 +1,5 @@
 \section{Expectation}
 
-\subsection{Idea and Definition}
-
 \subsection{Idea and definition}
 Roll a 4-sided die 1000 times and add together your scores. You would expect to roll about 250 each of 1,2,3 and 4 and if you did that exactly you would score 
 \[
@@ -16,16 +14,14 @@ You could rewrite that as
 and we see that each roll of the die contributes an ``expected value'' of $\frac{5}{2}$ to the total. 
 
 \begin{defn}[\textbf{Expected value}]
-Suppose that the random variable $X$ takes a finite or countable number of different numerical values $x_i$. Let the probability that $X$ takes the value $x_i$ be denoted $p_i$ so that 
- \[
-     \PP (X=x_i) = p_i \qquad \text{where} \sum_i p_i = 1. 
- \]
-\noindent The \ul{expected value} $\EE(X)$ of $X$ is defined to be 
- \[
-  \EE(X)  = \sum_i p_i x_i
- \]
- where the sum is taken over all relevant values of $i$.
- (If there are countably infinite outcomes the sum may turn out infinite and so $\EE(X)$ may not exist.) 
+The expectation for a random variable $X$ is defined by:
+\begin{itemize}
+    \item If $X$ is discrete:
+    \[\EE[X]:= \sum_{x_i} x_i \cdot \PP(X=x_i)=\sum_{x_i}x_i\cdot p_X(x_i)\]
+    \item If $X$ is continuous:
+    \[\EE[X]:=\int_{-\infty}^{\infty} x\ cdot f_X(x)dx.\]
+\end{itemize}
+We call $\EE[X]$ the expectation, mean or average of $X$.
 \end{defn}
  
 \ssn{Examples}
